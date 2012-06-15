@@ -1,4 +1,8 @@
+./annotiert
+./annotiert/*
+./annotiert/*.pdf
 *.aux
+*.bak
 *.bbl
 *.blg
 *.dvi
