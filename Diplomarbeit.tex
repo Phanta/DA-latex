@@ -1,0 +1,161 @@
+%% HEADER %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\documentclass[a4paper, oneside, 10pt]{scrreprt}
+% Alternative Optionen:
+%	Papiergröße: a4paper / a5paper / b5paper / letterpaper / legalpaper / executivepaper
+% Duplex: oneside / twoside
+% Grundlegende Fontgrößen: 10pt / 11pt / 12pt
+
+%% Zeilenabstand
+\usepackage{setspace}
+%\singlespacing        %% 1-zeilig (Standard)
+%\onehalfspacing       %% 1,5-zeilig
+\doublespacing        %% 2-zeilig
+
+%% Deutsche Anpassungen
+\usepackage[ngerman]{babel}
+\usepackage[T1]{fontenc}
+\usepackage[latin1]{inputenc}
+
+%% Seitenränder
+\usepackage[left=3cm,right=3cm,top=3cm,bottom=3cm]{geometry}
+
+%% diverse Packages
+%\usepackage{a4wide}								% kleine Seitenränder
+\usepackage{verbatim}						% multiline comments ala \begin {comment} ... \end{comment}
+%\usepackage{color}							% für Farbe im Dokument (eigentlich nur für TODO-Marke)
+\usepackage[printonlyused]{acronym} % Abkürzungsverzeichnis
+\usepackage{remreset} 							% für figure counter duch's komplette dokument
+\usepackage{float} 									% damit Bilder usw. dort landen wo ich will
+\usepackage{wrapfig}
+\usepackage{listings} 							% Quellcode Blöcke im Text
+\usepackage[tight,nice]{units}
+%\usepackage{program}								% Pseudocode
+%\usepackage{fancyhdr} 							% Fancy Kopf- und Fußzeilen
+\usepackage{longtable} 						% Für Tabellen, die eine Seite überschreiten
+\usepackage[breaklinks]{hyperref}
+
+%% Normales LaTeX oder pdfLaTeX?
+\newif\ifpdf
+\ifx\pdfoutput\undefined
+	\pdffalse              %%normales LaTeX wird ausgefï¿½hrt
+\else
+	\pdfoutput=1           
+	\pdftrue               %%pdfLaTeX wird ausgefï¿½hrt
+\fi
+
+%% Packages für Grafiken & Abbildungen
+\ifpdf %%Einbindung von Grafiken mittels \includegraphics{datei}
+	\usepackage[pdftex]{graphicx} %%Grafiken in pdfLaTeX
+	%\usepackage{epstopdf} %%gerade keine Zeit für eps-Kram
+\else
+	\usepackage[dvips]{graphicx} %%Grafiken und normales LaTeX
+\fi
+%\usepackage[hang,tight,raggedright]{subfigure} % Teilabbildungen in einer Abbildung
+
+
+%% MAIN DOCUMENT %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{document}
+
+%% Keine "Schusterjungen"
+\clubpenalty = 1000
+%% Keine "Hurenkinder"
+\widowpenalty = 1000
+\displaywidowpenalty = 1000
+
+%% Enumeration mit Labels
+\newcommand{\litem}[1]{\item \label{#1}}
+
+%% Eigennamen
+%\newcommand{\GCAD}{Gait-CAD }
+
+%% Einfache Abbildungsnummerierung
+\renewcommand{\thefigure}{\arabic{figure}}
+%% OMG ist das ein assi Hack, ich geh gleich brechen
+\makeatletter
+\@removefromreset{figure}{section}
+\@removefromreset{figure}{chapter}
+\makeatother
+
+%% Einfache Tabellenummerierung
+\renewcommand{\thetable}{\arabic{table}}
+%% OMG ist das ein assi Hack, ich geh gleich brechen --- again ;-)
+\makeatletter
+\@removefromreset{table}{section}
+\@removefromreset{table}{chapter}
+\makeatother
+
+%% Nummerierung aller Kapitel
+\setcounter{secnumdepth}{5}
+
+
+%% Deckblatt
+\input{Deckblatt.tex}
+
+%% Selbständigkeitserklärung
+\input{Selbständigkeitserklärung.tex}
+
+%% Inhaltsverzeichnis
+\setcounter{tocdepth}{5}
+\tableofcontents
+
+%%Abkürzungsverzeichnis
+\addcontentsline{toc}{chapter}{Abkürzungsverzeichnis}
+\chapter*{Abkürzungsverzeichnis}
+\renewcommand{\bflabel}[1]{\normalfont{\normalsize{#1}}\hfill} % Schriftart auf normale Schriftart ändern
+\begin{acronym}
+\setlength{\itemsep}{-\parsep} % für kompaktes Verzeichnis
+\acro{EKG}{Elektrokardiogramm}
+\acro{GUI}{grafische Benutzeroberfläche}
+\acro{IBMT}{Institut für biomedizinische Technik\acroextra{ (der TU Dresden)}}
+\end{acronym}
+
+%\cleardoublepage % Das erste Kapitel soll auf einer ungeraden Seite beginnen.
+\pagestyle{plain} %%Ab hier die Kopf-/Fusszeilen: headings / fancy / ...
+
+
+%% Le texte himself
+\input{Kapitel010.tex}
+\input{Kapitel020.tex}
+\input{Kapitel030.tex}
+\input{Kapitel040.tex}
+\input{Kapitel050.tex}
+\input{Kapitel060.tex}
+
+
+%% Tabellenverzeichnis
+\clearpage %% solange die Verzeichnisse kurz sind, beide aus eine Seite
+\addcontentsline{toc}{chapter}{Tabellenverzeichnis}
+\listoftables
+
+%% Abbildungsverzeichnis
+\clearpage
+\addcontentsline{toc}{chapter}{Abbildungsverzeichnis}
+\listoffigures
+
+%% Literaturverzeichnis
+\clearpage
+\addcontentsline{toc}{chapter}{Literaturverzeichnis}
+\nocite{*}
+%\bibliographystyle{plain}
+%\bibliographystyle{abbrv}
+\bibliographystyle{abbrvdin}
+%\bibliographystyle{gerplain}
+\bibliography{grunitz}
+%% ==> Eine Datei 'literatur.bib' wird hierfür benötigt.
+%% ==> Sie müssen hierfür BibTeX verwenden (Projekt | Eigenschaften... | BibTeX)
+%
+% %Auch nicht-zitierte BibTeX-Einträge werden angezeigt.
+%\bibliographystyle{alpha} %Art der Ausgabe: plain / apalike / amsalpha / ...
+%\bibliography{literatur} %Eine Datei 'literatur.bib' wird hierfür benötigt.
+
+%% Anhang
+%\appendix
+\begin{appendix}
+\input{Anhang010.tex}
+\input{Anhang020.tex}
+\end{appendix}
+
+\end{document}
+
+%% EOF %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
