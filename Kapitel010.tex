@@ -39,19 +39,39 @@ Unisens ist in Java implementiert und wird unter der \emph{\ac{LGPL}} zur Verf\"
 Die bereit gestellte Bibliothek ist auf zwei Einzeldateien aufgeteilt: \verb|org.unisens.jar| und \verb|org.unisens.ri.jar|.
 Bei der ersten Datei handelt es sich nur um die Definition der Schnittstellen der einzelnen Klassen.
 Die eigentliche Umsetzung der Funktionalit\"at ist in der zweiten Datei abgespeichert und die Klassennamen sind durch den Suffix "`Impl"' erweitert.
-Eine \"Ubersicht der Klassenstruktur und der von au\ss en ersichtlichen Attribute ist in Abbildung \ref{pic:unisens_interface} dargestellt.
-
+Im folgendem soll sich der Begriff Basisimplementierung auf diese funktionelle Umsetzung beziehen.
 \begin{figure}
 \includegraphics[width=\textwidth]{bilder/unisens_interface.png}
 \caption{Klassen\"ubersicht der von Unisens definierten Schnittstellen}
 \label{pic:unisens_interface}
 \end{figure}
+Wenn man schon vorhandene Unisensdatens\"atze benutzen m\"ochte reicht es aus, die Schnittstellendefinition zu kennen und zu nutzen.
+Sollen hingegen konkret Objekte erstellt werden, muss auf die Basisimplementierung zur\"uckgegriffen werden.
+Eine \"Ubersicht der Klassenstruktur und der von au\ss en ersichtlichen Attribute ist in Abbildung \ref{pic:unisens_interface} dargestellt.
+Die unterst\"utzten Signalarten sind auch in der Klassenstruktur erkennbar:
+\begin{table}[h]
+\centering
+\begin{tabular}{|c|c|}
+	\hline Signale & \verb|SignalEntry| \\
+	\hline Ereignisse & \verb|EventEntry| \\
+	\hline Einzelwerte & \verb|ValuesEntry| \\
+	\hline Propriet\"are Daten & \verb|CustomEntry| \\
+	\hline
+\end{tabular}
+\caption{Signalarten und die dazugeh\"origen Klassen}
+\label{tab:signal_klassen}
+\end{table}
 
-Die Zeitpunkte von Ereignisdaten und Einzelwertdaten werden \"uber eine virtuelle Abtastrate bestimmt.
-Der Zeitpunkt eins jeden \emph{Event}- oder \emph{Value}-Eintrags ist als ganzzahlige Samplenummer dieser Abtastrate gespeichert.
+Aufgrund der Ableitung der Klassen \verb|EventEntry| und \verb|ValuesEntry| von \verb|TimedEntry| ist ersichtlich, dass die Zeitpunkte von Ereignisdaten und Einzelwertdaten werden \"uber eine virtuelle Abtastrate bestimmt werden.
+Der Zeitpunkt eines jeden \emph{Event}- oder \emph{Value}-Eintrags ist als ganzzahlige Samplenummer dieser Abtastrate gespeichert.
 Die Zeit eines Ereignisses, relativ zum Messbeginn, errechnet sich somit $Zeitpunkt = {Samplenummer \over Abtastrate}$.
 M\"ochte man die M\"oglichkeit Ereignisse f\"ur jeden beliebigen Datenpunkt eines Datensatzes zuordnen zu k\"onnen, dann muss die virtuelle Abtastrate als das kleinste gemeinsame Vielfache aller vorhandenen Abtastraten gew\"ahlt werden.
 
-...
+Durch einen Fehler in der Basisimplementierung kann es vorkommen, dass beim Laden eines vorhandenen Unisensdatensatzes in dem Gruppen definiert sind eine \verb|NullPointerException| auftritt.
+Insbesondere tritt dieser Fehler auf, wenn innerhalb der Headerdatei der Gruppeneintrag nicht hinter den Dateneintr\"agen steht.
+
+Die Schnittstellendefinition des Unisensformats stellt nur Methoden zum Lesen und Anh\"angen von Datenpunkten an den Datensatz bereit.
+Somit wird ein Einf\"ugen, L\"oschen oder Ver\"andern von Datenpunkten innerhalb eines Dateneintrags nicht unterst\"utzt.
+Sollen diese Funktionen vorhanden sein, so muss diese Funktionalit\"at selbst implementiert werden.
 
 %% EOF %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
