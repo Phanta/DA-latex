@@ -34,6 +34,7 @@
 %\usepackage{fancyhdr} 							% Fancy Kopf- und Fußzeilen
 \usepackage{longtable} 						% Für Tabellen, die eine Seite überschreiten
 \usepackage[breaklinks]{hyperref}
+\usepackage{rotating}
 
 %% Normales LaTeX oder pdfLaTeX?
 \newif\ifpdf
@@ -46,7 +47,8 @@
 
 %% Packages für Grafiken & Abbildungen
 \ifpdf %%Einbindung von Grafiken mittels \includegraphics{datei}
-	\usepackage[pdftex]{graphicx} %%Grafiken in pdfLaTeX
+	\usepackage{graphicx} %%Grafiken in pdfLaTeX
+	%\usepackage[pdftex]{graphicx} %%Grafiken in pdfLaTeX
 	\usepackage{epstopdf} %%gerade keine Zeit für eps-Kram
 \else
 	\usepackage[dvips]{graphicx} %%Grafiken und normales LaTeX
