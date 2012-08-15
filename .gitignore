@@ -1,7 +1,5 @@
-./annotiert
-./annotiert/*
-./annotiert/*.pdf
-./bilder/*.pdf
+annotiert/*.pdf
+bilder/*.pdf
 *.aux
 *.bak
 *.bbl
