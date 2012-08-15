@@ -1,6 +1,7 @@
 ./annotiert
 ./annotiert/*
 ./annotiert/*.pdf
+./bilder/*.pdf
 *.aux
 *.bak
 *.bbl
