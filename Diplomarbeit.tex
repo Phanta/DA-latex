@@ -21,20 +21,21 @@
 \usepackage[left=3cm,right=3cm,top=3cm,bottom=3cm]{geometry}
 
 %% diverse Packages
-%\usepackage{a4wide}								% kleine Seitenränder
-\usepackage{verbatim}						% multiline comments ala \begin {comment} ... \end{comment}
-%\usepackage{color}							% für Farbe im Dokument (eigentlich nur für TODO-Marke)
-\usepackage[printonlyused]{acronym} % Abkürzungsverzeichnis
-\usepackage{remreset} 							% für figure counter duch's komplette dokument
-\usepackage{float} 									% damit Bilder usw. dort landen wo ich will
+%\usepackage{a4wide}	% kleine Seitenränder --- beachtet seitenende nicht wirklich
+\usepackage{verbatim}	% multiline comments ala \begin {comment} ... \end{comment}
+%\usepackage{color}	% für Farbe im Dokument (eigentlich nur für TODO-Marke)
+\usepackage[printonlyused]{acronym}	% Abkürzungsverzeichnis
+\usepackage{remreset}	% für figure counter duch's komplette dokument
+\usepackage{float}	% damit Bilder usw. dort landen wo ich will
 \usepackage{wrapfig}
-\usepackage{listings} 							% Quellcode Blöcke im Text
-\usepackage[tight,nice]{units}
-%\usepackage{program}								% Pseudocode
-%\usepackage{fancyhdr} 							% Fancy Kopf- und Fußzeilen
-\usepackage{longtable} 						% Für Tabellen, die eine Seite überschreiten
-\usepackage[breaklinks]{hyperref}
-\usepackage{rotating}
+\usepackage{listings}	% Quellcode Blöcke im Text
+%\usepackage[tight,nice]{units}
+%\usepackage{program}	% Pseudocode
+%\usepackage{fancyhdr}	% Fancy Kopf- und Fußzeilen
+%\usepackage{longtable}	% Für Tabellen, die eine Seite überschreiten
+\usepackage[breaklinks]{hyperref}	% f"ur Linkunterbrechung am Rand
+\usepackage{rotating}	% f"ur Bilder in Landscape
+\usepackage{enumitem}	% f"ur \begin{enumerate}[resume] und andere schicke Sachen
 
 %% Normales LaTeX oder pdfLaTeX?
 \newif\ifpdf

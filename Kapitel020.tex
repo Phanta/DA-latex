@@ -60,13 +60,22 @@ Das Programm ...
 					  Neben der Annotation einzelner Datenpunkte, soll auch die Markierung von Signalbereichen unterst"utzt werden.
 					  Ferner ist gefordert, dass vorhandene Annotationen ver"anderbar sind.
 	\AF{io} muss "Anderungen an den Signalen selbst und den Annotationen speichern k"onnen.
-			Annotationen m"ussen unabh"ngig von anderen Signalen gespeichert werden k"onnen.
+			Annotationen m"ussen unabh"angig von anderen Signalen gespeichert werden k"onnen.
 			Insbesondere d"urfen Annotationen sich nicht ver"andern, wenn sich das Ursprungssignal ver"andert oder nicht mehr vorhanden ist.
 	\AF{einstellungen} soll interne Einstellungen abspeichern und von einer Sitzung zur n"achsten "ubernehmen.
 					   Optionen bez"uglich der Darstellung von Signalen sollen in dem Datensatz mit abgespeichert werden k"onnen.
 \end{enumerate}
 
-Signalverarbeitungsteil fehlt
+Die in der Aufgabenstellung geforderte Ausbauf"ahigkeit der Programms ist nicht durch die Anwendungsf"alle abgedeckt.
+Daher wird die folgenden Anforderung nur auf Basis der Aufgabenstellung formuliert:
+%Die folgende Anforderung l"asst sich nicht aus den Anwendungsf"allen erschlie\ss en, das die Erweiterbarkeit eine Forderung von zuk"unftigen Entwicklern ist und nicht die der Anwender.
+%Um aber die Ausbauf"ahigkeit des Programms zu erm"oglichen, muss es 
+\begin{enumerate}[resume]
+	\AF{signalverarbeitung} Das Programm soll dem Benutzer erm"oglichen eine Signalverarbeitungsmethode auf ein gew"ahltes Biosignal anwenden zu k"onnen.
+							Dabei muss das Originalsignal unver"andert bleiben.
+							Der bearbeitete Signalverlauf kann als eigenes Signal im Datensatz abgespeichert werden.
+							Die Implementierung dieser Anforderung soll beispielhaft f"ur zuk"unftige Entwickler erfolgen um die Erweiterbarkeit zu gew"ahrleisten.
+\end{enumerate}
 
 \section{Testszenarien}
 
