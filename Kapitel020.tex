@@ -4,16 +4,16 @@
 
 In dieser Arbeit soll der Begriff Softwareentwicklung den Prozess benennen, der alle Aktivit"aten und die damit verbundenen (Zwischen-) Ergebnisse bei der Erstellung von Software umfasst.
 In der Literatur wird auch der Begriff Softwareprozess genutzt \cite{Sommerville2001a}.
-Obwohl es verschiedene Vorgehensmodelle f"ur das Erstellen von Software existieren, haben alle Softwareentwicklungsprozesse vier grundlegende Arbeitsaktivit"aten gemeinsam \cite{Brugge2004a,Sommerville2001a}:
+Obwohl verschiedene Vorgehensmodelle f"ur das Erstellen von Software existieren, haben alle Softwareentwicklungsprozesse vier grundlegende Arbeitsaktivit"aten gemeinsam \cite{Brugge2004a,Sommerville2001a}:
 \begin{description}
 	\item[Softwarespezifikation:] Es m"ussen die konkreten Anforderungen an das zu erstellende Programm ermittelt werden.
 								  Dabei wird die Funktion der Software, aber auch die Grenzen der Benutzung definiert.
 	\item[Softwareentwurf und -implementierung:] Nach Analyse der ermittelten Anforderungen kann die Architektur des Softwaresystems entworfen werden.
 												 Durch die Zerlegung der Software in mehrere Subsysteme werden die Anforderungen in kleine Teilprobleme aufgeteilt.
-												 Diese Teilprobleme sind den verschiedenen Komponenten und Objekte der Software zugeordnet und k"onnen seperat gel"ost werden.
-												 Diese L"osung wird durch die Objektentwurf und die schlu\ss endliche Implementierung des jeweiligen Programmteils erreicht.
+												 Diese Teilprobleme sind den verschiedenen Komponenten und Objekten der Software zugeordnet und k"onnen seperat gel"ost werden.
+												 Diese L"osung wird durch den Objektentwurf und die schlu\ss endliche Implementierung des jeweiligen Programmteils erreicht.
 	\item[Validierung der Software:] Die fertige Software muss auf ihre Funktionsf"ahigkeit "uberpr"uft werden.
-									 Hierbei ist aber auch abzusichern, dass die Software neben der gew"unschten Funktionalit"at keine ungewollten Nebeneffekte (\emph{bugs}) auftreten.
+									 Hierbei ist auch abzusichern, dass die Software neben der gew"unschten Funktionalit"at keine ungewollten Nebeneffekte (\emph{bugs}) auftreten.
 	\item[Weiterentwicklung:] Ein Programm muss sich im Laufe seiner Lebenszeit weiter entwickeln um den sich "andernden Nutzeranforderungen gerecht zu werden.
 \end{description}
 
@@ -28,25 +28,31 @@ Die Herangehensweise dieser Methode ist in Abbildung \ref{pic:inkrementelle_entw
 Nach der anf"anglichen Feststellung und Definition der grundlegenden Anforderungen an die zu programmierende Software, wird die allgemeine Struktur des Programms festgelegt.
 Die Subkomponenten des Programms werden einzeln entworfen und in das bestehende Programm integriert.
 Da die neuen Subkomponenten immer Teilanforderungen des Programmes erf"ullen, steigert sich somit die Funktionalit"at des Programms.
-Dieser Ansatz hat den Vorteil, dass die Software schon zeitig im Entwicklungsstadium ausprobiert und getestet werden kann und damit auch schon Erfahrungen gesammelt werden k"onnen.
+Dieser Ansatz hat den Vorteil, dass die Software schon zeitig im Entwicklungsstadium getestet werden kann und damit auch schon Erfahrungen gesammelt werden k"onnen.
 Zus"atzlich k"onnen gew"unschte "Anderungen der Bedienung oder der Funktionalit"at erkannt und implementiert werden.
 
 Der letzte der vier oben genannten Aspekte ist in dieser Arbeit ein nicht zu vernachl"assigender Punkt.
 Weil gerade das Programm f"ur die Nutzung w"ahrend der Entwicklung von Signalverarbeitungsmethoden erstellt wird, werden die Anforderungen an das Programm fortlaufend wachsen.
 Somit soll schon von Beginn an die Erweiterbarkeit dieses Projektes unterst"utzt und gef"ordert werden.
-Deshalb sind auch in den folgenden Anforderungen auch Punkte enthalten die diesen Aspekt besonders hervorheben und explizit fordern.
+Deshalb sind auch in den folgenden Anforderungen Punkte enthalten die diesen Aspekt besonders hervorheben und explizit fordern.
 
 %Theorie zu Softwareentwurf
 %-- Anforderungen: funktional und nichtfunktional
 %-- Weiterentwicklung
 
-\section{Anwendungsf"alle}
+\section{Anwendungsszenarien}
 
-In diesem und dem folgendem Abschnitt soll die zu erstellende Software genauer spezifiziert werden.
-Dazu soll zun"achst eine Liste von Anwendungsf"allen ausgearbeitet werden.
+%In diesem und dem folgendem Abschnitt soll die zu erstellende Software genauer spezifiziert werden.
+In diesem und dem folgendem Abschnitt soll die Softwarespezifikation im Entwicklungsprozess beschrieben und ausgearbeitet werden.
+Ziel ist es eine Liste zu erstellt, die die wesentlichen Anforderungen an das zu erstellende Programm definiert.
+
+Der erste Schritt stellt das Ausarbeiten von Szenarien dar, die eine Beschreibung eines Merkmals des Programmes aus Sicht des Anwenders ist.
+%Dazu soll zun"achst eine Liste von Anwendungsf"allen ausgearbeitet werden.
 %Um eine Anforderungsliste an die zu erstellende Software ausarbeiten zu k"onnen, soll zun"achst eine Liste von Anwendungsf"allen ausgearbeitet werden.
-Aus der Liste h"aufiger Arbeitsabl"aufe und typischer Aufgabenstellungen wird ersichtlich, was der Nutzer von der Software erwartet.
+Aufgrund dieser informellen Beschreibungen h"aufiger Arbeitsabl"aufe und typischer Aufgabenstellungen wird eine "Ubersicht gewonnen, was die zu erstellende Software leisten soll und der Nutzer erwartet.
+%Aus der Liste h"aufiger Arbeitsabl"aufe und typischer Aufgabenstellungen wird ersichtlich, was der Nutzer von der Software erwartet.
 Mithilfe dieser Erwartungen k"onnen im Anschluss die funktionalen Anforderungen an das Programm formuliert und festgelegt werden.
+Das Ergebnis ist somit die Beschreibung des notwendigen (Software-) Systemumfangs und der zu implementierenden Arbeitsprozesse.
 % besonderheiten/merkmale der zu ueberpruefenden signale
 % typische aufgabenstellungen
 % haeufige arbeitsablaeufe
@@ -79,7 +85,13 @@ Der Anwender m"ochte ...
 
 \section{Anforderungen}
 
-Aus den oben genannten Anwendungsf"allen ergeben sich die folgenden Anforderungen an das Programm.
+Mithilfe der oben beschriebenen Nutzungsf"allen kann daraus die konkrete Funktionalit"at der Software definiert werden.
+Diese Definition erfolgt durch die Bestimmung konkreter Anforderungen an das Programm.
+Dabei beschreiben die Anforderungen die konkret umzusetzenden Funktionen und Arbeitswerkzeuge.
+Zus"atzlich wird die in Kapitel \ref{chap:anforderungsvalidierung} beschriebene Validierung der Software die in diesem Abschnitt ausgearbeiteten Definitionen als Grundlage nehmen um das erstellte Programm zu "uberpr"ufen und zu bewerten.
+
+%Aus den oben genannten Anwendungsf"allen ergeben sich die folgenden Anforderungen an das Programm.
+Die folgende List von zu erf"ullenden Anforderungen ergibt sich aus den oben beschreibenen Anwendungsszenarien.
 Das Programm ...
 \renewcommand{\theenumi}{\Alph{enumi}}
 \renewcommand{\labelenumi}{\theenumi )}
@@ -96,7 +108,7 @@ Das Programm ...
 				 Es muss eine Vergr"o\ss erung und Verkleinerung bez"uglich der Abszissen- und der Ordinatenachse unterst"utzen.
 				 Zus"atzlich ist die F"ahigkeit des Verschiebens der Ansicht gefordert.
 				 Dabei sollen mehrere Diagramme gleichzeitig Verschoben werden k"onnen.
-	\AF{amplitudenmarkierung} muss in der Lage sein einen Amplitudenbreich ein oder mehrerer Signalansichten optisch hervorzuheben.
+	\AF{amplitudenmarkierung} muss in der Lage sein einen Amplitudenbereich ein oder mehrerer Signalansichten optisch hervorzuheben.
 	\AF{annotationen} soll dem Nutzer ein Werkzeug zur Verf"ugung stellen, das ihm erlaubt Datenpunkte zu annotieren.
 					  Diese Annotationen sollen optisch in den Signalansichten ersichtlich sein und mit einem Kommentar versehen werden k"onnen.
 					  Neben der Annotation einzelner Datenpunkte, soll auch die Markierung von Signalbereichen unterst"utzt werden.
@@ -108,7 +120,7 @@ Das Programm ...
 					   Optionen bez"uglich der Darstellung von Signalen sollen in dem Datensatz mit abgespeichert werden k"onnen.
 \end{enumerate}
 
-Die in der Aufgabenstellung geforderte Ausbauf"ahigkeit der Programms kann nicht durch die Anwendungsf"alle abgedeckt werden.
+Die in der Aufgabenstellung geforderte Ausbauf"ahigkeit der Programms ist nicht durch die Anwendungsszenarien abgedeckt werden.
 Hierbei handelt es sich um eine nichtfunktionale Anforderung an das Programm.
 Daher wird die folgenden Anforderung nur auf Basis der Aufgabenstellung formuliert und nicht aufgrund der Erwartungshaltung des Benutzers:
 %Die folgende Anforderung l"asst sich nicht aus den Anwendungsf"allen erschlie\ss en, das die Erweiterbarkeit eine Forderung von zuk"unftigen Entwicklern ist und nicht die der Anwender.
