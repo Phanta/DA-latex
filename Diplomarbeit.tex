@@ -108,12 +108,16 @@
 \addcontentsline{toc}{chapter}{Abk"urzungsverzeichnis}
 \chapter*{Abk"urzungsverzeichnis}
 \renewcommand{\bflabel}[1]{\normalfont{\normalsize{#1}}\hfill} % Schriftart auf normale Schriftart ändern
-\begin{acronym}
+\begin{acronym}[LGPL ]		% extra leerzeichen notwendig f"ur zus"atzlicher Platz
 \setlength{\itemsep}{-\parsep} % für kompaktes Verzeichnis
 \acro{EKG}{Elektrokardiogramm}
-\acro{GUI}{grafische Benutzeroberfl\"ache}
+\acroplural{EKG}[EKGs]{Elektrokardiogramme}
+\acro{GUI}{grafische Benutzeroberfl\"ache\acroextra{ \emph{(graphical user interface)}}}
 \acro{IBMT}{Institut für biomedizinische Technik\acroextra{ (der TU Dresden)}}
 \acro{LGPL}{\emph{GNU Lesser General Public License}}
+\acro{PPG}{Puls-(Foto-)Plethysmographie}
+\acro{tab}[Tab.]{Tabelle}
+\acroplural{tab}[Tab]{Tabellen}
 \end{acronym}
 
 

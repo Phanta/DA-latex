@@ -77,7 +77,7 @@ Das Programm ...
 	\AF{datenmanagement} soll in der Lage sein, Daten aus einem Datensatz zu laden (1).
 						 Dem Nutzer muss es erm"oglicht werden, diese Signaldaten aus einer "Ubersicht auszuw"ahlen (2) und in Diagrammen darstellen zu lassen.
 	\AF{dateninformation} muss dem Nutzer die M"oglichkeit bieten allgemeine Informationen sowohl "uber den Datensatz (1) als auch "uber die enthaltenen Daten (2) anzuzeigen.
-	\AF{diagramm} muss in der Lage sein, die Signalverl"aufe sowohl einzeln (1) in einem Diagramm daszustellen, aber auch mehrere verschieden Signalverl"aufe (2) in ein und demselben Diagramm zu visualisieren.
+	\AF{diagramm} muss in der Lage sein, die Signalverl"aufe sowohl einzeln (1) in einem Diagramm darzustellen, aber auch mehrere verschieden Signalverl"aufe (2) in ein und demselben Diagramm zu visualisieren.
 				  Diese Signalansichten sollten in ihrer Darstellungsgr"o\ss e durch den Nutzer ver"anderbar sein (3).
 	\AF{ansicht} soll dem Benutzer erm"oglichen, seine Signalansicht frei "`bewegen"' zu k"onnen.
 				 Es muss eine Vergr"o\ss erung und Verkleinerung bez"uglich der Abszissen- und der Ordinatenachse unterst"utzen (1).
@@ -104,10 +104,10 @@ Daher wird die folgenden Anforderung nur auf Basis der Aufgabenstellung formulie
 	\AF{signalverarbeitung} Das Programm soll dem Benutzer erm"oglichen eine Signalverarbeitungsmethode auf ein gew"ahltes Biosignal anwenden zu k"onnen (1).
 							Dabei muss das Originalsignal unver"andert bleiben (2).
 							Der bearbeitete Signalverlauf kann als eigenes Signal im Datensatz abgespeichert werden (3).
-							Die Implementierung dieser Anforderung soll beispielhaft f"ur zuk"unftige Entwickler erfolgen um die Erweiterbarkeit zu gew"ahrleisten (4).
+							Die Implementierung dieser Anforderung soll beispielhaft f"ur zuk"unftige Entwickler erfolgen um die Erweiterbarkeit zu gew"ahrleisten.
 \end{enumerate}
 
-\section{[WIP]Testszenarien}
+\section{Testszenarien}
 \label{chap:testszenarien}
 
 In diesem Abschnitt sollen Szenarien heraus gearbeitet werden, mit denen die Software am Ende validiert werden kann.
@@ -115,19 +115,20 @@ Dabei soll die oben geforderte Funktionalit"at anhand der Behandlung von Biosign
 Das Testen der Funktionalit"at mittels bestimmter Biosignale sind aber nur spezielle Einzelf"alle.
 Es kann durch sie nicht die absolute Fehlerfreiheit der Software gezeigt werden.
 
-Folgend sollen die Testszenarien beschrieben werden die zur Validierung der Software durch gef"uhrt werden sollen.
+Folgend sollen die Testszenarien beschrieben werden die zur Validierung der Software durchgef"uhrt werden sollen.
 Die Ausgangsbedingung ist eine das einfache Starten des Programmes.
 Somit soll der erste, nicht jeweils explizit genannte Schritt sein, das Programm zu starten.
 Abgeschlossen wird jedes Testszenario mit dem Speichern der geladenen Daten.
 \begin{description}
-\item[Testszenario 1] Der Benutzer l"adt einen Datensatz eines abdominaler EKGs mit sieben Aufnahmekan"alen.
-					  Zus"atzlich sind noch die approximierten EKG-Signale des Fetus sowie der Mutter im Datensatz gespeichert.
+\item[Testszenario 1] Der Benutzer l"adt einen Datensatz abdominaler \ac{EKG}-Daten mit sieben Aufnahmekan"alen.
+					  Zus"atzlich sind noch die approximierten \ac{EKG}-Signale des Fetus sowie der Mutter im Datensatz gespeichert.
 					  Der Benutzer l"asst sich alle verf"ugbaren Informationen zu dem geladenem Datensatz anzeigen.
 					  Anschlie\ss end l"asst er sich einen Kanal sowohl des Rohsignals als auch der beiden abgeleiteten Signale jeweils in einer eigenen Ansicht anzeigen.
 					  Er verschafft sich durch eine geringe Zoomstufe einen "Uberblick "uber die Signalverl"aufe.
 					  Der Benutzer zoomt auf interessante Bereiche der Aufnahme herein und vergr"o\ss ert die Ansicht der Einzelsignale.
+					  Er schlie{\ss}t die Ansicht des Rohsignals.
 					  Der Benutzer markiert in zwei unterschiedlichen, neu zu erstellenden Annotationskan"alen die QRS-Komplexe der Mutter, sowie des Fetus ("uber mindestens f"unf Minuten des Signalverlaufs).
-					  Zur "Uberpr"ufung der Annotationen l"asst er sich alle drei Signale und die gemachten Annotationen in einer Signalansicht darstellen.
+					  Zur "Uberpr"ufung der Annotationen l"asst er sich alle Signale und die gemachten Annotationen in einer Signalansicht darstellen.
 \item[Testszenario 2] Der Benutzer l"adt den im Testszenario abgespeicherten Datensatz wieder in das Programm.
 					  Er "uberpr"uft ob die Ansichten und die Einstellungen aus dem ersten Testszenario "ubernommen wurden.
 					  Der Benutzer speichert die Einstellungen der Signalansichten.
@@ -135,13 +136,26 @@ Abgeschlossen wird jedes Testszenario mit dem Speichern der geladenen Daten.
 					  Der Benutzer l"oscht jede zweite Annotation des fetalen QRS-Komplexes.
 					  Weiterhin soll er mindestens 10 Zeitbereiche markieren, wobei es auch zu "Uberschneidungen diese Bereiche kommen soll.
 					  Er l"adt die zuvor gespeicherten Einstellungen und "uberpr"uft ob diese richtig geladen wurden.
-\item[Testszenario 3] Der Benutzer l"adt einen Datensatz mit EKG-und PPG-Signalen.
-					  Er w"ahlt PPG und EKG Kan"ale und zeigt sie sich in einer Ansicht an.
-					  
+\item[Testszenario 3] Der Benutzer l"adt den Bearbeiteten Datensatz aus dem zweiten Testszenario.
+					  Er entfernt die Kan"ale der approximierten \ac{EKG}-Verl"aufe aus dem Datensatz.
+					  Der Benutzer "uberpr"uft die gemachten Annotationen mithilfe des Rohsignals.
+\item[Testszenario 4] Der Benutzer l"adt einen Datensatz mit \ac{EKG}-und \ac{PPG}-Signalen.
+					  Er w"ahlt \ac{PPG} und \ac{EKG} Kan"ale und zeigt sie sich in einer Ansicht an.
+					  Der Benutzer verschafft sich eine "Ubersicht durch eine geringe Zoomstufe "uber die Signalverl"aufe.
+					  Der Benutzer markiert einen Amplitudenbereich im \ac{PPG}-Signal.
+					  Er wendet eine Filterfunktion auf das \ac{EKG}-Signal an und speichert das Ergebnis im Datensatz ab.
+					  Er kontrolliert die Informationen des ver"anderten Signals.
+					  Der Nutzer entfernt das Original-\ac{EKG}-Signal aus dem Datensatz.
+\item[Testszenario 5] Der Benutzer l"adt den Datensatz aus dem viertem Testszenario.
+					  Er kontrolliert dabei die Einstellungen der Ansichten darauf, ob sie aus dem Szenario 4 "ubernommen wurden.
+					  Er annotiert die QRS-Komplexe des gefiltertem \ac{EKG}-Signals f"ur mindestens f"unf Minuten des Signalverlaufs.
+					  Der Benutzer wendet eine weitere Filterfunktion auf das bereits gefilterte Signal an und speichert das Ergebnis erneut im Datensatz ab.
+					  Er kontrolliert die Annotationen mit dem erneut gefiltertem Signal.
 \end{description}
 
 \begin{table}[tbh]
 \caption[Abdeckung der Anforderungen durch die Testszenarien]{Abdeckung der Anforderungen durch die Testszenarien (TS)}
+\label{tab:anforderungs_abdeckung}
 \centering
 \begin{tabular}{|r|c|c|c|c|c|c|c|c|c|c|c|c|c|c|c|c|c|}
 	\cline{2-17}
@@ -149,24 +163,28 @@ Abgeschlossen wird jedes Testszenario mit dem Speichern der geladenen Daten.
 	\multicolumn{1}{r|}{} & A & B1 & B2 & C1 & C2 & D1 & D2 & E1 & E2 & E3 & F1 & F2 & F3 & G & H1 & H2\\ \hline
 	TS 1 & \Checkmark & \Checkmark &  & \Checkmark & \Checkmark & \Checkmark & \Checkmark & \Checkmark & \Checkmark & \Checkmark & \Checkmark & \Checkmark & \Checkmark & & \Checkmark & \Checkmark \\ \hline
 	TS 2 & \Checkmark & \Checkmark & & \Checkmark & \Checkmark & & & \Checkmark & & & \Checkmark & \Checkmark & \Checkmark & & & \Checkmark \\ \hline
-	TS 3 &&&&&&&&&&&&&&&& \\ \hline
-	TS 4 &&&&&&&&&&&&&&&& \\ \hline
+	TS 3 & \Checkmark & \Checkmark & & \Checkmark & \Checkmark & & & \Checkmark & & & \Checkmark & & & & & \Checkmark \\ \hline
+	TS 4 & \Checkmark & \Checkmark & \Checkmark & \Checkmark & \Checkmark & & \Checkmark & \Checkmark & & \Checkmark & \Checkmark & \Checkmark & \Checkmark & \Checkmark & & \\ \hline
+	TS 5 & \Checkmark & \Checkmark & \Checkmark & \Checkmark & \Checkmark & & & \Checkmark & & & \Checkmark & \Checkmark & \Checkmark & \Checkmark & & \Checkmark \\ \hline
 \end{tabular}
 
 \vspace{2ex}
 
-\begin{tabular}{|r|c|c|c|c|c|c|c|c|c|c|c|c|c|c|}
-	\cline{2-14}
-	\multicolumn{1}{r|}{} & \multicolumn{13}{|c|}{Anforderung} \\ \cline{2-14}
-	\multicolumn{1}{r|}{} & H3 & H4 & I & J1 & J2 & J3 & J4 & K1 & K2 & L1 & L2 & L3 & L4 \\ \hline
-	TS 1 & & & & & \Checkmark & & & & & & & & \\ \hline
-	TS 2 & \Checkmark & \Checkmark & \Checkmark & & \Checkmark & & & \Checkmark & \Checkmark & & & & \\ \hline
-	TS 3 &&&&&&&&&&&&& \\ \hline
-	TS 4 &&&&&&&&&&&&& \\ \hline
+\begin{tabular}{|r|c|c|c|c|c|c|c|c|c|c|c|c|c|}
+	\cline{2-13}
+	\multicolumn{1}{r|}{} & \multicolumn{12}{|c|}{Anforderung} \\ \cline{2-13}
+	\multicolumn{1}{r|}{} & H3 & H4 & I & J1 & J2 & J3 & J4 & K1 & K2 & L1 & L2 & L3 \\ \hline
+	TS 1 & & & & & \Checkmark & & & & & & & \\ \hline
+	TS 2 & \Checkmark & \Checkmark & \Checkmark & & \Checkmark & & & \Checkmark & \Checkmark & & & \\ \hline
+	TS 3 & & & & & & \Checkmark & \Checkmark & & \Checkmark & & & \\ \hline
+	TS 4 & & & & \Checkmark & & & & & & \Checkmark & \Checkmark & \Checkmark \\ \hline
+	TS 5 & & & & \Checkmark & \Checkmark & \Checkmark & \Checkmark & \Checkmark & \Checkmark & \Checkmark & \Checkmark & \Checkmark \\ \hline
 \end{tabular}
 \end{table}
 
-Durch das Bestehen von Testszenarien nur gezeigt werden, dass das Programm die Erwartungen des Nutzers erf"ullen kann.
+In \ac{tab} \ref{tab:anforderungs_abdeckung} ist "ubersichtlich aufgelistet welche der Anforderungen durch die Testszenarien abgedeckt sind.
+Es ist erkenntlich, dass alle Anforderungen mindestens durch ein Testszenario "uberpr"uft wird.
+Durch das Bestehen der Testszenarien kann nur gezeigt werden, dass das Programm die Erwartungen des Nutzers erf"ullen kann.
 Um entstehende Fehler schon w"ahrend der Entwicklung abfangen und beheben zu k"onnen, wird die Software bzw. die einzelnen Programmteile auch schon einzeln daraufhin getestet, dass sie sich so verhalten, wie es der Programmierer vorgesehen hat.
 Speziell wird auch das korekte Verhalten im Falle eines Fehlers "uberpr"uft.
 Diese fortlaufenden funktionellen Test werden in den entsprechenden Abschnitten zu den einzelnen Programmkomponenten im Kapitel \ref{chap:entwurf} beschrieben.
