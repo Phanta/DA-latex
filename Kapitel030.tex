@@ -8,7 +8,7 @@ In jedem einzelnen Abschnitt wird auf drei Punkte eingegangen:
 \begin{itemize}
 	\item Grundlegende Idee und Designkonzept
 	\item Implementierungsdetails
-	\item Tests zur Validierung der einzelnen Komponente
+	\item Tests zur Verifikation der einzelnen Komponente
 \end{itemize}
 Es sei darauf hingewiesen, dass die eigentlichen Entwicklung und Implementierung nicht Komponentenweise, sondern nach entsprechenden Funktionalit"aten statt findet.
 Das Einbinden einer bestimmten Funktionalit"at betrifft oft mehrere Komponenten und ihr Zusammenspiel, wodurch der Ausbau der einzelnen Bestandteile parallel geschieht.
@@ -22,18 +22,22 @@ Die Gliederung dieses Kapitels nach den Programmteilen dient jedeglich der "Uber
 
 \section{Datenbehandlung}
 
-Es existieren \cite{Schlogl2009}
+Aufgrund der Vielfalt der genutzten Datenformate zur Speicherung von Biosignalen und der Nichtexistenz eines einheitlichen Standards \cite{Schlogl2009, Varri2001, Wang2010} muss ein Format gesucht werden, dass zur Behandlung von Datens"atzen im Rahmen dieser Arbeit geeignet ist.
+Die Wahl des Datensatzformates st"utzt sich auf die vergleichende Untersuchung \cite{Schlogl2009} von Dr. Alois Schl"ogl der Technischen Universit"at Graz.
+Das Unisens-Format besitzt eine Referenzimplementierung mit Programmierschnittstellen sowohl f"ur Matlab als auch f"ur Java und bietet f"ur diese Arbeit optimale Anwendungsvoraussetzungen.
+Die Organisation "uber eine menschlich les- und editierbare Headerdatei ist gerade in der Entwicklung interessant.
+Es kann ein Datensatz einfach und ohne Bearbeitungstools ver"andert und an die Bed"urfnisse angepasst werden.
+Einer der Kritikpunkte nach \cite{Schlogl2009} ist, dass das Format aus mehreren Dateien besteht.
+Da die Behandlung von Dateien und Verzeichnissen mit der aktuellen Software kaum noch Unterschiede f"ur den Anwender darstellt, ist nach Meinung des Autors dieser Punkt nicht von hoher Priorit"at.
+Es bietet sogar die M"oglichkeit Daten direkt von Sensoren (bei bekannten technischen Parametern wie z.B. Abtastrate und -aufl"osung) direkt in einen Datensatz integriert werden k"onnen.
+Zus"atzlich bietet das Format durch seine Definition eine gute Erweiterbarkeit.
+Es kann somit an die neue Gegebenheiten und Voraussetzungen angepasst und optimiert werden.
 
-vorhandene Datensatzformate
-	-- kurze "ubersicht
-	-- insbesondere vergleich unisens - wfdb - edf
-
-wahl von unisens begruenden
-	-- menschlich editierbar (xml header)
-	-- verzeichnis vs eine datei ist vernachl"assigbar
-	-- reine sensordaten importierbar
-	-- implementierung vorhanden
-	-- f"ur matlab und java
+%	-- menschlich editierbar (xml header)
+%	-- verzeichnis vs eine datei ist vernachl"assigbar
+%	-- reine sensordaten importierbar
+%	-- implementierung vorhanden
+%	-- f"ur matlab und java
 
 \subsection{Unisens}
 
@@ -79,7 +83,7 @@ Eine "Ubersicht der Klassenstruktur und der von au\ss en ersichtlichen Attribute
 \caption{Klassen"ubersicht der von Unisens definierten Schnittstellen}
 \label{pic:unisens_interface}
 \end{sidewaysfigure}
-Die vom Unisensformat unterst"utzten Signalarten sind auch in der Klassenstruktur erkennbar:
+Die vom Unisensformat unterst"utzten Signalarten sind auch in der Klassenstruktur in \ac{tab} \ref{tab:unisens_signalklassen} erkennbar.
 \begin{table}[h]
 \centering
 \begin{tabular}{|c|c|}
@@ -90,7 +94,7 @@ Die vom Unisensformat unterst"utzten Signalarten sind auch in der Klassenstruktu
 	\hline
 \end{tabular}
 \caption{Signalarten und ihre repr"asentierenden Klassen}
-\label{tab:signal_klassen}
+\label{tab:unisens_signalklassen}
 \end{table}
 
 Aufgrund der Ableitung der Klassen \verb|EventEntry| und \verb|ValuesEntry| von \verb|TimedEntry| ist ersichtlich, dass die Zeitpunkte von Ereignisdaten und Einzelwertdaten "uber eine virtuelle Abtastrate bestimmt werden.
