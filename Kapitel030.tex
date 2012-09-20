@@ -77,13 +77,13 @@ Das Unisens-Paket ist in Java implementiert und wird unter der \emph{\ac{LGPL}} 
 Die bereit gestellte Bibliothek ist auf zwei Einzeldateien aufgeteilt: \verb|org.unisens.jar| und \verb|org.unisens.ri.jar|.
 Bei der ersten Datei handelt es sich um die Definiton des Unisensformates und seiner Bestandteile als Javalassenstruktur.
 Diese Definition erfolgt haupts"achlich als \emph{Interface}klassen und legt die Schnittstellen zwischen den einzelnen Bestandteilen fest.
-Eine "Ubersicht der Klassenstruktur und der von au\ss en ersichtlichen Attribute ist in Abbildung \ref{pic:unisens_interface} auf Seite \pageref{pic:unisens_interface} dargestellt.
+Eine "Ubersicht der Klassenstruktur und der von au\ss en ersichtlichen Attribute ist in \picref{unisens_interface} auf Seite \pageref{pic:unisens_interface} dargestellt.
 \begin{sidewaysfigure}
 \includegraphics[width=\textwidth]{bilder/unisens_interface_.eps}
 \caption{Klassen"ubersicht der von Unisens definierten Schnittstellen}
 \label{pic:unisens_interface}
 \end{sidewaysfigure}
-Die vom Unisensformat unterst"utzten Signalarten sind auch in der Klassenstruktur in \ac{tab} \ref{tab:unisens_signalklassen} erkennbar.
+Die vom Unisensformat unterst"utzten Signalarten sind auch in der Klassenstruktur in \tabref{unisens_signalklassen} erkennbar.
 \begin{table}[h]
 \centering
 \begin{tabular}{|c|c|}
@@ -116,6 +116,14 @@ Durch einen Fehler in der Referenzimplementierung kann es vorkommen, dass beim L
 Insbesondere tritt dieser Fehler auf, wenn innerhalb der Headerdatei der Gruppeneintrag nicht hinter den Dateneintr"agen steht.
 
 \subsection{Interne Datenstruktur}
+
+\begin{figure}[htb]
+\includegraphics[width=0.9\textwidth]{bilder/prog_data_ubersicht.eps}
+\caption[UML-Diagramm des \texttt{data}-Paketes]{UML-Diagramm des \texttt{data}-Paketes inklusive der bereitgestellten Schnittstellen}
+\label{pic:data_package}
+\end{figure}
+
+siehe \picref{data_package}
 
 Kapselung von unisens in wrapperklassen -> erweiterung und vereinfachung der funktionalit"at
 
