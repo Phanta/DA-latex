@@ -1,5 +1,6 @@
 annotiert/*.pdf
 bilder/*.pdf
+bilder/*.dia~
 literatur/*.pdf
 *.aux
 *.bak
