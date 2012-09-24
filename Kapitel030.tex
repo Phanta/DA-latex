@@ -14,7 +14,7 @@ Es sei darauf hingewiesen, dass die eigentlichen Entwicklung und Implementierung
 Das Einbinden einer bestimmten Funktionalit"at betrifft oft mehrere Komponenten und ihr Zusammenspiel, wodurch der Ausbau der einzelnen Bestandteile parallel geschieht.
 Die Gliederung dieses Kapitels nach den Programmteilen dient jedeglich der "Ubersichtlichkeit.
 
-\section{"Uberblick "uber das Gesamtprogramm}
+\section{[WIP]"Uberblick "uber das Gesamtprogramm}
 
 \begin{figure}[htb]
 \centering
@@ -25,7 +25,7 @@ Die Gliederung dieses Kapitels nach den Programmteilen dient jedeglich der "Uber
 
 \begin{table}[hbt]
 \centering
-\caption[Paket- und Klassen"ubersicht]{Paket- und Klassen"ubersicht: Paketnamen sind in \texttt{True-Type} und Klassennamen als \textsf{serifenloser} Schriftart bezeichnet}
+\caption[Paket- und Klassen"ubersicht]{Paket- und Klassen"ubersicht: Paketnamen sind in \texttt{True-Type} und Klassennamen in \textsf{serifenloser} Schriftart geschrieben}
 \label{tab:klassenubersicht}
 \textsf{
 	\begin{tabular}{|llll|}
@@ -232,9 +232,11 @@ Die Annoationen werden beim Laden des Datensatzes in den Arbeitspeicher geladen 
 Neu erstellete Annotationen werden in dieser Liste an den entsprechenden Stellen einsortiert.
 Es wird immer die Samplenummer der Annotation gespeichert, auf die als letztes zugegriffen wurde (sowohl Lesen als auch Schreiben).
 Bei der Suche nach der entsprechenden Position einer gesuchten Annotation wird dann von dieser gespeicherten Samplenummer aus gestartet.
-Die Suche nach einer Samplenummer kann sowohl vor- als auch r"uckw"arts erfolgen.
+Die Suche nach einer Samplenummer erfolgt sowohl vor- als auch r"uckw"arts.
 Dieser Ansatz hat den Vorteil, dass eine gesuchte Position nach wenigen Suchschritten erreicht wird, da Annotationen durch den Benutzer nur ver"andert werden k"onnen die auch angezeigt werden.
 Somit befindet sich der Index des letzten Zugriffs immer in der N"ahe der gesuchten Position.
+
+\subsubsection{Tests des \texttt{data}-Paketes}
 
 %\subsection{Dateibehandlung}
 
@@ -243,6 +245,8 @@ Somit befindet sich der Index des letzten Zugriffs immer in der N"ahe der gesuch
 %\section{Allgemeine Programmstruktur}
 
 \section{Benutzerf"uhrung}
+
+
 
 \subsection{Grafische Buntzeroberfl\"ache}
 
