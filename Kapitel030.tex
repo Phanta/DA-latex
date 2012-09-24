@@ -19,13 +19,54 @@ Die Gliederung dieses Kapitels nach den Programmteilen dient jedeglich der "Uber
 \begin{figure}[htb]
 \centering
 \includegraphics[width=0.9\textwidth]{bilder/prog_ubersicht.eps}
-\caption[UML-Paket-"Ubersicht der umgesetzten Software]{UML-Paket-"Ubersicht der umgesetzten Software, nur wesentliche Klassen sind dargestellt}
+\caption[\ac{uml}-Paket-"Ubersicht der umgesetzten Software]{\ac{uml}-Paket-"Ubersicht der umgesetzten Software, nur wesentliche Klassen sind dargestellt}
 \label{pic:paket_ubersicht}
 \end{figure}
 
+\begin{table}[hbt]
+\centering
+\caption[Paket- und Klassen"ubersicht]{Paket- und Klassen"ubersicht: Paketnamen sind in \texttt{True-Type} und Klassennamen als \textsf{serifenloser} Schriftart bezeichnet}
+\label{tab:klassenubersicht}
+\textsf{
+	\begin{tabular}{|llll|}
+		\hline
+		\texttt{gst} & Main &&\\ 
+		    		 & Settings &&\\\hline
+		\texttt{gst.}& \texttt{data} & AnnotationController &\\
+					 &				 & AnnotationList &\\
+					 &				 & AnnotationManager &\\
+					 &				 & DataController &\\
+					 &				 & SignalController &\\
+					 &				 & UnisensDataset &\\
+					 &				 & ValueController &\\\hline
+		\texttt{gst.}& \texttt{test} & DataTest &\\
+					 &				 & Debug &\\\hline
+		\texttt{gst.}& \texttt{ui}	 & AnnotationSelectionDialog &\\
+					 &				 & DataSelectionDialog &\\
+					 &				 & MainWindow &\\
+					 &				 & Menus &\\
+					 &				 & NamedMouseAdapter &\\
+					 &				 & Sidebar &\\
+					 &				 & SignalOverview &\\
+					 &				 & SignalPanel &\\
+					 &				 & SignalView &\\
+					 &				 & SignalViewFactory &\\
+					 &				 & StatusBar &\\
+					 &				 & Toolbar &\\\hline
+		\texttt{gst.}& \texttt{ui.}	 & \texttt{dialog} & DatasetSelectionDialog\\
+					 &				 &				   & EditEventDialog \\
+					 &				 &				   & EnterFileNameDialog \\\hline
+		\texttt{gst.}& \texttt{ui.}	 & \texttt{layout} & ComponentArrangement \\
+					 &				 &				   & MultiSplit\\
+					 &				 &				   & SignalPanelLayoutManager\\
+					 &				 &				   & VerticalLayoutManager\\\hline
+\end{tabular}
+}
+\end{table}
+
 -- theoretische beschreibung des gesamtkonzeptes
--- auflisten der subkomponenten siehe \picref{paket_ubersicht}
--- graphische "Ubersicht der Bestandteile
+-- komplette auflisten der subkomponenten in \tabref{klassenubersicht}
+-- graphische "Ubersicht der Bestandteile siehe \picref{paket_ubersicht}
 
 \section{Datenbehandlung}
 
@@ -77,7 +118,7 @@ Unisens unterscheidet zwischen vier Arten von Daten:
 \end{description}
 Eine detailiertere Beschreibung des Formates kann der offiziellen Dokumentation \cite{Ottenbacher2010} entnommen werden.
 
-\subsubsection{Details der Implementierung}
+\subsubsection{Details der Referenzimplementierung}
 
 In diesem Abschnitt wird kurz auf einige Details der Umsetzung des Unisens-Formates eingegangen.
 Das Unisens-Paket ist in Java implementiert und wird unter der \emph{\ac{LGPL}} zur Verf"ugung gestellt.
@@ -122,22 +163,80 @@ Sollen hingegen konkret Objekte erstellt werden, muss auf die Referenzimplementi
 Durch einen Fehler in der Referenzimplementierung kann es vorkommen, dass beim Laden eines vorhandenen Unisensdatensatzes in dem Gruppen definiert sind eine \verb|NullPointerException| auftritt.
 Insbesondere tritt dieser Fehler auf, wenn innerhalb der Headerdatei der Gruppeneintrag nicht hinter den Dateneintr"agen steht.
 
-\subsection{Interne Datenstruktur}
+\subsection{Programminterne Datenstruktur}
 
 \begin{figure}[htb]
 \centering
 \includegraphics[width=0.9\textwidth]{bilder/prog_data_ubersicht.eps}
-\caption[UML-Diagramm des \texttt{data}-Paketes]{UML-Diagramm des \texttt{data}-Paketes inklusive der bereitgestellten Schnittstellen}
+\caption[\ac{uml}-Diagramm des \texttt{data}-Paketes]{\ac{uml}-Diagramm des \texttt{data}-Paketes inklusive der bereitgestellten Schnittstellen}
 \label{pic:data_package}
 \end{figure}
 
-siehe \picref{data_package}
+Das Paket \verb|gst.data| ist die Schnittstelle der Programms zu dem gew"ahlten Datensatzformat Unisens.
+Eine "Ubersicht des Paketes ist im \ac{uml}-Diagramm in \picref{data_package} dargestellt.
+Dieses Paket erf"ullt zwei wesentliche Aufgaben:
+\begin{itemize}
+	\item Vereinheitlichung der Behandlung der unterschiedlichen Datenarten
+	\item Abkapselung anderer Programmteile vom Datensatzformat
+\end{itemize}
 
-Kapselung von unisens in wrapperklassen -> erweiterung und vereinfachung der funktionalit"at
+Die Vereinheitlichung ist notwendig, da Unisens die Daten in drei Arten gliedert: Signale, Werte und Ereignisse.
+F"ur die Bearbeitung und Darstellung ist aber die Unterscheidung von Signalen und Werten nicht notwendig.
+In beiden F"allen handelt es sich um numerische Werte die zu einem bestimmten Zeitpunkt aufgenommen wurden.
+Somit sollen diese auch vom Programm gleichartig behandelt werden.
+Daher erhalten alle Datenarten die abstrakte Klasse \verb|DataController| als Fassade.
+Die jeweilge konkrete Implementierung ist in den drei abgeleiteten Klassen \verb|Signal-|, \verb|Value-| und \verb|AnnotationController| realisiert.
+Neben der Vereinheitlichung der Schnittstelle zum Datensatz werden auch die Zugriffe auf die Daten vereinfacht.
+Es werden notwendige Ausnahmebehandlungen (\emph{Exceptions}) durch die Klassen des \verb|data|-Paketes abgefangen und behandelt.
+Darunter f"allt unter anderem die Behandlung von Fehlern, wenn Daten aufgrund von fehlenden Zugriffsrechten nicht gelesen oder geschrieben werden k"onnen.
+Somit ist der Zugriff auf die konkreten Daten des Datensatzes sowohl vereinheitlicht als auch vereinfacht.
 
-daten"ubergabe an visualisierung mithilfe der controller
+Weiterhin wird mit dem \verb|data|-Paket erreicht, dass die restlichen Komponenten des Programms nicht direkt auf das Datensatzformat zugreifen.
+Sie sind damit von dem gew"hlten Format abgekapselt und ein Austausch des Formates erfordert nur die Anpassung des \verb|data|-Paketes.
+Der gesamte Datensatz ist durch die Wrapper-Klasse \verb|UnisensDataset| im Programm repr"asentiert.
+Zugriff auf den Datensatz erfolgt nur "uber die von der Klasse bereitgestellte Schnittstelle.
+Weiterhin wird der ver"anderde Zugriff auf Annotationen durch die Klasse \verb|AnnotationManager| realisiert und die Behandlung von Annotationen selbst "uber die Klasse \verb|AnnotationList| abgewickelt.
+Die zwei zu letzt genannten Klassen kapseln die von Unisens bereitgestellten Klassen (\verb|Event| und \verb|EventList|) von den anderen Programmteilen ab.
 
-\subsection{Dateibehandlung}
+Neben den zwei oben genannten Aspekten wird auch der Zugriff auf die Daten selbst durch das Paket ver"andert.
+Unisens arbeitet durchgehend mit Samplenummern bei der Indizierung der einzelnen Datenpunkte.
+Die durch das Paket bereitgestellte Schnittstelle wandelt diese Art des Zugriffs auf eine zeitbasierte Art um.
+Das bedeutet, anstatt Daten "uber die Angabe von Samplenummern zu erhalten, bietet die Schnittstelle die M"oglichkeit Daten aus einem bestimmten Zeitraum zu erhalten.
+Die notwendige Umrechnung zwischen Samplenummern und Abtastraten auf entsprechende Zeitpunkte wird im \verb|data|-Paket ausgef"uhrt.
+Dadurch wird die Existenz verschiedener Abtastraten der unterschiedlichen Signale vor dem restlichen Programm verborgen.
+
+\subsubsection{Repr"asentation des Datensatzes durch die Klassen \texttt{UnisensDataset} und \texttt{DataController}}
+
+Die Klasse \verb|UnsiensDataset| stellt die Schnittstelle des Programms zu den Datens"atzen dar.
+F"ur jeden geladenen Datensatz wird im Programm ein Objekt der Klasse \verb|UnisensDataset| erzeugt.
+Diese Objekte bieteten die erforderlichen Funktionen um auf die Eigenschaften des Datensatzes, die Eigenschaften der Dateneintr"age und die Daten der Eintr"ge selbst zuzugreifen.
+Beim Laden eines Datensatzes wird f"ur jeden Dateneintrag ein Instanz eines \verb|DataController|s erzeugt und in einer Liste \verb|ctrlList| im \verb|UnisensDataset|-Objekt gespeichert.
+Je nach Datenart des Eintrags wird zur Laufzeit dynamisch ein Objekt der Klassen \verb|Signal-|, \verb|Value-| oder \verb|AnnotationController| erzeugt.
+Genauer wird sogar f"ur jeden Kanal ein eigener \verb|DataController| angelegt.
+Jede Komponente des Programms die auf einen Dateneintrag zugreifen m"ochte, erh"alt vom \verb|UnisensDataset| den entsprechenden Controller.
+Es wird sichergestellt, dass zu jedem Zeitpunkt jedem Dateneintrag genau ein Controllerobjekt zugeordnet ist und keine Duplizierung auftreten kann.
+Durch spezielle Funktionen \verb|AddNewSignal()|, \verb|AddNewValue()| und \verb|AddNewAnnotation()| k"onnen einem Datensatz zus"tzliche Dateneintr"ge hinzugef"ugt werden.
+Die entsprechenden \verb|DataController| werden dann in die Liste \verb|ctrlList| aufgenommen und es kann durch diese anschlie\ss end auf die Daten zugegriffen werden.
+Der gesamte Datensatz wird bei einem Aufruf der \verb|save()|-Funktion des Datensatzes abgespeichert werden, weil die Speicherfunktion f"ur alle \verb|DataController|-Objekte in \verb|crtlList| rekursiv ausgef"uhrt werden k"onnen.
+
+\subsubsection{Pufferung, Sortieren und Suchen der Klasse \texttt{AnnotationController}}
+
+Die Referenzimplementierung des Unisensformates sieht f"ur das Lesen und Schreiben von Daten einen ungepufferten Ansatz vor.
+Das bedeutet sobald Daten vom Programm ver"andert werden, werden diese "Anderungen auch sofort im Datensatz und somit auf dem Speichermedium abgespeichert.
+Das hat zur Folge, dass Annotationen in der Reihenfolge in der sie erstellt wurden, in den Datendateien abgespeichert werden.
+Somit sind die Annotationen zeitlich unsortiert.
+Wenn nun eine Annotation eines bestimmten Zeitpunktes angezeigt werden soll, muss der im schlechtesten Fall der gesamte Datensatz nach dieser Annotation durchsucht werden.
+Dieses Verhalten ist unerw"unscht, da somit die Zugriffszeit w"ahrend der Laufzeit, insbesondere bei gro\ss en Datens"atzen, stark schwanken k"onnen.
+Dieses Problem wird durch eine gepufferte Implementierung der Klasse \verb|AnnotationController| behoben.
+Die Annoationen werden beim Laden des Datensatzes in den Arbeitspeicher geladen und mit einem Quick-Sort-Algorithmus nach aufsteigenden Samplenummern sortiert.
+Neu erstellete Annotationen werden in dieser Liste an den entsprechenden Stellen einsortiert.
+Es wird immer die Samplenummer der Annotation gespeichert, auf die als letztes zugegriffen wurde (sowohl Lesen als auch Schreiben).
+Bei der Suche nach der entsprechenden Position einer gesuchten Annotation wird dann von dieser gespeicherten Samplenummer aus gestartet.
+Die Suche nach einer Samplenummer kann sowohl vor- als auch r"uckw"arts erfolgen.
+Dieser Ansatz hat den Vorteil, dass eine gesuchte Position nach wenigen Suchschritten erreicht wird, da Annotationen durch den Benutzer nur ver"andert werden k"onnen die auch angezeigt werden.
+Somit befindet sich der Index des letzten Zugriffs immer in der N"ahe der gesuchten Position.
+
+%\subsection{Dateibehandlung}
 
 %\subsection{Speichermanagement}
 
