@@ -53,7 +53,20 @@ Zus"atzlich k"onnen gew"unschte "Anderungen der Bedienung oder der Funktionalit"
 \section{[WIP]Genutzte Biosignale zur Programmvalidierung}
 \label{chap:genutzte_biosignale}
 
--- kurze Beschreibung f"ur: fetale \ac{EKG}-Daten, \ac{PPG}, evtl. \ac{EKG} allgemein
+-- abdmECG Schwangerer
+-- aufgenommen durch Projektpartner in Leipzig (Universit"atsfrauenklinik Leipzig / Institut f"ur Geburtshilfe und Gyn"akologie)
+-- 7 kan"ale: 2-8 aus \cite{Zaunseder2012}
+-- Datensatz enth"alt: 
+\begin{itemize}
+	\item Rohdaten (7 Kan"ale)
+	\item vorverarbeitete Daten (Bandpass / 7 Kan"ale)
+	\item mECG und fECG Absch"atzung (jeweils 7 Kan"ale)
+	\item mQRS und fQRS Detektion
+	\item (mRR und fRR Zeitreihen)
+\end{itemize}
+-- Annotation notwendig zur Kontrolle der automatisiert detektierten QRS Komplexe, weil Detektionsrate stark schwankend ($66,1 - 94,5$\% \cite{Zaunseder2012})
+
+-- kurze Beschreibung f"ur: \ac{PPG}, evtl. \ac{EKG} allgemein
 -- warum annotieren notwendig
 
 %% EOF %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
