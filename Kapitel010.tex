@@ -12,6 +12,7 @@ Durch die Bereitstellung eines solchen Werkzeugs f"ur Dritte kann auch die metho
 Um solche Kooperationen zu unterst"utzen sollte es, aufgrund der unterschiedlichen Voraussetzungen, wenig spezialsierte Anforderungen an seine Umgebung stellen.
 
 \section{Zielstellung}
+\label{sec:zielstellung}
 
 Das Ziel dieser Arbeit ist ein Programm zu konzipieren und umzusetzen, das unterschiedliche (Bio-) Signale grafisch darstellt und dem Nutzer die M"oglichkeit bietet, Zeitpunkte und -intervalle innerhalb des Signalverlaufs zu markieren und mit Kommentaren zu versehen.
 Hierbei soll insbesonderer die gleichzeitige Darstellung mehrerer Signale unterschiedlicher Natur und Auspr"agung unterst"utzt werden.
@@ -29,18 +30,42 @@ In dieser Nutzerdokumentation soll dem Anwender die Funktionsweise und Bedienung
 
 \section{Konkretisieren der Aufgabenstellung}
 
--- Programmiersprache Java
--- notwendige Konvertierungsskripte (Matlab <-> Java) f"ur Daten
+Die Entwicklung automatiserter Datenverarbeitungsmethoden am \ac{IBMT} erfolgt haupts"achlich innerhalb der von Matlab bereit gestellten Umgebung statt.
+Das zu erstellende Programm soll aber unabh"angig aus lizensrechtlichen Gr"unden von Matlab unabh"angig sein.
+Durch die M"oglichkeit in Matlab Java-Code auszuf"uhren, bietet es sich an das Programm mit der Programmiersprache Java zu implementiern.
+Dadurch werden zwei Ziele erreicht:
+\begin{itemize}
+	\item Ausf"uhrbarkeit des Programms auf Computersystem durch Nutzung frei erh"altlicher Software
+	\item Integration der \ac{IBMT}-internen Nutzung des Programms in die bereits vorhandenen Entwicklungmethoden und -Werkzeuge
+\end{itemize}
+Die Implementierung in Java hat zus"atzlich noch den Vorteil, dass die Umsetzung der \ac{GUI} durch vorhandenen Bibliotheksfunktionen unterst"utzt unf vereinfacht wird.
+Da jedoch die Datenspeicherung von Matlab durch ein propriet"ares Format erfolgt und dieses Format sich mit den Versionen von Matlab schon in der Vergangenheit oft ver"andert hat, muss f"ur die Speicherung und den Transport von Daten ein geeignetes Format gew"ahlt werden.
+Neben der Wahl des Formates m"ussen auch Skripte f"ur eventuell anfallenden Import- und Exportfunktionen der Daten bereit gestellt werden.
+Bei der Erstellung der Konvertierungsskripte soll auf leicht verst"andliche und einfach Schnittstelle der Fokus gelegt werden.
+Eine ausf"uhrliche Dokumentation der Schnittstelle und der Skripte selbst ist nat"urlich auch ein Kernpunkt.
+%-- Programmiersprache Java
+%-- notwendige Konvertierungsskripte (Matlab <-> Java) f"ur Daten
 
--- Aufgabenteilung: Funktion
--- zuk"unftige Entwicklung
--- Benuzterschnittstelle
+Wie schon in \secref{zielstellung} erw"ahnt, ist die Erweiterbarkeit des Programmes ein wesentlicher Punkt der Umsetzung.
+Somit ist die Kapselung der einzelnen Programmkomponenten ein Bestandteil der Aufgabenstellung.
+Daher ist es notwendig die einzelnen funktionellen Implementierungen voneinander unabh"angig zu gestalten.
+Interaktionen zwischen den einzelnen Komponenten soll "uber einfach Schnittstellen erfolgen.
+Zus"atzlich ist es notwendig Test zu implementieren, die die korekte Funktionsweise der einzelnen Komponenten verifizieren.
+Damit kann nach einer ge"anderten Implementierung die Funktionalit"at erneut "uberpr"uft werden.
+%-- Aufgabenteilung: Funktion
+%-- zuk"unftige Entwicklung
 
--- Validierung mit Beispieldaten
--- ungleich Verifikation (die geschieht mit Tests)
+Die \ac{GUI} des Programmes soll ein intuitives Arbeiten mit dem Programm erm"oglichen.
+Da aber Begriffe wie ,,einfache Bedienbarkeit`` und ,,leicht verst"andliche Oberfl"ache`` von jeder Person anders interpretiert werden und somit nicht objektiv gemessen werden k"onnen, muss das Programm und seine Funktionalit"at validiert werden.
+Hierzu sollen typische Arbeitabl"aufe mithilfe von Beispieldatens"atzen ausgef"uhrt werden.
+Durch die Validierung kann aber nur festgestellt werden, ob die Software den W"unschen und Erwartungen des Nutzers gerecht wird.
+Die im obigen Absatz erw"ahnte Verifikation der Funktionalit"at wird durch die Validierung der Software nicht obsolet.
+%-- Benuzterschnittstelle
+%-- Validierung mit Beispieldaten
+%-- ungleich Verifikation (die geschieht mit Tests)
+
 
 -- Dokumentation f"ur Benutzer und Weiterentwickler
--- ein Schwerpunkt Erweiterbarkeit
 -- m"ogliche Grundlage f"ur Programm der automatisierten Signalverarbeitung
 
 %% EOF %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%

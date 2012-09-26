@@ -1,7 +1,7 @@
 \chapter{Vorbetrachtungen}
 
 \section{Allgemeine Softwareentwicklung}
-\label{chap:allgemeine_softwareentwicklung}
+\label{sec:allgemeine_softwareentwicklung}
 
 In dieser Arbeit soll der Begriff Softwareentwicklung den Prozess benennen, der alle Aktivit"aten und die damit verbundenen (Zwischen-) Ergebnisse bei der Erstellung von Software umfasst.
 In der Literatur wird auch der Begriff Softwareprozess genutzt \cite{Sommerville2001a}.
@@ -18,12 +18,12 @@ Obwohl verschiedene Vorgehensmodelle f"ur das Erstellen von Software existieren,
 	\item[Weiterentwicklung:] Ein Programm muss sich im Laufe seiner Lebenszeit weiter entwickeln um den sich "andernden Nutzeranforderungen gerecht zu werden.
 \end{description}
 
-Der Punkte der Softwarespezifikation ist im Kapitel \ref{chap:spezifikation} abgehandelt.
-Im Kapitel \ref{chap:entwurf} wird neben der Struktur und dem Aufbau des Programms auch auf die Fragen bez"uglich Entwurfsentscheidungen eingegangen.
+Der Punkte der Softwarespezifikation ist im \chapref{spezifikation} abgehandelt.
+Im \chapref{entwurf} wird neben der Struktur und dem Aufbau des Programms auch auf die Fragen bez"uglich Entwurfsentscheidungen eingegangen.
 Durch die Validierung der Software muss sicher gestellt werden, dass die Software die Erwartungen des Benutzers erf"ullt und den an sie gestellten Bedingungen gerecht wird.
-Dieser Punkt ist im Abschnitt \ref{chap:testszenarien} behandelt.
+Dieser Punkt ist im \secref{testszenarien} behandelt.
 Zudem muss das Programm auch schon w"ahrend der Entwicklung immer wieder auf die korrekte Funktionsweise "uberpr"uft werden.
-Dazu wird auch auf Tests der einzelnen Komponenten in den jeweilegen Abschnitten im Kapitel \ref{chap:entwurf} eingegangen.
+Dazu wird auch auf Tests der einzelnen Komponenten in den jeweilegen Abschnitten im \chapref{entwurf} eingegangen.
 Der letzte der vier oben genannten Aspekte ist in dieser Arbeit ein nicht zu vernachl"assigender Punkt.
 Weil gerade das Programm f"ur die Nutzung w"ahrend der Entwicklung von Signalverarbeitungsmethoden erstellt wird, werden die Anforderungen an das Programm fortlaufend wachsen.
 Somit soll schon von Beginn an die Erweiterbarkeit dieses Projektes unterst"utzt und gef"ordert werden.
@@ -51,7 +51,7 @@ Zus"atzlich k"onnen gew"unschte "Anderungen der Bedienung oder der Funktionalit"
 %-- Weiterentwicklung
 
 \section{[WIP]Genutzte Biosignale zur Programmvalidierung}
-\label{chap:genutzte_biosignale}
+\label{sec:genutzte_biosignale}
 
 -- abdmECG Schwangerer
 -- aufgenommen durch Projektpartner in Leipzig (Universit"atsfrauenklinik Leipzig / Institut f"ur Geburtshilfe und Gyn"akologie)
@@ -66,7 +66,12 @@ Zus"atzlich k"onnen gew"unschte "Anderungen der Bedienung oder der Funktionalit"
 \end{itemize}
 -- Annotation notwendig zur Kontrolle der automatisiert detektierten QRS Komplexe, weil Detektionsrate stark schwankend ($66,1 - 94,5$\% \cite{Zaunseder2012})
 
--- kurze Beschreibung f"ur: \ac{PPG}, evtl. \ac{EKG} allgemein
--- warum annotieren notwendig
+-- Teil von Cui Zhai \cite{Zhai2012}:
+\begin{itemize}
+	\item \ac{EKG}
+	\item \ac{PPG}
+	\item RR-Intervalle (\ac{hrv}, aus obigen abgeleitet)
+\end{itemize}
+
 
 %% EOF %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%

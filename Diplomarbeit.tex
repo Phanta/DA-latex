@@ -71,9 +71,12 @@
 %% Enumeration mit Labels
 \newcommand{\litem}[1]{\item \label{#1}}
 
-%% einfache Bild- und Tabellenreferenzen
+%% einfache Bild-, Tabellen-, Kapitel- und Abschnittsreferenzen
 \newcommand{\picref}[1]{\ac{abb} \ref{pic:#1}}	% \picref{xyz} -> 'Abb. [<pic:xyz>]'
-\newcommand{\tabref}[1]{\ac{tab} \ref{tab:#1}}	% \picref{xyz} -> 'Tab. [<tab:xyz>]'
+\newcommand{\tabref}[1]{\ac{tab} \ref{tab:#1}}	% \tabref{xyz} -> 'Tab. [<tab:xyz>]'
+\newcommand{\chapref}[1]{Kapitel \ref{chap:#1}}	% \chaoref{xyz} -> 'Kapitel [<tab:xyz>]'
+\newcommand{\secref}[1]{Abschnitt \ref{sec:#1}}	% \picref{xyz} -> 'Abschnitt [<tab:xyz>]'
+
 
 %% Einfache Abbildungsnummerierung
 \renewcommand{\thefigure}{\arabic{figure}}
@@ -126,9 +129,10 @@
 \acro{EKG}{Elektrokardiogramm}
 \acroplural{EKG}[EKGs]{Elektrokardiogramme}
 \acro{GUI}{grafische Benutzeroberfl\"ache\acroextra{ \emph{(graphical user interface)}}}
-\acro{IBMT}{Institut für biomedizinische Technik\acroextra{ (der TU Dresden)}}
-\acro{LGPL}{\emph{GNU Lesser General Public License}}
-\acro{PPG}{Puls-(Foto-)Plethysmographie}
+\acro{hrv}[HRV]{Herzratenvariabilit"at}
+\acro{IBMT}{Institut für bio\-med\-izinische Technik\acroextra{ (der TU Dresden)}}
+\acro{lgpl}[LGPL]{\emph{GNU Lesser General Public License} \cite{LGPL1997}}
+\acro{PPG}{Fotoplethysmographie\acroextra{ \emph{photoplethysmography}}}
 \acro{tab}[Tab.]{Tabelle}
 \acroplural{tab}[Tab]{Tabellen}
 \acro{uml}[UML]{\emph{Unified Modeling Language}}
