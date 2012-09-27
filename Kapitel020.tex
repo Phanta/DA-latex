@@ -50,6 +50,8 @@ Zus"atzlich k"onnen gew"unschte "Anderungen der Bedienung oder der Funktionalit"
 %-- Anforderungen: funktional und nichtfunktional
 %-- Weiterentwicklung
 
+
+
 \section{[WIP]Genutzte Biosignale zur Programmvalidierung}
 \label{sec:genutzte_biosignale}
 
@@ -62,18 +64,36 @@ Zus"atzlich k"onnen gew"unschte "Anderungen der Bedienung oder der Funktionalit"
 \end{figure}
 %\end{wrapfigure}
 
--- abdmECG Schwangerer
--- aufgenommen durch Projektpartner in Leipzig (Universit"atsfrauenklinik Leipzig / Institut f"ur Geburtshilfe und Gyn"akologie)
--- 7 kan"ale: 2-8 aus \cite{Zaunseder2012}
--- Datensatz enth"alt: 
+F"ur die Validierung des Programmes werden typische Arbeitsschritte mit dem Programm auf Beispieldatens"atze durchgef"uhrt.
+In diesem Abschnitt soll kurz die genutzten Daten n"aher beschrieben werden.
+
+\subsection{Abdominale \aclp{EKG}}
+
+F"ur Untersuchungen von \ac{EKG}-Daten von Feten werden \acp{EKG} von Schwangeren abdominal aufgenommen.
+Die Datenaufzeichnung f"ur das \ac{IBMT} erfolgt in Zusammenarbeit der Abteilung f"ur Pr"anatal- und Geburtsmedizin der Universit"atsklink Leipzig.
+Daf"ur werden die \acp{EKG} mit sieben Kan"alen aufgezeichnet (Elektrodenkonfiguration zwei bis acht in \picref{elektroden_konfig}).
+Die Aufzeichnungsdauer betr"agt rund 20 Minuten und die Daten werden mit $1{}kHz$ abgetastet.
+Weitere Details "uber die Datenaufzeichnung und der Datenverarbeitung sind in den Arbeiten von F. Andreotti \cite{Andreotti2011}, M. C. Santiago \cite{Santiago2012} und S. Zaunseder \cite{Zaunseder2012} beschrieben.
+%-- abdmECG Schwangerer
+%-- aufgenommen durch Projektpartner in Leipzig (Universit"atsfrauenklinik Leipzig / Institut f"ur Geburtshilfe und Gyn"akologie)
+%-- 7 kan"ale: 2-8 aus \cite{Zaunseder2012}
+%-- Datensatz enth"alt: 
+Die f"ur die Validierung genutzten Datens"atze enthalten folgende Elemente:
 \begin{itemize}
-	\item Rohdaten (7 Kan"ale)
-	\item vorverarbeitete Daten (Bandpass / 7 Kan"ale)
-	\item mECG und fECG Absch"atzung (jeweils 7 Kan"ale)
-	\item mQRS und fQRS Detektion
-	\item (mRR und fRR Zeitreihen)
+	\item Rohdaten (sieben Kan"ale)
+	\item vorverarbeitete Daten (gefilterte Rohsignale mit einem Bandpass (Durchlassbereich $2$ bis $100{}Hz$ \cite{Andreotti2011}) und einem $49-51{}Hz$-Notchfilter)
+	\item Absch"atzung der m"utterlichen und fetalen \acp{EKG}
+	\item Detektionen der m"utterlichen und fetalen QRS-Komplexe (als Annotationen)
+	\item m"utterliche und fetale RR-Zeitreihen aus der QRS-Detektion abgeleitet
 \end{itemize}
--- Annotation notwendig zur Kontrolle der automatisiert detektierten QRS Komplexe, weil Detektionsrate stark schwankend ($66,1 - 94,5$\% \cite{Zaunseder2012})
+Insgesamt enth"alt ein jeder Datensatz 28 Kan"ale \ac{EKG}-Daten, 14 Annotationskan"ale und 14 RR-Zeiteihen.
+Eine Kontrolle der automatisierten QRS-Detektion ist in diesem Fall notwendig, da die Detektionsrate zwischen $66,1$ und $94,5{}\%$ \cite{Zaunseder2012} schwankt.
+%-- Annotation notwendig zur Kontrolle der automatisiert detektierten QRS Komplexe, weil Detektionsrate stark schwankend ($66,1 - 94,5$\% \cite{Zaunseder2012})
+
+
+
+\subsection{[WIP]Videogest"utzte Herzratenermittlung}
+
 
 -- Teil von Cui Zhai \cite{Zhai2012}:
 \begin{itemize}
