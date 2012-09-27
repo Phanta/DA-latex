@@ -52,22 +52,22 @@ Zus"atzlich k"onnen gew"unschte "Anderungen der Bedienung oder der Funktionalit"
 
 
 
-\section{[WIP]Genutzte Biosignale zur Programmvalidierung}
+\section{Genutzte Biosignale zur Programmvalidierung}
 \label{sec:genutzte_biosignale}
 
+F"ur die Validierung des Programmes werden typische Arbeitsschritte mit dem Programm auf Beispieldatens"atze durchgef"uhrt.
+In diesem Abschnitt soll kurz die genutzten Daten n"aher beschrieben werden.
+
+\subsection{Abdominale \aclp{EKG}}
+
 %\begin{wrapfigure}{r}{0.5\textwidth}
-\begin{figure}
+\begin{figure}[bth]
 	\centering
 	\includegraphics[width=0.6\textwidth]{bilder/elektroden_konfiguration.pdf}
 	\caption[Elektrodenkonfiguration zur Aufnahme des abdominalen \ac{EKG}-Signals]{Elektrodenkonfiguration zur Aufnahme des abdominalen \ac{EKG}-Signals \cite{Zaunseder2012}}
 	\label{pic:elektroden_konfig}
 \end{figure}
 %\end{wrapfigure}
-
-F"ur die Validierung des Programmes werden typische Arbeitsschritte mit dem Programm auf Beispieldatens"atze durchgef"uhrt.
-In diesem Abschnitt soll kurz die genutzten Daten n"aher beschrieben werden.
-
-\subsection{Abdominale \aclp{EKG}}
 
 F"ur Untersuchungen von \ac{EKG}-Daten von Feten werden \acp{EKG} von Schwangeren abdominal aufgenommen.
 Die Datenaufzeichnung f"ur das \ac{IBMT} erfolgt in Zusammenarbeit der Abteilung f"ur Pr"anatal- und Geburtsmedizin der Universit"atsklink Leipzig.
@@ -92,15 +92,42 @@ Eine Kontrolle der automatisierten QRS-Detektion ist in diesem Fall notwendig, d
 
 
 
-\subsection{[WIP]Videogest"utzte Herzratenermittlung}
+\subsection{Videogest"utzte Herzratenermittlung}
 
+\begin{table}[bht]
+\centering
+\begin{tabular}{l|c}
+	\hline
+	\multicolumn{1}{|c|}{Sensor} & \multicolumn{1}{|c|}{Abtastfrequenz in $Hz$} \\\hline
+	Webcam Logitech c170 & 10 \\
+	Industriekamera uEye & 100 \\
+	Ohrl"appchen \ac{PPG} & 1000 \\
+	\ac{EKG} & 1000 \\
+\end{tabular}
+\caption{Abtastfrequenzen der in \cite{Zhai2012} genutzten Sensoren}
+\label{tab:zhai_frequenzen}
+\end{table}
 
--- Teil von Cui Zhai \cite{Zhai2012}:
+Die Herzrate kann auf verschiedene Arten ermittelt werden.
+Ein M"oglichkeit bietet die Analyse von \ac{PPG}-Signalen.
+Durch einen kamerabasierten Ansatz kann die Erfassung des \ac{PPG}-Signals ber"uhrungslos erfolgen.
+In der Arbeit von C. Zhai \cite{Zhai2012} wird eine solche Herangehensweise ausgearbeitet und untersucht.
+Um die erreicheten Ergebnisse zu validieren, werden diese mit denen aus bew"ahrten Methoden gewonnenen verglichen.
+Dazu werden von Probanden \ac{EKG}-Daten nach der 1. Ableitung nach Einthoven aufgenommen.
+Zus"atzlich wird ein \ac{PPG}-Signal am rechten Ohrl"appchen mit einen Reflexions-\ac{PPG}-Sensor aufgenommen und das Gesicht des Probanden mit zwei Kameras gefilmt.
+Die Abtastfrequenzen der einzelnen Sensoren sind in \tabref{zhai_frequenzen} dargestellt.
+Auch hier sei f"ur eine ausf"uhrlichere Beschreibung der Signale sowie der Messwertermittlung auf die urspr"ungliche Arbeit \cite{Zhai2012} verwiesen.
+Die genutzten Datens"atze enthalten folgende Daten:
 \begin{itemize}
-	\item \ac{EKG}
-	\item \ac{PPG}
-	\item RR-Intervalle (\ac{hrv}, aus obigen abgeleitet)
+	\item ein einkanaliges \ac{EKG}
+	\item Signal des \ac{PPG}-Sensors
+	\item detektierte R-Zacken aus \ac{EKG} und Punkte maximalen Anstiegs aus \ac{PPG} (Annotationen)
+	\item RR-Zeitreihen (abgeleitet aus dem \ac{EKG})
+	\item PP-Zeitreihen (abgeleitet aus dem \ac{PPG} und den beiden Kameradaten)
 \end{itemize}
+Zusammengefasst enth"alt jeder Validierungsdatensatz zwei kontinuierlich abgetastete Signale, zwei Annotationskan"ale und vier Zeitreihen (RR- bzw. PP-Zeitreihen).
+Die manuelle Nachkontrolle ist bei dieser Anwendung f"ur die automatisiert erkannten Annotationen notwedig.
+%-- Teil von Cui Zhai \cite{Zhai2012}:
 
 
 %% EOF %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
