@@ -11,6 +11,8 @@ Ein solches Werkzeug kann durch die Definition und Festlegung von Ein- und Ausga
 Durch die Bereitstellung eines solchen Werkzeugs f"ur Dritte kann auch die methodische Grundlage f"ur die Kooperation verschiedener Institutionen geschaffen werden.
 Um solche Kooperationen zu unterst"utzen sollte es, aufgrund der unterschiedlichen Voraussetzungen, wenig spezialsierte Anforderungen an seine Umgebung stellen.
 
+
+
 \section{Zielstellung}
 \label{sec:zielstellung}
 
@@ -27,6 +29,8 @@ Die Arbeit eines zuk"unftigen Entwicklers wird somit durch die beispielhafte Int
 
 Neben der Entwicklerdokumentation soll auch eine seperate Dokumentation f"ur die Benutzer des Programms zur Verf"ugung gestellt werden.
 In dieser Nutzerdokumentation soll dem Anwender die Funktionsweise und Bedienung des Programms verst"andlich gemacht werden.
+
+
 
 \section{Konkretisieren der Aufgabenstellung}
 
@@ -64,8 +68,20 @@ Die im obigen Absatz erw"ahnte Verifikation der Funktionalit"at wird durch die V
 %-- Validierung mit Beispieldaten
 %-- ungleich Verifikation (die geschieht mit Tests)
 
-
--- Dokumentation f"ur Benutzer und Weiterentwickler
--- m"ogliche Grundlage f"ur Programm der automatisierten Signalverarbeitung
+Um dem Nutzer des Programmes die Arbeit mit dem Programm zu erm"oglichen, soll ein Benutzerdokumentation erstellt werden.
+In dieser Dokumentation soll dem Nutzer die M"oglichkeiten, die ihm das Programm bietet, erl"autert werden.
+Es soll dem Nutzer die einzelnen Werkzeuge erkl"art werden und die Funktionsweise des Programmes vermittelt werden.
+Eine weitere Dokumentation soll f"ur die zweite Zielgruppe, zuk"unftige Entwickler des Programmes, soll zus"atzlich erstellt werden.
+In diesem zweiten Dokument im Zusammenhang mit der vorliegenden Arbeit soll das Wissen vermittelt werden, wie die einzelnen Bestandteile des Programmes zusammenarbeiten und welche internen Beziehungen zwischen den einzelnen Komponenten bestehen.
+Die Entwicklerdokumentation besteht aus drei Elementen:
+\begin{itemize}
+	\item Ein \verb|pdf|-Dokument, dass den allgemeinen Aufbau und das interne Zusammenspiel der Komponent erkl"art.
+	\item Die mit dem Dokumentationswerkzeug Javadoc automatisiert erstellte Dokumentation aller Klassen, deren Membervariablen und Methoden, die die jeweilgen Schnittstellen im Detail beschreibt.
+	\item Die Kommentierung des Quelltextes an notwendigen Stellen, die die Funktionsweise und Implementierung der Algorithmen besser verst"andlich machen.
+\end{itemize}
+Besonders die beispielhaft implementierte Signalverarbeitungsfunktion und die dazugeh"orige Dokumentation soll es erm"oglichen eine Weiterentwicklung des Programmes so einfach wie m"oglich zu gestalten.
+Wird dieses Ziel erreicht, kann das Programm eine Grundlage f"ur eine Plattform automatiserter Signalverarbeitung bilden.
+%-- Dokumentation f"ur Benutzer und Weiterentwickler
+%-- m"ogliche Grundlage f"ur Programm der automatisierten Signalverarbeitung
 
 %% EOF %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
