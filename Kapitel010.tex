@@ -34,17 +34,19 @@ In dieser Nutzerdokumentation soll dem Anwender die Funktionsweise und Bedienung
 
 \section{Konkretisieren der Aufgabenstellung}
 
-Die Entwicklung automatiserter Datenverarbeitungsmethoden am \ac{IBMT} erfolgt haupts"achlich innerhalb der von Matlab bereit gestellten Umgebung statt.
-Das zu erstellende Programm soll aber unabh"angig aus lizensrechtlichen Gr"unden von Matlab unabh"angig sein.
-Durch die M"oglichkeit in Matlab Java-Code auszuf"uhren, bietet es sich an das Programm mit der Programmiersprache Java zu implementiern.
+Die Entwicklung automatiserter Datenverarbeitungsmethoden am \ac{IBMT} erfolgt haupts"achlich innerhalb der von \ml (MathWorks, Inc., Natick, MA, USA) bereit gestellten Umgebung statt.
+Das zu erstellende Programm soll aber unabh"angig aus lizensrechtlichen Gr"unden von \ml unabh"angig sein.
+Durch die M"oglichkeit in \ml Java-Code auszuf"uhren, bietet es sich an das Programm mit der Programmiersprache Java zu implementiern.
 Dadurch werden zwei Ziele erreicht:
 \begin{itemize}
 	\item Ausf"uhrbarkeit des Programms auf Computersystem durch Nutzung frei erh"altlicher Software
 	\item Integration der \ac{IBMT}-internen Nutzung des Programms in die bereits vorhandenen Entwicklungmethoden und -Werkzeuge
 \end{itemize}
-Die Implementierung in Java hat zus"atzlich noch den Vorteil, dass die Umsetzung der \ac{GUI} durch vorhandenen Bibliotheksfunktionen unterst"utzt unf vereinfacht wird.
-Da jedoch die Datenspeicherung von Matlab durch ein propriet"ares Format erfolgt und dieses Format sich mit den Versionen von Matlab schon in der Vergangenheit oft ver"andert hat, muss f"ur die Speicherung und den Transport von Daten ein geeignetes Format gew"ahlt werden.
-Neben der Wahl des Formates m"ussen auch Skripte f"ur eventuell anfallenden Import- und Exportfunktionen der Daten bereit gestellt werden.
+Die Implementierung in Java hat zus"atzlich noch den Vorteil, dass die Umsetzung der \ac{GUI} durch vorhandenen Bibliotheksfunktionen unterst"utzt und vereinfacht wird.
+%Da jedoch die Datenspeicherung von \ml in einem propriet"aren Dateiformat erfolgt und dieses sich mit den \ml -Versionen in der Vergangenheit oft ver"andert hat, muss f"ur die Speicherung und den Transport von Daten ein geeignetes Format gew"ahlt werden.
+Die Datenspeicherung durch \ml erfolgt in einem propriet"arem Dateiformat und unterlag in der Vergangenheit h"aufigen Ver"anderungen.
+Daher soll f"ur die Speicherung und den Transport von Daten ein geeignetes, von \ml unabh"angiges Datensatzformat gew"ahlt werden.
+Zus"atzlich m"ussen auch Skripte f"ur eventuell anfallenden Import- und Exportfunktionen der Daten bereit gestellt werden.
 Bei der Erstellung der Konvertierungsskripte soll auf leicht verst"andliche und einfach Schnittstelle der Fokus gelegt werden.
 Eine ausf"uhrliche Dokumentation der Schnittstelle und der Skripte selbst ist nat"urlich auch ein Kernpunkt.
 %-- Programmiersprache Java
@@ -59,7 +61,7 @@ Damit kann nach einer ge"anderten Implementierung die Funktionalit"at erneut "ub
 %-- Aufgabenteilung: Funktion
 %-- zuk"unftige Entwicklung
 
-Die \ac{GUI} des Programmes soll ein intuitives Arbeiten mit dem Programm erm"oglichen.
+Die \ac{GUI} soll eine intuitive Arbeit mit dem Programm erm"oglichen.
 Da aber Begriffe wie ,,einfache Bedienbarkeit`` und ,,leicht verst"andliche Oberfl"ache`` von jeder Person anders interpretiert werden und somit nicht objektiv gemessen werden k"onnen, muss das Programm und seine Funktionalit"at validiert werden.
 Hierzu sollen typische Arbeitabl"aufe mithilfe von Beispieldatens"atzen ausgef"uhrt werden.
 Durch die Validierung kann aber nur festgestellt werden, ob die Software den W"unschen und Erwartungen des Nutzers gerecht wird.
@@ -68,18 +70,19 @@ Die im obigen Absatz erw"ahnte Verifikation der Funktionalit"at wird durch die V
 %-- Validierung mit Beispieldaten
 %-- ungleich Verifikation (die geschieht mit Tests)
 
-Um dem Nutzer des Programmes die Arbeit mit dem Programm zu erm"oglichen, soll ein Benutzerdokumentation erstellt werden.
+Um dem Nutzer die Arbeit mit dem Programm zu erm"oglichen, soll eine Benutzerdokumentation erstellt werden.
 In dieser Dokumentation soll dem Nutzer die M"oglichkeiten, die ihm das Programm bietet, erl"autert werden.
-Es soll dem Nutzer die einzelnen Werkzeuge erkl"art werden und die Funktionsweise des Programmes vermittelt werden.
-Eine weitere Dokumentation soll f"ur die zweite Zielgruppe, zuk"unftige Entwickler des Programmes, soll zus"atzlich erstellt werden.
-In diesem zweiten Dokument im Zusammenhang mit der vorliegenden Arbeit soll das Wissen vermittelt werden, wie die einzelnen Bestandteile des Programmes zusammenarbeiten und welche internen Beziehungen zwischen den einzelnen Komponenten bestehen.
+Die einzelnen Werkzeuge und die Funktionsweise des Programmes sollen vermittelt werden.
+Eine weitere Dokumentation soll f"ur die zweite Zielgruppe (zuk"unftige Entwickler des Programmes) erstellt werden.
+Im Zusammenhang mit der vorliegenden Arbeit soll innerhalb des zweiten Dokumentes das Wissen vermittelt werden.
+Genauer werden die einzelnen Bestandteile des Programmes und internen Beziehungen untereinander diskutiert.
 Die Entwicklerdokumentation besteht aus drei Elementen:
 \begin{itemize}
-	\item Ein \verb|pdf|-Dokument, dass den allgemeinen Aufbau und das interne Zusammenspiel der Komponent erkl"art.
+	\item Einem \verb|pdf|-Dokument, dass den allgemeinen Aufbau und das interne Zusammenspiel der Komponent erkl"art.
 	\item Die mit dem Dokumentationswerkzeug Javadoc automatisiert erstellte Dokumentation aller Klassen, deren Membervariablen und Methoden, die die jeweilgen Schnittstellen im Detail beschreibt.
 	\item Die Kommentierung des Quelltextes an notwendigen Stellen, die die Funktionsweise und Implementierung der Algorithmen besser verst"andlich machen.
 \end{itemize}
-Besonders die beispielhaft implementierte Signalverarbeitungsfunktion und die dazugeh"orige Dokumentation soll es erm"oglichen eine Weiterentwicklung des Programmes so einfach wie m"oglich zu gestalten.
+Besonders die beispielhaft implementierte Signalverarbeitungsfunktion und die dazugeh"orige Dokumentation soll eine Weiterentwicklung des Programmes erm"oglichen.
 Wird dieses Ziel erreicht, kann das Programm eine Grundlage f"ur eine Plattform automatiserter Signalverarbeitung bilden.
 %-- Dokumentation f"ur Benutzer und Weiterentwickler
 %-- m"ogliche Grundlage f"ur Programm der automatisierten Signalverarbeitung

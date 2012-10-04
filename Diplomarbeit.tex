@@ -29,7 +29,7 @@
 \usepackage{float}	% damit Bilder usw. dort landen wo ich will
 \usepackage{wrapfig}	% f"ur textumflossene Bilder
 %\usepackage{listings}	% Quellcode Blöcke im Text
-%\usepackage[tight,nice]{units}
+\usepackage[tight]{units}%schicke Einheitenabstände
 %\usepackage{program}	% Pseudocode
 %\usepackage{fancyhdr}	% Fancy Kopf- und Fußzeilen
 %\usepackage{longtable}	% Für Tabellen, die eine Seite überschreiten
@@ -77,6 +77,8 @@
 \newcommand{\chapref}[1]{Kapitel \ref{chap:#1}}	% \chaoref{xyz} -> 'Kapitel [<tab:xyz>]'
 \newcommand{\secref}[1]{Abschnitt \ref{sec:#1}}	% \picref{xyz} -> 'Abschnitt [<tab:xyz>]'
 
+%% Abkürzung von Eigennamen
+\newcommand{\ml}{Matlab\textsuperscript{\textregistered}{ }}
 
 %% Einfache Abbildungsnummerierung
 \renewcommand{\thefigure}{\arabic{figure}}
