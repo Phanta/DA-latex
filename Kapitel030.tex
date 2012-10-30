@@ -127,7 +127,8 @@ Bei der ersten Datei handelt es sich um die Definiton des Unisensformates und se
 Diese Definition erfolgt haupts"achlich als \emph{Interface}klassen und legt die Schnittstellen zwischen den einzelnen Bestandteilen fest.
 Eine "Ubersicht der Klassenstruktur und der von au\ss en ersichtlichen Attribute ist in \picref{unisens_interface} auf Seite \pageref{pic:unisens_interface} dargestellt.
 \begin{sidewaysfigure}
-\includegraphics[width=\textwidth]{bilder/unisens_interface_.eps}
+\centering
+\includegraphics[angle=-90, width=0.9\textwidth]{bilder/unisens_interface_.pdf}
 \caption{Klassen"ubersicht der von Unisens definierten Schnittstellen}
 \label{pic:unisens_interface}
 \end{sidewaysfigure}
@@ -167,7 +168,7 @@ Insbesondere tritt dieser Fehler auf, wenn innerhalb der Headerdatei der Gruppen
 
 \begin{figure}[htb]
 \centering
-\includegraphics[width=0.9\textwidth]{bilder/prog_data_ubersicht.eps}
+\includegraphics[angle=-90, width=\textwidth]{bilder/package_data_ubersicht.pdf}
 \caption[\acs{uml}-Diagramm des \texttt{data}-Paketes]{\ac{uml}-Diagramm des \texttt{data}-Paketes inklusive der bereitgestellten Schnittstellen}
 \label{pic:data_package}
 \end{figure}
@@ -204,6 +205,20 @@ Die durch das Paket bereitgestellte Schnittstelle wandelt diese Art des Zugriffs
 Das bedeutet, anstatt Daten "uber die Angabe von Samplenummern zu erhalten, bietet die Schnittstelle die M"oglichkeit Daten aus einem bestimmten Zeitraum zu erhalten.
 Die notwendige Umrechnung zwischen Samplenummern und Abtastraten auf entsprechende Zeitpunkte wird im \verb|data|-Paket ausgef"uhrt.
 Dadurch wird die Existenz verschiedener Abtastraten der unterschiedlichen Signale vor dem restlichen Programm verborgen.
+
+\subsubsection{[WIP]Das Singleton-Konzept und \texttt{DatasetList}}
+
+\begin{figure}[htb]
+\centering
+\includegraphics[angle=-90, width=0.8\textwidth]{bilder/singleton_datasetlist.pdf}
+\caption{Klasse \texttt{DatasetList} und das Singleton-Konzept}
+\label{pic:datasetlist}
+\end{figure}
+
+- \picref{datasetlist}
+- alle DS in einer einzigartigen Liste zusammengefasst
+- Singleton Konzept erkl"aren \cite{Gamma1995} (Seite 127 bis 134)
+- stellt sicher, dass jeder DS nur einmal geladen wird
 
 \subsubsection{Repr"asentation des Datensatzes durch die Klassen \texttt{UnisensDataset} und \texttt{DataController}}
 
