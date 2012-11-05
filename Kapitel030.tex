@@ -230,7 +230,7 @@ Je nach Datenart des Eintrags wird zur Laufzeit dynamisch ein Objekt der Klassen
 Genauer wird sogar f"ur jeden Kanal ein eigener \verb|DataController| angelegt.
 Jede Komponente des Programms die auf einen Dateneintrag zugreifen m"ochte, erh"alt vom \verb|UnisensDataset| den entsprechenden Controller.
 Es wird sichergestellt, dass zu jedem Zeitpunkt jedem Dateneintrag genau ein Controllerobjekt zugeordnet ist und keine Duplizierung auftreten kann.
-Durch spezielle Funktionen \verb|AddNewSignal()|, \verb|AddNewValue()| und \verb|AddNewAnnotation()| k"onnen einem Datensatz zus"tzliche Dateneintr"ge hinzugef"ugt werden.
+Durch spezielle Funktionen \verb|AddNewSignal()|, \verb|AddNewValue()| und \verb|AddNewAnnotation()| k"onnen einem Datensatz zus"atzliche Dateneintr"age hinzugef"ugt werden.
 Die entsprechenden \verb|DataController| werden dann in die Liste \verb|ctrlList| aufgenommen und es kann durch diese anschlie\ss end auf die Daten zugegriffen werden.
 Der gesamte Datensatz wird bei einem Aufruf der \verb|save()|-Funktion des Datensatzes abgespeichert werden, weil die Speicherfunktion f"ur alle \verb|DataController|-Objekte in \verb|crtlList| rekursiv ausgef"uhrt werden k"onnen.
 
@@ -250,6 +250,20 @@ Bei der Suche nach der entsprechenden Position einer gesuchten Annotation wird d
 Die Suche nach einer Samplenummer erfolgt sowohl vor- als auch r"uckw"arts.
 Dieser Ansatz hat den Vorteil, dass eine gesuchte Position nach wenigen Suchschritten erreicht wird, da Annotationen durch den Benutzer nur ver"andert werden k"onnen die auch angezeigt werden.
 Somit befindet sich der Index des letzten Zugriffs immer in der N"ahe der gesuchten Position.
+
+\paragraph{Anmerkung zur Quick-Sort-Implementierung}
+
+- w"ahrend der Test und Nutzung ist ein Stack-Overflow aufgetreten bei ca. \unit{3.000} - \unit{3.600} Annotationen
+- = zuviele ineinander verschachtelte Funktionsaufrufe
+- liegt in der rekursiven Struktur des Sortieralgorithmuses
+- konnte mit Vergr"o\ss erung des Stacks "uber den Parameter \texttt{-Xss2m} von \unit{512}{kB} auf \unit{2}{MB} angehoben werden
+- Probleme bestehen weiterhin, kann wiederum erh"oht werden auf maximal ??? (gro{\ss}e Datens"atze!)
+
+\subsubsection{[WIP]Direkter Zugriff auf Werte mit der Klasse \class{BufferedValueController}}
+
+- weil Unisens kein gezieltes Einf"ugen von Daten erlaubt
+- direkter/wahlfreier Zugriff (\emph{random access}) auf die Daten
+- anderer Ansatz als in \class{AnnotationController}: Daten werden schon beim Lesen in den Puffer einsortiert
 
 \subsubsection{[WIP]Tests des \texttt{data}-Paketes}
 
