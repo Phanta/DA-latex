@@ -1,0 +1,37 @@
+\section{[WIP]Signalverarbeitung}
+
+\begin{figure}[htb]
+\centering
+\includegraphics[angle=-90, width=\textwidth]{bilder/package_signalprocessing.pdf}
+\caption{"Ubersicht "uber das \class{signalprocessing}-Paket}
+\label{pic:package_signalprocessing}
+\end{figure}
+
+- zwei Arten von Signalverarbeitern unterst"tzt: einmaliger und kontinuirlicher Ablauf
+
+\subsection{[WIP]Einfache Signalverarbeitung durch \class{SignalProcessor}}
+
+- einmalig: einfach im Menu der zugeh"origen Konfigurationsdialog registrieren und er "uber nimmt die Arbeit
+
+\subsection{[WIP]Kontinuirliche Verarbeitung von Signalen}
+
+\begin{figure}[tbh]
+\centering
+\includegraphics[angle=-90, width=0.8\textwidth]{bilder/detail_LiveSignalProcessor_Menus_interaction.pdf}
+\caption{Registrierung eines \class{LiveSignalProcessor}s im Menu}
+\label{pic:interaction_menu_lsp}
+\end{figure}
+\begin{figure}[tbh]
+\centering
+\includegraphics[angle=-90, width=0.8\textwidth]{bilder/verbesserung_LiveSignalProcessor_Menus_interaction.pdf}
+\caption{M"ogliche Verbesserung der Menu-Interaktion}
+\label{pic:interaction_menu_lsp_improved}
+\end{figure}
+
+- Klasse \class{LiveSignalProcessor}
+- Umsetzung wie in \picref{interaction_menu_lsp}
+- bestehende Funktionalit"at erkl"aren
+- Verbessern nach \picref{interaction_menu_lsp_improved}
+- vorgesehene Funktion erkl"aren
+- Vorteil: weniger Eingriff in die bestehende Struktur druch Implementierer notwendig
+
