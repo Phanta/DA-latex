@@ -150,19 +150,49 @@ Durch spezielle Funktionen \verb|AddNewSignal()|, \verb|AddNewValue()| und \verb
 Die entsprechenden \verb|DataController| werden dann in die Liste \verb|ctrlList| aufgenommen und es kann durch diese anschlie\ss end auf die Daten zugegriffen werden.
 Der gesamte Datensatz wird bei einem Aufruf der \verb|save()|-Funktion des Datensatzes abgespeichert werden, weil die Speicherfunktion f"ur alle \verb|DataController|-Objekte in \verb|crtlList| rekursiv ausgef"uhrt werden k"onnen.
 
-\subsubsection{[WIP]Das Singleton-Konzept und \texttt{DatasetList}}
+\subsubsection{Das Singleton-Konzept und \texttt{DatasetList}}
 
+Die geladenen Datens"atze sollen im Programm in einer Liste zusammengefasst werden.
+Diese Liste soll im gesamten Programm zug"anglich sein.
+Es muss aber sichergestellt werden, dass ein und derselbe Datensatz nicht mehrfach geladen wird und somit mehrere Instanzen der Klasse \class{UnisensDataset} f"ur diesen angelegt werden.
+Diese Aufgabe wird durch die Klasse \class{DatasetList} "ubernommen, die als Singleton-Klasse implementiert ist (siehe \picref{datasetlist}).
 \begin{figure}[htb]
 \centering
 \includegraphics[angle=-90, width=0.8\textwidth]{bilder/singleton_datasetlist.pdf}
-\caption{Klasse \texttt{DatasetList} und das Singleton-Konzept}
+\caption[Klasse \texttt{DatasetList} und das Singleton-Konzept]{Die Klasse \texttt{DatasetList} und das Singleton-Konzept. Aus Gr"unden der "Ubersicht sind nicht alle Funktionen aufgelistet (durch \code{...()} markiert).}
 \label{pic:datasetlist}
 \end{figure}
 
-- \picref{datasetlist}
-- alle DS in einer einzigartigen Liste zusammengefasst
-- Singleton Konzept erkl"aren \cite{Gamma1995} (Seiten 127 bis 134)
-- stellt sicher, dass jeder DS nur einmal geladen wird
+Das Entwurfsmuster des Singletons (\cite{Gamma1995} Seite 127 bis 134) wird angewendet, wenn f"ur eine Klasse nur genau ein Objekt instanziert werden soll.
+Es stellt zus"atzlich sicher, dass die geschaffene Instanz global im Programm erreichbar ist.
+Damit die Einzigartigkeit des Objektes dieser Klasse garantiert ist, ist der Konstruktor der Klasse als \code{private} deklariert.
+Somit kann keine neue Objektinstanz au{\ss}erhalb der Klasse \class{DatasetList} erzeugt werden.
+Die Instanz selbst wird in der Klassenvariable \code{instance} gespeichert.
+Klassenvariablen werden in der Klasse selbst gespeichert und nicht f"ur die einzelnen Objekte dieser Klasse angelegt.
+Von au{\ss}en kann auf das konkrete Objekt "uber die "offentliche (\code{public}) Klassenfunktion \code{getInstance()} zugegriffen werden.
+Klassenfunktionen sind wie Klassenvariablen f"ur die Klassen definiert, aber nicht f"ur die Objekte selbst.
+Durch diese Singletonimplementierung ist sichergestellt, dass
+\begin{itemize}
+	\item die Objektinstanz \code{instance} der Klasse \class{DatasetList} innerhalb des Programms einzigartig ist und
+	\item diese Instanz global im Programm "uber die Funktion \code{DatasetList.getInstance()} erh"altlich ist.
+\end{itemize}
+
+Die Objekte der \class{UnisensDataset}s werden in einer nicht "offentlichen Liste \code{datasets} gespeichert.
+Au{\ss}erhalb der Klasse kann auf die Datensatzobjekte "uber einen Index und die \code{get()}-Funktion zugegriffen werden.
+Der entsprechende Index wird durch die \code{load()}-Funktion zur"uck gegeben.
+Die \code{loadDataset()}-Funktion "offnet eine Dialog zum "offnen einer Datei in dem der Benutzer die Headerdatei \verb|unisens.xml| eines Datensatzes ausw"ahlen kann.
+Diesem Dialog gibt den absoluten Pfad der gew"ahlten Datei zur"uck und dieser wird mit denen aller bereits geladenen Datens"atzen in der Liste \code{datasets} verglichen.
+Wurde der vom Nutzer gew"ahlte Datensatz bereits geladen, wird der Index dieses Datensatzes zur"uck gegeben.
+Ist der Datensatz jedoch unbekannt, wird er von der Funktion geladen und das \code{UnisensDataset}-Objekt in der Liste gespeichert.
+Der Index des neu erzeugten Objektes wird zur"uckgegeben.
+Durch diese Behandlung wird sicher gestellt, dass jeder Datensatz nur einmal geladen wird.
+Mit die Methoden \code{save()} und \code{close()}, die auch den Index eines Datensatzes erwarten, werden die Datens"atze auf der Festplatte gespeichert bzw. geschlossen.
+Wird ein Datensatz geschlossen, so wird auch das entsprechende \code{UnisensDataset}-Objekt aus der \code{datasets}-Liste gel"oscht.
+
+%- \picref{datasetlist}
+%- alle DS in einer einzigartigen Liste zusammengefasst
+%- Singleton Konzept erkl"aren \cite{Gamma1995} (Seiten 127 bis 134)
+%- stellt sicher, dass jeder DS nur einmal geladen wird
 
 \subsubsection{Pufferung, Sortieren und Suchen der Klasse \texttt{AnnotationController}}
 
