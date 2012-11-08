@@ -211,14 +211,24 @@ Die Suche nach einer Samplenummer erfolgt sowohl vor- als auch r"uckw"arts.
 Dieser Ansatz hat den Vorteil, dass eine gesuchte Position nach wenigen Suchschritten erreicht wird, da Annotationen durch den Benutzer nur ver"andert werden k"onnen die auch angezeigt werden.
 Somit befindet sich der Index des letzten Zugriffs immer in der N"ahe der gesuchten Position.
 
-\paragraph[{[WIP]Anmerkung zur Quick-Sort-Implementierung}]{[WIP]Anmerkung zur Quick-Sort-Implementierung:}
-%\addcontentsline{toc}{paragraph}{Anmerkung zur Quick-Sort-Implementierung}
+\paragraph[{Anmerkung zur Quick-Sort-Implementierung}]{Anmerkung zur Quick-Sort-Implementierung:}
 
-- w"ahrend der Test und Nutzung ist ein Stack-Overflow aufgetreten bei ca. \unit{3.000} - \unit{3.600} Annotationen
-- = zuviele ineinander verschachtelte Funktionsaufrufe
-- liegt in der rekursiven Struktur des Sortieralgorithmuses
-- konnte mit Vergr"o\ss erung des Stacks "uber den Parameter \texttt{-Xss2m} von \unit{512}{kB} auf \unit{2}{MB} angehoben werden
-- Probleme bestehen weiterhin, kann wiederum erh"oht werden auf maximal ??? (gro{\ss}e Datens"atze!)
+W"ahrend Testl"aufen und Benutzung des Programmes kam es beim Laden von Datens"atzen mit ca. \unit{3.000} - \unit{3.600} Annotationen zu Abst"urzen des Programmes.
+Diese Abst"urze wurden durch eine \code{StackOverflowException} verursacht.
+Der Grund daf"ur ist, dass die Implementierung des Quick-Sort-Algorithmus auf Rekursion beruht und die \code{quicksort()}-Funktion sich selbst aufruft.
+Jeder Methodenaufruf wird auf dem sogenannten Java \emph{Thread-Stack} abgelegt.
+Durch die Verschachtelung der Methodenaufrufe reicht der Speicherplatz (typischerweise \unit{512}{kB}) des \emph{Thread-Stacks} nicht aus.
+Die Gr"o{\ss}e des \emph{Thread-Stacks} kann beim Programmstart aber durch Parameter"ubergabe an die \emph{Java-Virtual-Machine} ver"andert werden.
+Das Problem konnte mit dem Parameter \code{-Xss2m} behoben werden, wodurch die maximale Speichergr"o{\ss}e der \emph{Thread-Stacks} von \unit{512}{kB} auf \unit{2}{MB} angehoben wird.
+Der Parameter setzt sich aus dem Prefix \code{-Xss} und der gew"ahlten Gr"o{\ss}e zusammen (\code{512k} steht f"ur \unit{512}{kB}, \code{2m} f"ur \unit{2}{MB}, usw.).
+Das Problem wurde f"ur die genannte Datensatzgr"o{\ss}e behoben, kann aber bei h"oherer Annotationensanzahl wieder auftreten.
+Es kann die Gr"o{\ss}e des \emph{Thread-Stacks} weiter erh"oht werden.
+
+%- w"ahrend der Test und Nutzung ist ein Stack-Overflow aufgetreten bei ca. \unit{3.000} - \unit{3.600} Annotationen
+%- = zuviele ineinander verschachtelte Funktionsaufrufe
+%- liegt in der rekursiven Struktur des Sortieralgorithmuses
+%- konnte mit Vergr"o\ss erung des Stacks "uber den Parameter \texttt{-Xss2m} von \unit{512}{kB} auf \unit{2}{MB} angehoben werden
+%- Probleme bestehen weiterhin, kann wiederum erh"oht werden auf maximal ??? (gro{\ss}e Datens"atze!)
 
 % newline wegen overfuill box
 \subsubsection{[WIP]Direkter Zugriff auf Werte mit der Klasse\newline \class{BufferedValueController}}
