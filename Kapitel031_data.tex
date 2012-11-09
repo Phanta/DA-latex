@@ -270,13 +270,45 @@ Durch diese Herangehensweise ist garantiert, dass durch Fehler beim Schreiben ke
 
 \subsubsection{[WIP]Observer Prinzip zur Reaktion auf Daten"anderung}
 
+\begin{figure}[bth]
+\centering
+\includegraphics[angle=-90, width=0.9\textwidth]{bilder/detail_observer.pdf}
+\caption{Observer-Prinzip mit durch \class{DataChangeListener}}
+\label{pic:observer}
+\end{figure}
 
+An mehreren Stellen im Programm muss auf eine Ver"anderung von Daten reagiert werden .
+So muss die Ansicht eines Signalverlaufs angepasst werden oder eine Signalverarbeitungsfunktion ihr Ausgabesignal ver"andern.
+Um dieses dynamische Reaktionen zu erm"oglichen wird das \emph{Observer}-Entwurfsmuster (\cite{Gamma1995} Seiten 293 bis 303) angewendet.
+Eine Klasse die an einer m"oglichen Ver"anderung von Daten interessiert ist muss zwei Bedingungen erf"ullen:
+\begin{itemize}
+	\item Das Interface \class{DataChangeListener} implementieren.
+	\item Das interessierte Objekt bei dem zu beobachtenden \class{DataController} registrieren.
+\end{itemize}
+Das Interface \class{DataChangeListener} definiert nur eine Methode: \class{dataChangeReaction()}.
+Sie hat keinen R"uckgabewert und erh"alt als Parameter ein \class{DataChangeEvent}.
+Das Objekt der Klasse \class{DataChangeEvent} enth"alt alle Informationen "uber die aufgetretene Daten"anderung inlklusive einer Referenz des entsprechenden \class{DataController}s.
+Somit ist es f"ur \class{DataChangeListener}-implementierende Klassen nicht notwendig die \class{DataController} zu speichern, von denen sie Mitteilungen "uber Ver"anderungen erhalten m"ochten.
+Die Registrierung eines Objektes bei einem \class{DataController} erfolgt mit der Methode \code{register(DataChangeListener)}.
+Die Speicherung der Objekte und die "Ubergabe der \class{DataChangeEvents} an alle \emph{Observer} ist komplett in der Klasse \class{DataController} implementiert.
 
-- Erkl"arung der Prinzipes \cite{Gamma1995} (Seiten 293 bis 303)
-- Observer wird von interessierten Klassen mit der Implementierung des Interface \class{DataChangeListener} realisiert
-- die Funktionalit"at ist in der Klasse \class{DataController} implementiert
-- Subklassen erzeugen die \class{DataChangeEvent}-Objekte und starten den Ablauf mit dem Funktionsaufruf \texttt{notifyListeners(DataChangeEvent)}
-- Bild!
+Die jeweilige \class{DataController}-Implementierung muss zwei Aufgaben "ubernehmen:
+\begin{enumerate}
+	{% Klammern damit "Anderungen lokal bleiben
+	\renewcommand{\theenumi}{\arabic{enumi}}
+	\renewcommand{\labelenumi}{\theenumi}
+	\item Bei einer "Anderung der Daten ein entsprechendes \class{DataChangeEvent} mit den notwendigen Informationen erzeugen.
+	\item Das erzeugte Objekt "uber die Methode \code{notifyListeners()} der Superklasse \class{DataController} an die \emph{Observer} weiterreichen.
+	}
+\end{enumerate}
+Diese zwei Schritte werden beispielsweise durch die Klassen \class{AnnotationController} und \class{Buf\-fered\-Value\-Controller} bereits implementiert, da diese beiden Klassen die "Anderung von Daten erm"oglichen.
+Intern werden bei einem Aufruf von \code{notifyListeners()} bei allen registrierten \emph{Observern} die Methode \code{dataChageReaction()} aufgerufen und das \class{DataChangeEvent} weitergegeben.
+
+%- Erkl"arung der Prinzipes \cite{Gamma1995} (Seiten 293 bis 303)
+%- Observer wird von interessierten Klassen mit der Implementierung des Interface \class{DataChangeListener} realisiert
+%- die Funktionalit"at ist in der Klasse \class{DataController} implementiert
+%- Subklassen erzeugen die \class{DataChangeEvent}-Objekte und starten den Ablauf mit dem Funktionsaufruf \texttt{notifyListeners(DataChangeEvent)}
+%- Bild!
 
 \subsubsection{[WIP]Tests des \texttt{data}-Paketes}
 
