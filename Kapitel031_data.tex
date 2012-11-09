@@ -195,6 +195,7 @@ Wird ein Datensatz geschlossen, so wird auch das entsprechende \code{UnisensData
 %- stellt sicher, dass jeder DS nur einmal geladen wird
 
 \subsubsection{Pufferung, Sortieren und Suchen der Klasse \texttt{AnnotationController}}
+\label{sec:anno_ctrl}
 
 Die Referenzimplementierung des Unisensformates sieht f"ur das Lesen und Schreiben von Daten einen ungepufferten Ansatz vor.
 Das bedeutet sobald Daten vom Programm ver"andert werden, werden diese "Anderungen auch sofort im Datensatz und somit auf dem Speichermedium abgespeichert.
@@ -231,15 +232,45 @@ Es kann die Gr"o{\ss}e des \emph{Thread-Stacks} weiter erh"oht werden.
 %- Probleme bestehen weiterhin, kann wiederum erh"oht werden auf maximal ??? (gro{\ss}e Datens"atze!)
 
 % newline wegen overfuill box
-\subsubsection{[WIP]Direkter Zugriff auf Werte mit der Klasse\newline \class{BufferedValueController}}
+%\subsubsection{Direkter Zugriff auf Werte mit der Klasse\newline \class{BufferedValueController}}
+\subsubsection{Direkter Zugriff auf Werte mit der Klasse \class{BufferedValueController}}
 
-- weil Unisens kein gezieltes Einf"ugen von Daten erlaubt
-- direkter/wahlfreier Zugriff (\emph{random access}) auf die Daten
-- Subklasse \class{DataPoint}
-- anderer Ansatz als in \class{AnnotationController}: Daten werden schon beim Lesen in den Puffer einsortiert
-- Speichern durch neu schreiben der Datei (alte Datei wird als backup kopiert)
+Eine direkte "Anderung einzelner Datenpunkte ist vom Unisensformat nicht vorgesehen.
+Daher ist f"ur einen wahlfreien (\emph{random access}) Schreibzugriff auf die Daten eine eigene Implementierung notwendig.
+F"ur Werte, Datenpunkte denen ein Zeitpunkt und ein Wert zugeordnet ist, ist diese Eigenschaft in der Klasse \class{BufferedValueController} implementiert.
+In \picref{data_package} ist ersichtlich, dass \class{BufferedValueController} von der Klasse \class{ValueController} abgeleitet ist.
+Um die Funktionalit"at der Schreibzugriffe zu gew"ahrleisten, werden die Daten, wie auch schon in der Klasse \class{AnnotationController} geschehen, in einem Puffer \code{buffer} zwischengespeichert.
+
+Die einzelnen Wert-Datenpunkte sind durch die interne Klasse \class{DataPoint} abstrahiert.
+Diese haben eine Samplenummer \code{sampleStamp} und einen Wert \code{data}.
+Der Datentyp der Werte kann frei gew"ahlt werden, da die Klasse \class{DataPoint} als Template-Klasse implementiert ist.
+In der aktuellen Implementierung von \class{BufferdValueController} ist der Datentyp der Werte als \code{Double} festgelegt.
+
+Die Datenpunkte sind im Puffer \code{buffer} nach ihren Samplenummern aufsteigend sortiert.
+Aufgrund der in \secref{anno_ctrl} beschriebenen Probleme des Quick-Sort-Algorithmus und der Java-\emph{Thread-Stack}-Gr"o{\ss}e ist die Sortierung auf andere Art und Weise implementiert.
+Die Daten werden beim initialen F"ullen des Puffers nicht erst aus der Datei gelesen und anschlie{\ss}end sortiert, sondern beide Schritte erfolgen gleichzeitig.
+Hierbei werden die Daten einzeln gelesen, anschlie{\ss}end die zugeh"orige Position aufgrund ihrer Samplenummer gesucht und letzendlich in den Puffer eingef"ugt.
+Die Positionssuche erfolgt, analog zur Implementierung in der Klasse \class{AnnotationController}, "uber einen Suchindex.
+Liegen die Daten schon sortiert in der Datei vor, so wird effektiv nur der Suchindex erh"oht und der Datenpunkt in den Puffer eingef"ugt.
+Dadurch wird der Zeitverbrauch durch die st"andige ,,Suche'' w"ahrend des Auff"ullens des Puffers verringert.
+Dieser Ansatz beruht im Gegensatz zur Implementierung in \class{AnnotationController} nicht auf Rekursion und f"uhrt zu keiner tiefen Verschachtelung von Methodenaufrufen.
+
+Neben der Implementierung von Methoden zum Hinzuf"ugen, L"oschen und Ver"andern von Datenpunkten m"ussen auch die schon von \class{ValueController} bereitgestellten Methoden zum Lesen der Datenpunkte und Speichern der Datendatei an den gepufferten Ansatz angepasst werden.
+Hierf"ur werden die \code{getDataPoints()} und die \code{saveImpl()} Funktionen durch \class{BufferedValueController} "uberschrieben.
+Bei einem Lesezugriff mit \code{getDataPoints()} werden die Daten aus dem Puffer gelesen und nicht mehr direkt aus der Datendatei.
+Beim Speichervorgang wird die bereits bestehende Datendatei als \emph{Backup} gespeichert, die neue Datei erzeugt und die Daten in diese neu erzeugt Datei geschrieben.
+Erst wenn der Schreibvorgang erfolgreich beendet ist, wird die alte Backupdatei gel"oscht.
+Durch diese Herangehensweise ist garantiert, dass durch Fehler beim Schreiben keine Daten verloren gehen.
+
+%- weil Unisens kein gezieltes Einf"ugen von Daten erlaubt
+%- direkter/wahlfreier Zugriff (\emph{random access}) auf die Daten
+%- Subklasse \class{DataPoint}
+%- anderer Ansatz als in \class{AnnotationController}: Daten werden schon beim Lesen in den Puffer einsortiert
+%- Speichern durch neu schreiben der Datei (alte Datei wird als backup kopiert)
 
 \subsubsection{[WIP]Observer Prinzip zur Reaktion auf Daten"anderung}
+
+
 
 - Erkl"arung der Prinzipes \cite{Gamma1995} (Seiten 293 bis 303)
 - Observer wird von interessierten Klassen mit der Implementierung des Interface \class{DataChangeListener} realisiert
