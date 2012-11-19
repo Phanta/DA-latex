@@ -91,7 +91,7 @@ Die Klassen der Referenzimplementierung bestehen aus den Klassennamen der Schnit
 Wenn man schon vorhandene Unisensdatens"atze benutzen m"ochte reicht es aus, die Schnittstellendefinition zu kennen und zu nutzen.
 Sollen hingegen konkret Objekte erstellt werden, muss auf die Referenzimplementierung zur"uckgegriffen werden.
 
-Durch einen Fehler in der Referenzimplementierung kann es vorkommen, dass beim Laden eines vorhandenen Unisensdatensatzes in dem Gruppen definiert sind eine \verb|NullPointerException| auftritt.
+Durch einen Fehler in der Referenzimplementierung kann es vorkommen, dass beim Laden eines vorhandenen Unisensdatensatzes in dem Gruppen definiert sind eine \texttt{Null\-Pointer\-Exception} auftritt.
 Insbesondere tritt dieser Fehler auf, wenn innerhalb der Headerdatei der Gruppeneintrag nicht hinter den Dateneintr"agen steht.
 
 \subsection{Programminterne Datenstruktur}
@@ -99,7 +99,7 @@ Insbesondere tritt dieser Fehler auf, wenn innerhalb der Headerdatei der Gruppen
 \begin{figure}[htb]
 \centering
 \includegraphics[angle=-90, width=\textwidth]{bilder/package_data_ubersicht.pdf}
-\caption[\acs{uml}-Diagramm des \texttt{data}-Paketes]{\ac{uml}-Diagramm des \texttt{data}-Paketes inklusive der bereitgestellten Schnittstellen}
+\caption[\acs{uml}-Diagramm des \texttt{data}-Paketes]{\ac{uml}-Diagramm des \texttt{data}-Paketes inklusive der bereitgestellten Schnitt\-stellen}
 \label{pic:data_package}
 \end{figure}
 
@@ -124,7 +124,7 @@ Somit ist der Zugriff auf die konkreten Daten des Datensatzes sowohl vereinheitl
 
 Weiterhin wird mit dem \verb|data|-Paket erreicht, dass die restlichen Komponenten des Programms nicht direkt auf das Datensatzformat zugreifen.
 Sie sind damit von dem gew"ahlten Format abgekapselt und ein Austausch des Formates erfordert nur die Anpassung des \verb|data|-Paketes.
-Der gesamte Datensatz ist durch die Wrapper-Klasse \verb|UnisensDataset| im Programm repr"asentiert.
+Der gesamte Datensatz ist durch die Wrapper-Klasse \verb|UnisensDataset| im Programm repr"asentiert und ist im \secref{datensatz_repraesentation} n"aher beschrieben.
 Zugriff auf den Datensatz erfolgt nur "uber die von der Klasse bereitgestellte Schnittstelle.
 Weiterhin wird der ver"anderde Zugriff auf Annotationen durch die Klasse \verb|AnnotationManager| realisiert und die Behandlung von Annotationen selbst "uber die Klasse \verb|AnnotationList| abgewickelt.
 Die zwei zu letzt genannten Klassen kapseln die von Unisens bereitgestellten Klassen (\verb|Event| und \verb|EventList|) von den anderen Programmteilen ab.
@@ -137,6 +137,7 @@ Die notwendige Umrechnung zwischen Samplenummern und Abtastraten auf entsprechen
 Dadurch wird die Existenz verschiedener Abtastraten der unterschiedlichen Signale vor dem restlichen Programm verborgen.
 
 \subsubsection{Repr"asentation des Datensatzes durch die Klassen \texttt{UnisensDataset} und \texttt{DataController}}
+\label{sec:datensatz_repraesentation}
 
 Die Klasse \verb|UnsiensDataset| stellt die Schnittstelle des Programms zu den Datens"atzen dar.
 F"ur jeden geladenen Datensatz wird im Programm ein Objekt der Klasse \verb|UnisensDataset| erzeugt.
@@ -252,7 +253,7 @@ Die Daten werden beim anf"anglichem F"ullen des Puffers nicht erst aus der Datei
 Hierbei werden die Daten einzeln gelesen, anschlie{\ss}end die zugeh"orige Position aufgrund ihrer Samplenummer gesucht und letztendlich in den Puffer eingef"ugt.
 Die Positionssuche erfolgt, analog zur Implementierung in der Klasse \class{AnnotationController}, "uber einen Suchindex.
 Liegen die Daten schon sortiert in der Datei vor, so wird effektiv nur der Suchindex erh"oht und der Datenpunkt in den Puffer eingef"ugt.
-Dadurch wird der Zeitverbrauch durch die st"andige ,,Suche'' w"ahrend des Auff"ullens des Puffers verringert.
+Dadurch wird der Zeitverbrauch durch die st"andige "`Suche"' w"ahrend des Auff"ullens des Puffers verringert.
 Dieser Ansatz beruht im Gegensatz zur Implementierung in \class{AnnotationController} nicht auf Rekursion und f"uhrt zu keiner tiefen Verschachtelung von Methodenaufrufen.
 
 Neben der Implementierung von Methoden zum Hinzuf"ugen, L"oschen und Ver"andern von Datenpunkten m"ussen auch die schon von \class{ValueController} bereitgestellten Methoden zum Lesen der Datenpunkte und Speichern der Datendatei an den gepufferten Ansatz angepasst werden.

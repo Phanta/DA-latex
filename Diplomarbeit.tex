@@ -1,6 +1,6 @@
 %% HEADER %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-\documentclass[a4paper, oneside, 10pt]{scrreprt}
+\documentclass[a4paper, oneside, 11pt]{scrreprt}
 % Alternative Optionen:
 %	Papiergröße: a4paper / a5paper / b5paper / letterpaper / legalpaper / executivepaper
 % Duplex: oneside / twoside
@@ -8,14 +8,17 @@
 
 %% Zeilenabstand
 \usepackage{setspace}
-%\singlespacing        %% 1-zeilig (Standard)
-%\onehalfspacing       %% 1,5-zeilig
-\doublespacing        %% 2-zeilig
+%\singlespacing			%% 1-zeilig (Standard)
+\onehalfspacing			%% 1,5-zeilig
+%\doublespacing			%% 2-zeilig
 
 %% Deutsche Anpassungen
+\usepackage{bibgerm}     		% deutsches Literaturverzeichnis
 \usepackage[ngerman]{babel}
-\usepackage[T1]{fontenc}
-\usepackage[latin1]{inputenc}
+\usepackage[T1]{fontenc}		% Umlaute äöüß direkt schreiben
+\usepackage[latin1]{inputenc}	% korrekte Umlaute für unixoide und auch Windowssysteme
+\usepackage{lmodern}    		% Schrift glätten - alternativ: Packet cm-super installieren, da geht das dann automatisch Latin Modern sieht aber eigentlich
+								% besser aus als Computer Modern lmodern bitte nach fontenc laden!
 
 %% Seitenränder
 \usepackage[left=3cm,right=3cm,top=3cm,bottom=3cm]{geometry}
@@ -33,11 +36,18 @@
 %\usepackage{program}	% Pseudocode
 %\usepackage{fancyhdr}	% Fancy Kopf- und Fußzeilen
 %\usepackage{longtable}	% Für Tabellen, die eine Seite überschreiten
-\usepackage[breaklinks]{hyperref}	% f"ur Linkunterbrechung am Rand
+%\usepackage[breaklinks]{hyperref}	% f"ur Linkunterbrechung am Rand
 \usepackage{rotating}	% f"ur Bilder in Landscape
 \usepackage{enumitem}	% f"ur \begin{enumerate}[resume] und andere schicke Sachen
 \usepackage{bbding}		% f"ur \Checkmarks
 %\usepackage{multirow}	% f"ur \multirow in Tabellen
+
+% Anpassung der Verlinkung im Dokument
+\usepackage[colorlinks=true,		% farbig ohne Rahmen
+			linkcolor=black,		% alle Farben sind schwarz
+			citecolor=black,
+			urlcolor=black
+			]{hyperref}
 
 %% Normales LaTeX oder pdfLaTeX?
 \newif\ifpdf
@@ -72,10 +82,10 @@
 \newcommand{\litem}[1]{\item \label{#1}}
 
 %% einfache Bild-, Tabellen-, Kapitel- und Abschnittsreferenzen
-\newcommand{\picref}[1]{\ac{abb} \ref{pic:#1}}	% \picref{xyz} -> 'Abb. [<pic:xyz>]'
-\newcommand{\tabref}[1]{\ac{tab} \ref{tab:#1}}	% \tabref{xyz} -> 'Tab. [<tab:xyz>]'
-\newcommand{\chapref}[1]{Kapitel \ref{chap:#1}}	% \chaoref{xyz} -> 'Kapitel [<tab:xyz>]'
-\newcommand{\secref}[1]{Abschnitt \ref{sec:#1}}	% \picref{xyz} -> 'Abschnitt [<tab:xyz>]'
+\newcommand{\picref}[1]{\acs{abb}\,\ref{pic:#1}}	% \picref{xyz} -> 'Abb. [<pic:xyz>]'
+\newcommand{\tabref}[1]{\acs{tab}\,\ref{tab:#1}}	% \tabref{xyz} -> 'Tab. [<tab:xyz>]'
+\newcommand{\chapref}[1]{Kapitel\,\ref{chap:#1}}	% \chaoref{xyz} -> 'Kapitel [<tab:xyz>]'
+\newcommand{\secref}[1]{Abschnitt\,\ref{sec:#1}}	% \picref{xyz} -> 'Abschnitt [<tab:xyz>]'
 
 %% Abkürzung von Eigennamen
 \newcommand{\ml}{Matlab\textsuperscript{\textregistered}{ }}
@@ -125,6 +135,7 @@
 \listoftables
 
 %%Abkürzungsverzeichnis * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * 
+\clearpage
 \addcontentsline{toc}{chapter}{Abk"urzungsverzeichnis}
 \chapter*{Abk"urzungsverzeichnis}
 \renewcommand{\bflabel}[1]{\normalfont{\normalsize{#1}}\hfill} % Schriftart auf normale Schriftart ändern
