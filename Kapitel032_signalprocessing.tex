@@ -24,6 +24,7 @@ Um die Darstellung der Zeitreihe zu erm"oglichen, wird jeder errechneten Differe
 Das errechneten Datenpunkte werden als \class{Value} gespeichert.
 Der Wert $V_{value}$ ist die Differenz der Zeitpunkte $t_{n+1} - t_n$ zweier Annotationen $A_n$ und $A_{n+1}$.
 Der Zeitpunkt des \class{Value}s $t_{value}$ wird auf den Zeitpunkt $t_{n+1}$ der zweiten Annotation $A_{n+1}$ festgelegt.
+Die Implementierung dieses Algorithmus ist im Paket \code{rrcalc} mit den zwei Klassen \class{RRCalculator} und \class{LiveRRCalculator} realisiert.
 
 \begin{figure}[htb]
 \centering
@@ -73,28 +74,56 @@ Durch diese Umsetzung kann sich ein zuk"unftiger Entwickler auf die Implementier
 
 %- einmalig: einfach im Menu der zugeh"origen Konfigurationsdialog registrieren und er "ubernimmt die Arbeit
 
-\subsection{[WIP]Kontinuirliche Verarbeitung von Signalen durch \class{LiveSignalPorcessor}}
+\subsection{Kontinuierliche Verarbeitung von Signalen durch \class{LiveSignalProcessor}}
 \label{sec:live_signal_processor}
+
+Aus \picref{package_signalprocessing} ist ersichtlich, dass die Klasse \class{LiveSignalProcessor} von \class{SignalProcessor} abgeleitet ist.
+Somit wird auch die Funktionalit"at der einmaligen Signalverarbeitung mit "ubernommen.
+Zus"atzlich dazu wird der Funktionsumfang dahingehend erweitert, dass eine kontinuierliche Signalverarbeitung ausgef"uhrt werden kann.
+Um dieses dynamische Verhalten zu erm"oglichen wird durch die Klasse \class{LiveSignalProcessor} das \emph{Interface} \class{DataChangeListener} implementiert.
+Der \class{LiveSignalProcessor} meldet sich bei allen Eingangssignalen als \emph{Observer} an und erh"alt dadurch Informationen "uber ver"anderte (Eingangs-) Daten.
+Diese gewonnenen Informationen werden, sofern der \class{LiveSignalProcessor} gestartet ist, an die implementierende Unterklasse weitergegeben, die diese dann verarbeiten kann.
+Informationen ver"anderter Daten werden verworfen, wenn die kontinuierliche Signalverarbeitung gestoppt ist.
+Der Zustand ob die Verarbeitung ein- oder ausgeschaltet ist, wird mit der \code{boolean}-Variable \code{isRunning} gespeichert.
+Der Zustand kann "uber die Methoden \code{start()} und \code{stop()} ein- bzw. ausgeschaltet werden.
+
+Eine implementierende Unterklasse muss neben den im \secref{signal_processor} genannten Methoden \code{getName()}, \code{getParameterString()} und \code{performFunctionality()} noch zwei weitere Methoden "uberschreiben: \code{preLiveAction()} und \code{handleEvent()}.
+\code{handleEvent()} erh"alt als Parameter die auftretenden \class{DataChangeEvent}s und soll diese verarbeiten.
+Die Methode \code{preLiveAction()} wird durch die Klasse \class{LiveSignalProcessor} aufgerufen, wenn die kontinuierliche Signalverarbeitung gestartet wird.
+Mit diesem Zwischenschritt soll erm"oglicht werden, dass eventuell notwendige Vorbereitungen ausgef"uhrt werden k"onnen bevor das erste \code{DataChangeEvent} weitergegeben wird.
+In dem implementiertem Beispiel \class{RRLiveCalculator} wird dieser Methodenaufruf genutzt, das Ausgabesignal f"ur das entsprechende Eingangssignal zu berechnen. dieser Methodenaufruf genutzt, das Ausgabesignal f"ur das entsprechende Eingangssignal zu berechnen.
 
 \begin{figure}[tbh]
 \centering
 \includegraphics[angle=-90, width=0.8\textwidth]{bilder/detail_LiveSignalProcessor_Menus_interaction.pdf}
-\caption{Registrierung eines \class{LiveSignalProcessor}s im Menu}
+\caption{Registrierung eines \class{LiveSignalProcessor}s im Men"u}
 \label{pic:interaction_menu_lsp}
 \end{figure}
-\begin{figure}[tbh]
-\centering
-\includegraphics[angle=-90, width=0.8\textwidth]{bilder/verbesserung_LiveSignalProcessor_Menus_interaction.pdf}
-\caption{M"ogliche Verbesserung der Menu-Interaktion}
-\label{pic:interaction_menu_lsp_improved}
-\end{figure}
 
-- Klasse \class{LiveSignalProcessor}
-- Umsetzung wie in \picref{interaction_menu_lsp}
-- bestehende Funktionalit"at erkl"aren
-- Verbessern nach \picref{interaction_menu_lsp_improved}
-- vorgesehene Funktion erkl"aren
-- Vorteil: weniger Eingriff in die bestehende Struktur durch Implementierer notwendig
+Damit gestartete kontinuierliche Signalverarbeitungsfunktionen durch den Anwender wieder gestoppt werden k"onnen, ist eine automatisierte Men"u"anderung implementiert (siehe \picref{interaction_menu_lsp}).
+Durch eine Dialogbox, die "uber das Men"u vom Anwender aufgerufen wird, werden die notwendigen Parameter der Signalverarbeitungsfunktion eingestellt.
+Die Dialogbox erzeugt das \class{LiveSignalProcessor}-Objekt und "ubergibt die gew"ahtlen Parameter.
+Nachdem der \class{LiveSignalProcessor} gestartet wurde, wird er im Men"u mit der Methode \code{registerStartedLiveSignalProcessor()} registriert.
+Diese Registrierung hat zur folge:
+\begin{itemize}
+	\item Ein Men"ueintrag mit dem Namen des gestarteten \class{LiveSignalProcessor} wird erzeugt und in das Men"u eingef"ugt.
+	\item Die laufende Signalverarbeitungsfunktion und der entsprechende Men"ueintrag werden zusammen in einem \class{RunningSignalProcessorMenuItem}-Objekt gespeichert.
+\end{itemize}
+Wird der entsprechende Men"ueintrag durch den Nutzer aufgerufen, wird die \code{stop()}-Methode des \class{LiveSignalProcessor}s aufgerufen und der Men"ueintrag wieder entfernt.
+
+%\begin{figure}[tbh]
+%\centering
+%\includegraphics[angle=-90, width=0.8\textwidth]{bilder/verbesserung_LiveSignalProcessor_Menus_interaction.pdf}
+%\caption{M"ogliche Verbesserung der Menu-Interaktion}
+%\label{pic:interaction_menu_lsp_improved}
+%\end{figure}
+
+%- Klasse \class{LiveSignalProcessor}
+%- Umsetzung wie in \picref{interaction_menu_lsp}
+%- bestehende Funktionalit"at erkl"aren
+%- Verbessern nach \picref{interaction_menu_lsp_improved}
+%- vorgesehene Funktion erkl"aren
+%- Vorteil: weniger Eingriff in die bestehende Struktur durch Implementierer notwendig
 
 \subsection{Implementierung weiterer Signalverarbeitungsmethoden}
 
