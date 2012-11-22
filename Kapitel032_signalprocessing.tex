@@ -1,21 +1,72 @@
-\section{[WIP]Signalverarbeitung}
+\section{[WIP]Signalverarbeitung mit dem \texttt{signalprocessing}-Paket}
 
+\subsection{"Uberblick "uber das \code{signalprocessin}-Paket}
 
+Die Signalverarbeitung der Software wird durch das Paket \class{signalprocessing} erm"oglicht.
+Der Schwerpunkt bei der Implementierung dieses Paket liegt in der Umsetzung einer erweiterbaren Plattform f"ur Signalverarbeitungsfunktionen.
+Die Bereitstellung und Implementierung spezieller Signalverbeitungsfunktion stellen eine untergeordnete Rolle dar und soll an dieser Stelle nur beispielhaft erfolgen.
+Als Musterbeispiel f"ur die Funktionalit"at der Signalverarbeitung wird die Berechnung von RR-Zeitreihen herangezogen.
+Genauer soll aus den Zeitpunkten von Annotationen eines Kanals eine Zeitreihe der zeitlichen Abst"ande der gegebenen Annotationen automatisiert erstellt werden.
+Es wird bewusst eine Signalverarbeitungsfunktion geringer Komplexit"at implementiert um den Fokus auf das allgemeine Zusammenspiel der beteiligten Klassen und nicht auf den Algorithmus selbst zu legen.
+
+Zur Berechnung der Schlag-zu-Schlag-Intervalle werden folgende Schritte ausgef"uhrt:
+\begin{enumerate}
+	\item Auswahl eines Annotationskanals durch den Benutzer
+	\item Berechnung der Zeitpunkte der Annotationen aus ihren Samplenummern und der (virtuellen) Abtastfrequenz
+	\item Berechnung der Differenz der Zeitpunkte aufeinander folgender Annotationen
+	\item Speichern der errechneten Zeitdifferenzen in einem durch den Benutzer benannten Signal
+\end{enumerate}
+Um die Darstellung der Zeitreihe zu erm"oglichen, wird jeder errechneten Differenz ein Zeitpunkt zugewiesen.
+Das errechneten Datenpunkte werden als \class{Value} gespeichert.
+Der Wert $V_{value}$ ist die Differenz der Zeitpunkte $t_{n+1} - t_n$ zweier Annotationen $A_n$ und $A_{n+1}$.
+Der Zeitpunkt des \class{Value}s $t_{value}$ wird auf den Zeitpunkt $t_{n+1}$ der zweiten Annotation $A_{n+1}$ festgelegt.
 
 \begin{figure}[htb]
 \centering
 \includegraphics[angle=-90, width=\textwidth]{bilder/package_signalprocessing.pdf}
-\caption{"Ubersicht "uber das \class{signalprocessing}-Paket}
+\caption{"Ubersicht "uber das \code{signalprocessing}-Paket}
 \label{pic:package_signalprocessing}
 \end{figure}
 
-- zwei Arten von Signalverarbeitern unterst"utzt: einmaliger und kontinuierlicher Ablauf
+In dem \code{signalprocessing}-Paket wird zwischen zwei Arten der Ausf"uhrung von Signalverarbeitungsfunktionen unterschieden (siehe \picref{package_signalprocessing}).
+Die erste Art ist das einmalige Anwenden einer Verarbeitungsfunktion auf ein oder mehrerer Signale und ist im \secref{signal_processor} er"ortert.
+Ein Anwendungsbeispiel daf"ur sind Filterfunktionen oder die Berechnung von RR-Intervallen aus bereits annotierten \ac{EKG}-Daten.
+Die zweite Ausf"uhrungsart ist eine kontinuirliche Verarbeitung von Signalen.
+Hierbei wird auf eine Ver"anderung des zu verarbeitenden Signals reagiert und die Ausgabe entsprechend angepasst.
+Das implementierte Beispiel daf"ur ist die Berechnung und Anzeige der RR-Zeitreihe, während der Benutzer des Programms Annotationen ver"andert bzw. korrigiert.
+Diese zweite Verarbeitungsart ist im \secref{live_signal_processor} weiter unten beschrieben.
 
-\subsection{[WIP]Einfache Signalverarbeitung durch \class{SignalProcessor}}
+%- zwei Arten von Signalverarbeitern unterst"utzt: einmaliger und kontinuierlicher Ablauf
 
-- einmalig: einfach im Menu der zugeh"origen Konfigurationsdialog registrieren und er "uber nimmt die Arbeit
+\subsection{Einmalige Signalverarbeitung durch \class{SignalProcessor}}
+\label{sec:signal_processor}
 
-\subsection{[WIP]Kontinuirliche Verarbeitung von Signalen}
+Die Klasse \class{SignalProcessor} stellt einen Prototypen einer allgemeinen Signalverarbeitungsfunktion dar.
+Objekte dieser Klasse besitzen ein oder mehrere Eingangssignale und ebenso ein oder mehrere Ausgangssignale.
+\class{SignalProcessor} stellt eine einheitliche Schnittstelle f"ur das Hinzuf"ugen und Entfernen von Ein- und Ausgangssignalen zur Verf"ugung und speichert die notwendigen Objektreferenzen dieser Signale.
+Da sie aber nicht die konkrete Funktionalit"at der Signalverarbeitungsfunktion implementieren kann, ist \class{SignalPorcessor} als abstrakte Klasse implementiert.
+
+\class{SignalProcessor} "ubernimmt drei wesentliche Aufgaben implementierter Signalverarbeitungsfunktionen:
+\begin{enumerate}
+	\item Bereitstellen einer einheitlichen Schnittstelle mit der alle Signalverarbeitungsfunktionen genutzt werden k"onnen
+	\item Methoden zum Hinzuf"ugen, Entfernen und Speicherung der Objektreferenzen der Ein- und Ausgangssignale
+	\item einheitliche Dokumentation des Signalursprungs f"ur die Ausgabesignale
+\end{enumerate}
+In den Methoden zum Hinzuf"ugen von Eingangs- und Ausgangssignalen wird sichergestellt, dass ein und dasselbe Signal mehrfach als Ein- bzw. Ausgangssignal verwendet wird.
+Diese Funktionalit"at kann optional durch die implementierende Unterklasse auch ausgestellt werden.
+Wird die Funktion \code{run()} aufgerufen, wird die durch die Unterklasse implementierte Signalverarbeitung durchgef"uhrt.
+Zus"atzlich dazu wird durch \class{SignalProcessor} der Signalursprung der Ausgangssignale vermerkt.
+Es werden bei der Ausf"uhrung einer Signalverarbeitungsfunktion die Programmversion, die Version der verarbeitenden Funktion und auch die genutzten Parameter in den Ausgangssignalen als Quelle vermerkt.
+Damit wird erreicht, dass automatisiert die Entstehungsgeschichte von verarbeiteten Signalen aufgezeichnet wird.
+
+In \picref{package_signalprocessing} sind drei Methoden als abstrakt ersichtlich, die durch eine konkretisierende Unterklasse implementiert werden m"ussen. Die Methoden \code{getName()} und \code{getParameterString()} dienen der Dokumentation der Verarbeitungsschritte und geben einen \code{Sring} mit Funktionsnamen (und eventuell notwendiger Versionsnummer) bzw. die genutzten Parameter der Funktion zur"uck.
+Die dritte Methode \code{performFunctinality()} soll die konkrete Verarbeitung durchf"uhren und die Ausgangssignale entsprechende ver"andern.
+Durch diese Umsetzung kann sich ein zuk"unftiger Entwickler auf die Implementierung des Algorithmus konzentrieren und alle organisatorischen Nebenabl"aufe sind schon durch \class{SignalProcessor} abgedeckt.
+
+%- einmalig: einfach im Menu der zugeh"origen Konfigurationsdialog registrieren und er "ubernimmt die Arbeit
+
+\subsection{[WIP]Kontinuirliche Verarbeitung von Signalen durch \class{LiveSignalPorcessor}}
+\label{sec:live_signal_processor}
 
 \begin{figure}[tbh]
 \centering

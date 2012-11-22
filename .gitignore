@@ -5,6 +5,7 @@ literatur/*.pdf
 *.aux
 *.bak
 *.bbl
+*.bkp
 *.blg
 *.dvi
 *.fdb_latexmk

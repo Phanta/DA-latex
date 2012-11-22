@@ -1,13 +1,13 @@
-\section{Datenbehandlung}
+\section{Behandlung der Datens"atze}
 
 Aufgrund der Vielfalt der genutzten Datenformate zur Speicherung von Biosignalen und der Nichtexistenz eines einheitlichen Standards \cite{Schlogl2009, Varri2001, Wang2010} muss ein Format gesucht werden, dass zur Behandlung von Datens"atzen im Rahmen dieser Arbeit geeignet ist.
 Die Wahl des Datensatzformates st"utzt sich auf die vergleichende Untersuchung \cite{Schlogl2009} von Dr. Alois Schl"ogl der Technischen Universit"at Graz.
 Das Unisens-Format besitzt eine Referenzimplementierung mit Programmierschnittstellen sowohl f"ur Matlab als auch f"ur Java und bietet f"ur diese Arbeit optimale Anwendungsvoraussetzungen.
 Die Organisation "uber eine menschlich les- und editierbare Headerdatei ist gerade in der Entwicklung interessant.
-Es kann ein Datensatz einfach und ohne Bearbeitungstools ver"andert und an die Bed"urfnisse angepasst werden.
+Datens"atze k"onnen ohne Bearbeitungstools ver"andert und an die Bed"urfnisse angepasst werden.
 Einer der Kritikpunkte nach \cite{Schlogl2009} ist, dass das Format aus mehreren Dateien besteht.
-Da die Behandlung von Dateien und Verzeichnissen mit der aktuellen Software kaum noch Unterschiede f"ur den Anwender darstellt, ist nach Meinung des Autors dieser Punkt nicht von hoher Priorit"at.
-Es bietet sogar die M"oglichkeit Daten direkt von Sensoren (bei bekannten technischen Parametern wie z.B. Abtastrate und -aufl"osung) direkt in einen Datensatz integriert werden k"onnen.
+Da die Behandlung von Dateien und Verzeichnissen mit aktuellen Betriebssystemen kaum Unterschiede f"ur den Anwender darstellt, ist nach Meinung des Autors dieser Punkt nicht von hoher Priorit"at.
+Es bietet sogar die M"oglichkeit Daten von Sensoren (bei bekannten technischen Parametern wie z.B. Abtastrate und -aufl"osung) direkt in einen Datensatz zu integrieren.
 Zus"atzlich bietet das Format durch seine Definition eine gute Erweiterbarkeit.
 Es kann somit an die neue Gegebenheiten und Voraussetzungen angepasst und optimiert werden.
 
@@ -17,9 +17,9 @@ Es kann somit an die neue Gegebenheiten und Voraussetzungen angepasst und optimi
 %	-- implementierung vorhanden
 %	-- f"ur matlab und java
 
-\subsection{Unisens}
+\subsection{Allgemeiner Aufbau des Unisens Datensatzes}
 
-Das vom Forschungszentrum Informatik und Institut f"ur Technik der Informationsverarbeitung der Universit"at Karlsruhe entwickelte Datenformat Unisens dient der Speicherung und der Dokumentation von Sensordaten.
+Das vom Forschungszentrum Informatik und Institut f"ur Technik der Informationsverarbeitung der Universit"at Karlsruhe entwickelte Datenformat Unisens dient der Speicherung und der Dokumentation von Sensordaten \cite{Kirst2008, Ottenbacher2010}.
 Unisens ist konzipiert, Daten verschiedener Sensoren innerhalb eines Datensatzes zu speichern.
 Ein Datensatz ist im Dateisystem durch ein eigenes Verzeichnis und eine Headerdatei \verb|unisens.xml| hinterlegt.
 In der Headerdatei werden alle Informationen "uber die Bestandteile des Datensatzes, deren Formatierung und ihre semantischen Zusammenh"ange gespeichert.
@@ -36,8 +36,8 @@ Unisens unterscheidet zwischen vier Arten von Daten:
 		Alle Kan"ale desselben Signals haben auch dieselbe Abtastrate und -aufl"osung.
 	\item[Ereignisse \emph{(Event)}] \hfill \\
 		Ereignisse sind diskrete Zeitpunkte die mit einer textlichen Beschreibung versehen sind. (z.B. Triggersignale)
-		Sie zeichnen sich durch einen Zeitstempel und einer kurzen Beschreibung aus.
-		Optional k"onnen noch Kommentare zu einem Ereignis hinzugef"ugt werden.
+		Sie zeichnen sich durch einen Zeitstempel und einem textuellen K"urzel aus.
+		Optional kann zu jedem Ereignis ein Kommentar hinzugef"ugt werden.
 	\item[Einzelwerte \emph{(Value)}] \hfill \\
 		Einzelwerte sind eine Kombination der beiden oben genannten Datenarten.
 		Sie beinhalten numerische Werte die zu bestimmten Zeitpunkten aufgenommen wurden.
@@ -48,10 +48,10 @@ Unisens unterscheidet zwischen vier Arten von Daten:
 \end{description}
 Eine detailliertere Beschreibung des Formates kann der offiziellen Dokumentation \cite{Ottenbacher2010} entnommen werden.
 
-\subsubsection{Details der Referenzimplementierung}
+\subsection{Details der Unisens Referenzimplementierung}
 
-In diesem Abschnitt wird kurz auf einige Details der Umsetzung des Unisens-Formates eingegangen.
-Das Unisens-Paket ist in Java implementiert und wird unter der \emph{\ac{lgpl}} zur Verf"ugung gestellt.
+In diesem Abschnitt wird auf einige Details der Umsetzung des Unisens-Formates eingegangen.
+F"ur das Unisens-Paket gibt es eine Referenzimplementierung in Java, die unter der \emph{\ac{lgpl}} zur Verf"ugung gestellt wird.
 Die bereit gestellte Bibliothek ist auf zwei Einzeldateien aufgeteilt: \verb|org.unisens.jar| und \verb|org.unisens.ri.jar|.
 Bei der ersten Datei handelt es sich um die Definition des Unisensformates und seiner Bestandteile als Javaklassenstruktur.
 Diese Definition erfolgt haupts"achlich als \emph{Interface}klassen und legt die Schnittstellen zwischen den einzelnen Bestandteilen fest.
