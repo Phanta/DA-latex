@@ -297,7 +297,7 @@ Die jeweilige \class{DataController}-Implementierung muss zwei Aufgaben "uberneh
 \begin{enumerate}
 	{% Klammern damit "Anderungen lokal bleiben
 	\renewcommand{\theenumi}{\arabic{enumi}}
-	\renewcommand{\labelenumi}{\theenumi}
+	\renewcommand{\labelenumi}{{\theenumi}.}
 	\item Bei einer "Anderung der Daten ein entsprechendes \class{DataChangeEvent} mit den notwendigen Informationen erzeugen.
 	\item Das erzeugte Objekt "uber die Methode \code{notifyListeners()} der Superklasse \class{DataController} an die \emph{Observer} weiterreichen.
 	}
