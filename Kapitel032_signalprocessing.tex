@@ -1,4 +1,4 @@
-\section{[WIP]Signalverarbeitung im Paket \texttt{signalprocessing}}
+\section{Signalverarbeitung im Paket \texttt{signalprocessing}}
 
 \subsection{"Uberblick "uber das \code{signalprocessing}-Paket}
 
@@ -127,8 +127,23 @@ Wird der entsprechende Men"ueintrag durch den Nutzer aufgerufen, wird die \code{
 
 \subsection{Implementierung weiterer Signalverarbeitungsmethoden}
 
-- Ableiten der neuen Implementierung von \class{SignalProcessor} bzw. \class{LiveSignalProcessor}
-- Implementierung eines Konfigurationsdialoges
-- Registrieren des Dialogs im Menu/ Erstellen eines Menueintrages
+Das Paket \code{signalprocessing} ist daf"ur ausgelegt, dass es um weitere Signalverarbeitungsfunktionen einfach erweitert werden kann.
+Die Implementierungen der zwei Hauptklassen \class{SignalProcessor} und \class{LiveSignalProcessor} als abstrakte Klassen erm"oglicht ein schnelles einbinden neuer Funktionalit"aten.
+Vier Schritte sind durch einen zuk"unftigen Entwickler auszuf"uhren:
+\begin{itemize}
+	\item Auswahl einer Superklasse abh"angig davon ob eine einfache oder kontinuierliche Signalverarbeitung stattfinden soll.
+	\item Implementierung einer Unterklasse die die gew"unschte Funktionalit"at bereit stellt.
+	\item Programmierung einer Dialogbox, die dem Benutzer des Programmes Einstellungen der Parameter erlaubt.
+	\item Integration des Konfigurationsdialogs in das Men"u des Programms.
+\end{itemize}
+Es ist empfohlen alle Klassen in einem eigenem Paket einzubinden um Namenskollisionen zu unterbinden.
+Das neue Paket kann und sollte als im bestehenden Paket \code{gst.signalprocessing} angelegt werden, damit die Gliederung der Pakete innerhalb des Programms nach Funktionalit"at erhalten bleibt.
+Der Konfigurationsdialog soll nach der Erstellung und Initialisierung des konkreten Signalverarbeitungsobjektes die Verarbeitungsroutine starten (durch den Methodenaufruf von \code{run()}.
+Wie schon im \secref{live_signal_processor} erw"ahnt, muss die kontinuierliche Verarbeitung durch die Methode \code{start()} ausgel"ost werden.
+Das Abbrechen der kontinuierlichen Signalverarbeitung durch den Nutzer ist in der vorgelegten Implementierung schon integriert.
+
+%- Ableiten der neuen Implementierung von \class{SignalProcessor} bzw. \class{LiveSignalProcessor}
+%- Implementierung eines Konfigurationsdialoges
+%- Registrieren des Dialogs im Menu/ Erstellen eines Menueintrages
 
 % EOF
