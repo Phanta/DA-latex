@@ -1,6 +1,6 @@
 \section{[WIP]Benutzerf"uhrung}
 
-\subsection{[WIP]Elemente der grafischen Benutzeroberfl"ache}
+\subsection{Elemente der grafischen Benutzeroberfl"ache}
 
 \begin{figure}[htb]
 \centering
@@ -9,11 +9,17 @@
 \label{pic:gui_elements_and_classes}
 \end{figure}
 
-\subsection{[WIP]Datenvisualisierung}
-
-- Nutzung von JFreeChart (\ac{lgpl})
-
-\subsection{[WIP]Umsetzung der \ac{GUI} im Paket \class{gst.ui}}
+In \picref{gui_element_and_classes} sind die einzelnen Bestandteile der \ac{GUI} hervorgehoben.
+Interaktionen zwischen dem Benutzer und dem Programm erfolgen "uber f"unf Hauptkomponenten:
+\begin{itemize}
+	\item Men"uzeile durch die Klasse \class{Menus} repr"asentiert
+	\item Werkzeugleiste als Klasse \class{Toolbar}
+	\item Statuszeile zum Anzeigen von Informationen mithilfe der Klasse \class{StatusBar}
+	\item einzelne Diagramme als \class{SignalView}s zur Anzeige der Signalverl"aufe (im folgendem Signalansichten genannt)
+	\item Zusammenfassung aller Signalansichten auf dem fl"achengr"o{\ss}tem Bestandteil, dem \class{SignalPanel}
+\end{itemize}
+W"ahrend das Men"u, die Werkzeugleiste und die Signalansichten Eingaben von dem Benutzer verarbeiten, dient die Statuszeile ausschlie{\ss}lich der Pr"asentation von Informationen.
+Die grafische Darstellung der Klasse \class{SignalPanel} bleibt f"ur den Nutzer gr"o{\ss}tenteils verborgen, da es sich hierbei um ein organisatorisches Programmelement handelt (siehe dazu \secref{signalpanel_organisation}).
 
 \begin{figure}[htb]
 \centering
@@ -22,7 +28,26 @@
 \label{pic:package_ui_ubersicht}
 \end{figure}
 
-- alle Elemente Singleton (bis auf \class{SignalView})
+Ein "Ubersicht die Klassenhierarchie ist in \picref{package_ui_ubersicht} dargestellt.
+Bis auf die \class{SignalView}-Klasse sind alle grafischen Komponenten nach dem Singleton-Entwurfsmuster implementiert (vgl. \secref{singleton}).
+Durch diese Entscheidung ist einerseits garantiert, dass die grafischen Elemente nur einmal in der Programminstanz vorkommen und au{\ss}erdem kann auf sie vereinfacht zugegriffen werden ("ahnlich wie auf globale Variablen).
+
+%- alle Elemente Singleton (bis auf \class{SignalView})
+
+\subsection{[WIP]Visualisierung der Signalverl"aufe}
+
+- Nutzung von JFreeChart (\ac{lgpl})
+- langsam bei der darstellung vieler Datenpunkte
+- Einschr"ankung durch begrenzung der Punkte auf die Pixelbreite des entsprechenden Diagramms
+- Klasse \class{SignalView}
+
+\subsection{[WIP]Gr"o{\ss}enbestimmung und Positionierung der Signalansichten durch \class{SignalPanel}}
+\label{sec:signalpanel_organisation}
+
+- organisationseinheit
+
+\subsection{[WIP]Verarbeitung der Benutzereingabe im Paket \class{ui}}
+
 
 \subsubsection{[WIP]Koordiniertes Zoomen und Scrollen durch \class{SignalPanel}}
 
