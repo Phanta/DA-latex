@@ -4,10 +4,11 @@
 \subsection{"Uberblick "uber das \code{signalprocessing}-Paket}
 
 Die Signalverarbeitung der Software wird durch das Paket \class{signalprocessing} erm"oglicht.
-Der Schwerpunkt bei der Implementierung dieses Paket liegt in der Umsetzung einer erweiterbaren Plattform f"ur Signalverarbeitungsfunktionen.
-Die Bereitstellung und Implementierung spezieller Signalverarbeitungsfunktion stellen eine untergeordnete Rolle dar und soll an dieser Stelle nur beispielhaft erfolgen.
+Der Schwerpunkt bei der Implementierung dieses Paketes liegt in der Umsetzung einer erweiterbaren Plattform f"ur Signalverarbeitungsfunktionen.
+Die Bereitstellung und Implementierung konkreter Signalverarbeitungsfunktion spielen eine untergeordnete Rolle.
+Die Verwendung des Paketes soll an dieser Stelle nur beispielhaft erfolgen.
 Als Musterbeispiel f"ur die Funktionalit"at der Signalverarbeitung wird die Berechnung von RR-Zeitreihen herangezogen.
-Genauer soll aus den Zeitpunkten von Annotationen eines Kanals eine Zeitreihe der zeitlichen Abst"ande der gegebenen Annotationen automatisiert erstellt werden.
+Im Detail soll aus den Zeitpunkten von Annotationen eines Kanals eine Zeitreihe der zeitlichen Abst"ande der gegebenen Annotationen automatisiert erstellt werden.
 Es wird bewusst eine Signalverarbeitungsfunktion geringer Komplexit"at implementiert um den Fokus auf das allgemeine Zusammenspiel der beteiligten Klassen und nicht auf den Algorithmus selbst zu legen.
 
 Zur Berechnung der Schlag-zu-Schlag-Intervalle werden folgende Schritte ausgef"uhrt:
@@ -22,7 +23,7 @@ Zur Berechnung der Schlag-zu-Schlag-Intervalle werden folgende Schritte ausgef"u
 	}
 \end{enumerate}
 Um die Darstellung der Zeitreihe zu erm"oglichen, wird jeder errechneten Differenz ein Zeitpunkt zugewiesen.
-Das errechneten Datenpunkte werden als \class{Value} gespeichert.
+Die errechneten Datenpunkte werden als \class{Value} gespeichert.
 Der Wert $V_{value}$ ist die Differenz der Zeitpunkte $t_{n+1} - t_n$ zweier Annotationen $A_n$ und $A_{n+1}$.
 Der Zeitpunkt des \class{Value}s $t_{value}$ wird auf den Zeitpunkt $t_{n+1}$ der zweiten Annotation $A_{n+1}$ festgelegt.
 Die Implementierung dieses Algorithmus ist im Paket \code{rrcalc} mit den zwei Klassen \class{RRCalculator} und \class{LiveRRCalculator} realisiert.
@@ -58,20 +59,22 @@ Da sie aber nicht die konkrete Funktionalit"at der Signalverarbeitungsfunktion i
 	\renewcommand{\theenumi}{\arabic{enumi}}
 	\renewcommand{\labelenumi}{{\theenumi}.}
 	\item Bereitstellen einer einheitlichen Schnittstelle mit der alle Signalverarbeitungsfunktionen genutzt werden k"onnen
-	\item Methoden zum Hinzuf"ugen, Entfernen und Speicherung der Objektreferenzen der Ein- und Ausgangssignale
+	\item Methoden zum Hinzuf"ugen, Entfernen und Speichern der Objektreferenzen der Ein- und Ausgangssignale
 	\item einheitliche Dokumentation des Signalursprungs f"ur die Ausgabesignale
 	}
 \end{enumerate}
 In den Methoden zum Hinzuf"ugen von Eingangs- und Ausgangssignalen wird sichergestellt, dass ein und dasselbe Signal mehrfach als Ein- bzw. Ausgangssignal verwendet wird.
-Diese Funktionalit"at kann optional durch die implementierende Unterklasse auch ausgestellt werden.
+Diese Funktionalit"at kann optional durch die implementierende Unterklasse verhindert werden.
 Wird die Funktion \code{run()} aufgerufen, wird die durch die Unterklasse implementierte Signalverarbeitung durchgef"uhrt.
 Zus"atzlich dazu wird durch \class{SignalProcessor} die Signalquelle der Ausgangssignale vermerkt.
-Es werden bei der Ausf"uhrung einer Signalverarbeitungsfunktion die Programmversion, die Version der verarbeitenden Funktion und auch die genutzten Parameter in den Ausgangssignalen als Quelle vermerkt.
-Damit wird erreicht, dass automatisiert die Entstehungsgeschichte von verarbeiteten Signalen aufgezeichnet wird.
+Es werden bei der Ausf"uhrung einer Signalverarbeitungsfunktion die Programmversion, der Name der verarbeitenden Funktion und auch die genutzten Parameter in den Ausgangssignalen als Quelle vermerkt.
+Damit wird erreicht, dass die Entstehungsgeschichte von verarbeiteten Signalen automatisiert aufgezeichnet wird.
 
-In \picref{package_signalprocessing} sind drei Methoden als abstrakt ersichtlich, die durch eine konkretisierende Unterklasse implementiert werden m"ussen. Die Methoden \code{getName()} und \code{getParameterString()} dienen der Dokumentation der Verarbeitungsschritte und geben einen \code{String} mit Funktionsnamen (und eventuell notwendiger Versionsnummer) bzw. die genutzten Parameter der Funktion zur"uck.
+In \picref{package_signalprocessing} sind drei abstrakten Methoden ersichtlich, die durch eine konkretisierende Unterklasse implementiert werden m"ussen.
+Die Methoden \code{getName()} und \code{getParameterString()} dienen der Dokumentation der Verarbeitungsschritte und geben einen \code{String} mit Funktionsnamen (und eventuell notwendiger Versionsnummer) bzw. die genutzten Parameter der Funktion zur"uck.
 Die dritte Methode \code{performFunctionality()} soll die konkrete Verarbeitung durchf"uhren und die Ausgangssignale entsprechende ver"andern.
-Durch diese Umsetzung kann sich ein zuk"unftiger Entwickler auf die Implementierung des Algorithmus konzentrieren und alle organisatorischen Nebenabl"aufe sind schon durch \class{SignalProcessor} abgedeckt.
+Durch diese Umsetzung kann sich ein zuk"unftiger Entwickler auf die Implementierung des Algorithmus konzentrieren.
+Alle organisatorischen Nebenabl"aufe sind durch \class{SignalProcessor} abgedeckt.
 
 %- einmalig: einfach im Menu der zugeh"origen Konfigurationsdialog registrieren und er "ubernimmt die Arbeit
 
@@ -83,16 +86,16 @@ Somit wird auch die Funktionalit"at der einmaligen Signalverarbeitung mit "ubern
 Zus"atzlich dazu wird der Funktionsumfang dahingehend erweitert, dass eine kontinuierliche Signalverarbeitung ausgef"uhrt werden kann.
 Um dieses dynamische Verhalten zu erm"oglichen wird durch die Klasse \class{LiveSignalProcessor} das \emph{Interface} \class{DataChangeListener} implementiert.
 Der \class{LiveSignalProcessor} meldet sich bei allen Eingangssignalen als \emph{Observer} an und erh"alt dadurch Informationen "uber ver"anderte (Eingangs-) Daten.
-Diese gewonnenen Informationen werden, sofern der \class{LiveSignalProcessor} gestartet ist, an die implementierende Unterklasse weitergegeben, die diese dann verarbeiten kann.
+Die gewonnenen Informationen werden, sofern der \class{LiveSignalProcessor} gestartet ist, an die implementierende Unterklasse weitergegeben, die diese dann verarbeiten kann.
 Informationen ver"anderter Daten werden verworfen, wenn die kontinuierliche Signalverarbeitung gestoppt ist.
-Der Zustand ob die Verarbeitung ein- oder ausgeschaltet ist, wird mit der \code{boolean}-Variable \code{isRunning} gespeichert.
+Der Zustand ob die Verarbeitung ein- oder ausgeschaltet ist, wird in der \code{boolean}-Variable \code{isRunning} gespeichert.
 Der Zustand kann "uber die Methoden \code{start()} und \code{stop()} ein- bzw. ausgeschaltet werden.
 
-Eine implementierende Unterklasse muss neben den im \secref{signal_processor} genannten Methoden \code{getName()}, \code{getParameterString()} und \code{performFunctionality()} noch zwei weitere Methoden "uberschreiben: \code{preLiveAction()} und \code{handleEvent()}.
+Eine implementierende Unterklasse muss neben den im \secref{signal_processor} genannten Methoden \code{getName()}, \code{getParameterString()} und \code{performFunctionality()} noch zwei weitere Methoden implementieren: \code{preLiveAction()} und \code{handleEvent()}.
 \code{handleEvent()} erh"alt als Parameter die auftretenden \class{DataChangeEvent}s und soll diese verarbeiten.
 Die Methode \code{preLiveAction()} wird durch die Klasse \class{LiveSignalProcessor} aufgerufen, wenn die kontinuierliche Signalverarbeitung gestartet wird.
 Mit diesem Zwischenschritt soll erm"oglicht werden, dass eventuell notwendige Vorbereitungen ausgef"uhrt werden k"onnen bevor das erste \code{DataChangeEvent} weitergegeben wird.
-In dem implementiertem Beispiel \class{RRLiveCalculator} wird dieser Methodenaufruf genutzt, das Ausgabesignal f"ur das entsprechende Eingangssignal zu berechnen. dieser Methodenaufruf genutzt, das Ausgabesignal f"ur das entsprechende Eingangssignal zu berechnen.
+In dem implementiertem Beispiel \class{RRLiveCalculator} wird dieser Methodenaufruf genutzt, das Ausgabesignal f"ur das entsprechende Eingangssignal zu berechnen.
 
 \begin{figure}[tbh]
 \centering
@@ -128,7 +131,7 @@ Wird der entsprechende Men"ueintrag durch den Nutzer aufgerufen, wird die \code{
 
 \subsection{Implementierung weiterer Signalverarbeitungsmethoden}
 
-Das Paket \code{signalprocessing} ist daf"ur ausgelegt, dass es um weitere Signalverarbeitungsfunktionen einfach erweitert werden kann.
+Das Paket \code{signalprocessing} ist daf"ur ausgelegt, um um zus"atzliche Signalverarbeitungsfunktionen einfach erweitert werden zu k"onnen.
 Die Implementierungen der zwei Hauptklassen \class{SignalProcessor} und \class{LiveSignalProcessor} als abstrakte Klassen erm"oglicht ein schnelles einbinden neuer Funktionalit"aten.
 Vier Schritte sind durch einen zuk"unftigen Entwickler auszuf"uhren:
 \begin{itemize}
@@ -139,9 +142,9 @@ Vier Schritte sind durch einen zuk"unftigen Entwickler auszuf"uhren:
 \end{itemize}
 Es ist empfohlen alle Klassen in einem eigenem Paket einzubinden um Namenskollisionen zu unterbinden.
 Das neue Paket kann und sollte als im bestehenden Paket \code{gst.signalprocessing} angelegt werden, damit die Gliederung der Pakete innerhalb des Programms nach Funktionalit"at erhalten bleibt.
-Der Konfigurationsdialog soll nach der Erstellung und Initialisierung des konkreten Signalverarbeitungsobjektes die Verarbeitungsroutine starten (durch den Methodenaufruf von \code{run()}.
+Der Konfigurationsdialog soll nach der Erstellung und Initialisierung des konkreten Signalverarbeitungsobjektes die Verarbeitungsroutine starten (durch den Methodenaufruf von \code{run()}).
 Wie schon im \secref{live_signal_processor} erw"ahnt, muss die kontinuierliche Verarbeitung durch die Methode \code{start()} ausgel"ost werden.
-Das Abbrechen der kontinuierlichen Signalverarbeitung durch den Nutzer ist in der vorgelegten Implementierung schon integriert.
+Das Abbrechen der kontinuierlichen Signalverarbeitung durch den Nutzer ist in der vorgelegten Implementierung bereits integriert.
 
 %- Ableiten der neuen Implementierung von \class{SignalProcessor} bzw. \class{LiveSignalProcessor}
 %- Implementierung eines Konfigurationsdialoges

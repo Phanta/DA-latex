@@ -136,10 +136,11 @@ Die manuelle Nachkontrolle ist bei dieser Anwendung f"ur die automatisiert erkan
 In der objektorientierten Programmierung werden die einzelnen funktionalen Bestandteile eines Programms in einzelnen Klassen implementiert.
 Diese Klassen sind durch ihre Funktionen (\emph{Methoden}) und ihre Variablen (\emph{Member/Eigenschaften}) definiert.
 Als Objekte werden die einzelnen Instanzen dieser Klassen bezeichnet.
-Alle Objekte einer Klasse k"onnen unterschiedliche Werte in ihren Variablen speichern, somit sind im Allgemeinen alle Methodenaufrufe und Membervariablen f"ur jedes Objekt lokal gespeichert.
+Alle Objekte einer Klasse k"onnen unterschiedliche Werte in ihren Variablen speichern, somit sind im Allgemeinen alle Methodenaufrufe und Variablen f"ur jedes Objekt lokal gespeichert.
+
 Es k"onnen auch Methoden und Eigenschaften f"ur eine Klasse selbst definiert werden --- die Klassenmethoden und Klassenvariablen.
 Klassenvariablen werden f"ur eine Klasse nur genau einmal abgespeichert und sind f"ur alle Objektinstanzen dieser Klasse identisch.
-Klassenmethoden sind, ebenso wie die Klassenvariablen, f"ur die Klasse definiert und k"onnen somit Objekt"ubergreifend Funktionalit"aten "ubernehmen, k"onnen aber nicht auf die Member der einzelnen Objekte zugreifen.
+Klassenmethoden sind, ebenso wie die Klassenvariablen, f"ur die Klasse definiert und k"onnen somit objekt"ubergreifend Funktionalit"aten "ubernehmen, k"onnen aber nicht auf die Member der einzelnen Objekte zugreifen.
 
 Durch \emph{Ableitung} von Klassen k"onnen Methoden und Eigenschaften von anderen Klassen "ubernommen werden, ohne dass dabei diese Elemente erneut programmiert werden m"ussen.
 Dabei bezeichnet man als \emph{Superklasse} die Klasse von der abgeleitet wurde und die abgeleitete Klasse als \emph{Unter-} bzw. \emph{Subklasse}.
@@ -156,12 +157,15 @@ Das Gegenst"uck dazu ist die "offentliche (\emph{public}) Deklaration: Alle Klas
 Elemente die als gesch"utzt (\emph{protected}) markiert sind, erlauben nur Zugriffe durch die deklarierende Klasse und ihre Subklassen.
 
 Ein \emph{Interface} ist die Deklaration einer wohldefinierten Schnittstelle.
-Durch sie werden Methodennamen und die Parameter festgelegt, jedoch keine direkte Funktionalit"at bereit gestellt.
+Durch sie werden Methodennamen und die Parameter definiert, jedoch keine direkte Funktionalit"at bereit gestellt.
 Mithilfe von \emph{Interfaces} wird zugesichert, dass jede implementierende Klasse die bezeichneten Methoden zur Verf"ugung stellt.
 
 \emph{Abstrakte Klassen} sind Klassen von denen direkt keine Objekte instanziert werden d"urfen.
 Sie besitzen aber dennoch Methoden und Membervariablen und k"onnen Funktionalit"aten implementieren.
-Mit ihnen kann abstraktes Verhalten implementiert werden, dass f"ur alle Unterklassen gleich bleibt, aber spezifische Funktionalit"at erst durch die Unterklasse bereitgestellt werden kann.
-Die Methodik abstrakter Klassen wird insbesondere im \code{signalprocessing}-Paket genutzt und ist im \secref{signalprocessing} beschrieben. \cite{Barnes2003a}
+Mit ihnen kann abstraktes Verhalten implementiert werden, das f"ur alle Unterklassen gleich bleibt.
+Spezifische Funktionalit"at wird erst durch die Unterklasse bereitgestellt.
+Die Methodik abstrakter Klassen wird insbesondere im \code{signalprocessing}-Paket genutzt und ist im \secref{signalprocessing} beschrieben.
+
+\cite{Barnes2003a}
 
 %% EOF %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
