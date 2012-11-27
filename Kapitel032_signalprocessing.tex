@@ -63,7 +63,7 @@ Da sie aber nicht die konkrete Funktionalit"at der Signalverarbeitungsfunktion i
 	\item einheitliche Dokumentation des Signalursprungs f"ur die Ausgabesignale
 	}
 \end{enumerate}
-In den Methoden zum Hinzuf"ugen von Eingangs- und Ausgangssignalen wird sichergestellt, dass ein und dasselbe Signal mehrfach als Ein- bzw. Ausgangssignal verwendet wird.
+In den Methoden zum Hinzuf"ugen von Eingangs- und Ausgangssignalen wird sichergestellt, dass ein und dasselbe Signal nicht mehrfach als Ein- bzw. Ausgangssignal verwendet wird.
 Diese Funktionalit"at kann optional durch die implementierende Unterklasse verhindert werden.
 Wird die Funktion \code{run()} aufgerufen, wird die durch die Unterklasse implementierte Signalverarbeitung durchgef"uhrt.
 Zus"atzlich dazu wird durch \class{SignalProcessor} die Signalquelle der Ausgangssignale vermerkt.
@@ -108,7 +108,7 @@ Damit gestartete kontinuierliche Signalverarbeitungsfunktionen durch den Anwende
 Durch eine Dialogbox, die "uber das Men"u vom Anwender aufgerufen wird, werden die notwendigen Parameter der Signalverarbeitungsfunktion eingestellt.
 Die Dialogbox erzeugt das \class{LiveSignalProcessor}-Objekt und "ubergibt die gew"ahtlen Parameter.
 Nachdem der \class{LiveSignalProcessor} gestartet wurde, wird er im Men"u mit der Methode \code{registerStartedLiveSignalProcessor()} registriert.
-Diese Registrierung hat zur folge:
+Diese Registrierung hat zur Folge:
 \begin{itemize}
 	\item Ein Men"ueintrag mit dem Namen des gestarteten \class{LiveSignalProcessor} wird erzeugt und in das Men"u eingef"ugt.
 	\item Die laufende Signalverarbeitungsfunktion und der entsprechende Men"ueintrag werden zusammen in einem \class{RunningSignalProcessorMenuItem}-Objekt gespeichert.
