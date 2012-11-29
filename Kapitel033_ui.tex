@@ -30,19 +30,28 @@ Die grafische Darstellung der Klasse \class{SignalPanel} bleibt f"ur den Nutzer 
 
 Ein "Ubersicht die Klassenhierarchie ist in \picref{package_ui_ubersicht} dargestellt.
 Bis auf die \class{SignalView}-Klasse sind alle grafischen Komponenten nach dem Singleton-Entwurfsmuster implementiert (vgl. \secref{singleton}).
-Durch diese Entscheidung ist einerseits garantiert, dass die grafischen Elemente nur einmal in der Programminstanz vorkommen und au{\ss}erdem kann auf sie vereinfacht zugegriffen werden ("ahnlich wie auf globale Variablen).
+Durch diese Entscheidung ist einerseits garantiert, dass die grafischen Elemente nur einmal in der Programminstanz vorkommen und au{\ss}erdem kann auf sie vereinfacht zugegriffen werden ("ahnlich globalen Variablen).
 
 %- alle Elemente Singleton (bis auf \class{SignalView})
 
 \subsection{[WIP]Visualisierung der Signalverl"aufe}
 
-F"ur die Darstellung der Signalverl"aufe in Diagrammen wird die Java-Bibliothek JFreeChart genutzt.
-In dem a
+\subsubsection{[WIP]Die genutzte \jfcNS-Bibliothek}
 
-- Nutzung von JFreeChart (\ac{lgpl})
-- langsam bei der darstellung vieler Datenpunkte
-- Einschr"ankung durch begrenzung der Punkte auf die Pixelbreite des entsprechenden Diagramms
-- Klasse \class{SignalView}
+F"ur die Darstellung der Signalverl"aufe in Diagrammen wird die \javaNS-Bibliothek \jfc genutzt.
+\jfc wird, ebenso wie das \usNS-Format, unter der \ac{lgpl} zur freien Nutzung angeboten.
+Mithilfe der \jfcNS-Bibliothek k"onnen Diagramm unterschiedlicher Art zur Visualisierung von Daten dargestellt werden.
+Neben der Vielzahl der unterst"utzten Diagrammtypen werden zus"atzlich die dynamische ver"anderbare Graphen unterst"utzt.
+%Zudem sind durch umfangreiche Einstellm"oglichkeiten die Diagramme ausgesprochen individualisierbar.
+Die umfangreichen Einstellm"oglichkeiten bei der Anpassung der Diagramme erm"oglichen eine nahezu nahtlose Integration der Bibliothekselemente in das bestehende grafischen Gesamtbild.
+Zudem bietet die \jfcNS-Bibliothek, zus"atzlich zur grafischen Veranschaulichung von Daten, auch grafische Elemente um Bereiche oder bestimmte Punkte in einem Diagramm gesondert hervorheben zu k"onnen.
+
+%- Nutzung von \jfc (\ac{lgpl})
+%- langsam bei der darstellung vieler Datenpunkte
+
+\subsubsection{[WIP]Die Wrapper-Klasse \class{SignalView}}
+
+F"ur die Integration der Diagramme in die \ac{GUI} als Signalansichten existiert die Klasse \class{SignalView}.
 
 \subsection{[WIP]Gr"o{\ss}enbestimmung und Positionierung der Signalansichten durch \class{SignalPanel}}
 \label{sec:signalpanel_organisation}
@@ -57,8 +66,11 @@ In dem a
 - Observer-Prinzip
 - zwei eigene Managerklassen (Unabh"angigkeit) \class{ScrollLockManager}, \class{ZoomLockManager}
 
-\subsubsection{[WIP]Darstellung und Verarbeitung der Benutzereingaben}
+\subsubsection{[WIP]Verarbeitung der Benutzereingaben zur Steuerung der Ansicht}
 
+- Einf"ugen und Entfernen von Datenkan"alen
+- Steuerung der Ansicht "uber Zeitfenster
+- Legende anzeigen
 - \class{SignalView} stellt dar
 - Datenzugriff "uber abstrakte Definition von \class{DataController}
 - Subklassen verarbeiten Maus- und Tastatureingabe
