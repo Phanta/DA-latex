@@ -104,9 +104,22 @@ Damit wird dem Nutzer eine visuelle R"uckmeldung bei "Anderungen der Daten gebot
 \subsection{[WIP]Gr"o{\ss}enbestimmung und Positionierung der Signalansichten durch \class{SignalPanel}}
 \label{sec:signalpanel_organisation}
 
-Die Klasse \class{SignalPanel} ist
+Die Klasse \class{SignalPanel} "ubernimmt im \code{ui}-Paket eine organisatorische Rolle.
+Sie umfasst innerhalb der \ac{GUI} den in \picref{gui_elements_and_classes} dargestellten Bereich III, wird aber durch die einzelnen Signalansichten verdeckt.
+Eine Aufgabe von \class{SignalPanel} ist es, die einzelnen Signalansichten auf der zur Verf"ugung stehenden Fl"ache anzuordnen und deren Gr"o{\ss}en zu ver"andern.
+Es werden drei Arbeitsmodi dem Benutzer zur Verf"ugung gestellt die "uber die Toolbar erreicht werden k"onnen:
+\begin{itemize}
+	\item gleiche Gr"o{\ss}en: Alle Signalansichten haben dieselbe H"ohe. Dieser Modus wird durch das = Symbol dargestellt.
+	\item eine gro{\ss}e Ansicht: Eine Signalansicht wird auf \unit{60}{\%} der zur Verf"ugung stehende Gr"o{\ss}e dargestellt und alle restlichen sind verkleinert. Dieser Modus ist mit einer 1 gekennzeichnet.
+	\item zwei vergr"o{\ss}erte Ansichten: Zwei Signalansichten erhalten jeweils \unit{35}{\%} der H"ohe zugesprochen und die restlichen sind verkleinert dargestellt. Diser Modus ist mit einer 2 gekennzeichnet.
+\end{itemize}
+Mit zwei zus"atzlichen Kn"opfen in der Toolbar k"onnen die zu vergr"o{\ss}ernden Signalansichten durch den Nutzer ausgew"ahlt werden.
+Alle Signalansichten nutzten die komplette Breite und sind somit nur in ihrer H"ohe ver"anderlich.
+Eine durch den Nutzer ver"anderliche Breite der Signalansichten ist nicht implementiert, da eine solche Funktionalit"at nicht notwendig ist und die Bedienung des Programms komplexer werden w"urde.
+Neben der Positionierung und Anpassung der Gr"o{\ss}en "ubernimmt die \class{SignalPanel}-Klasse noch Koordinationsaufgaben bei dem gemeinsamen Scrollen und Zoomen der Signalansichten.
+Diese Funktionen sind im folgendem Abschnitt beschrieben.
 
-- organisationseinheit
+%- organisationseinheit
 
 \subsection{[WIP]Verarbeitung der Benutzereingabe im Paket \class{ui}}
 \label{sec:userinput}
