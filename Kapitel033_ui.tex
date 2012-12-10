@@ -34,7 +34,7 @@ Durch diese Entscheidung ist einerseits garantiert, dass die grafischen Elemente
 
 %- alle Elemente Singleton (bis auf \class{SignalView})
 
-\subsection{[WIP]Visualisierung der Signalverl"aufe}
+\subsection{Visualisierung der Signalverl"aufe}
 
 \subsubsection{Die genutzte \jfcNS-Bibliothek}
 
@@ -92,7 +92,14 @@ Diese Darstellungsartefakte nehmen mit Erh"ohung der Zoomstufe ab, da umso mehr 
 
 \subsubsection{Dynamische Reaktion auf Ver"anderung der Daten}
 
-
+Da durch die Implementierung in der Klasse \class{SignalView} die Darstellung der Daten von den Daten entkoppelt ist, resultiert eine "Anderung der Daten nicht direkt in einer "Anderung der Anzeige.
+Es ist aber w"unschenswert diese Ver"anderungen dem Nutzer zu visualisieren.
+Beispielsweise m"ochte der Benutzer eine neu hinzugef"ugte Annotation in allen Signalansichten dargestellt bekommen.
+W"urde dies nicht geschehen, kann beim Nutzer Zweifel aufkommen, ob die Annotation erzeugt wurde oder nicht.
+Um diese dynamische Aktualisierung der Anzeige zu erm"oglichen, wird durch die Klasse \class{SignalView} das Interface \class{DataChangeListener} implementiert (siehe \picref{package_ui_ubersicht}).
+Sofern ein \class{DataController}-Objekt einer Signalansicht zugeordnet ist, wird das der Ansicht entsprechende \class{SignalView}-Objekt bei dem \class{DataController} als \class{DataChangeListener} registriert.
+"Andern sich die Daten eines \class{DataController}s, wird diese Ver"anderung dem \class{SignalView}-Objekt mitgeteilt und es wird entsprechend das Diagramm aktualisiert.
+Damit wird dem Nutzer eine visuelle R"uckmeldung bei "Anderungen der Daten geboten.
 
 \subsection{[WIP]Gr"o{\ss}enbestimmung und Positionierung der Signalansichten durch \class{SignalPanel}}
 \label{sec:signalpanel_organisation}
