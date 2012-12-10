@@ -141,6 +141,7 @@ Dr"uckt der Benutzer die Taste E, so "offnet sich ein Dialog in dem er die Signa
 Mit der Taste Q kann die Signalansicht geschlossen werden.
 Zus"atzlich kann der Nutzer durch dr"ucken der Zifferntasten voreingestellte Annotationen ausw"ahlen, die er einem Annotationskanal hinzuf"ugen kann.
 Der Vorgang der Editierung von Annotationen ist im \secref{edit_annotations} weiter unten beschrieben.
+Die Behandlung der Eingaben des Nutzers zur Steuerung der Ansicht der einzelnen Signalansichten ist im folgendem Abschnitt beschrieben.
 
 %- Einf"ugen und Entfernen von Datenkan"alen
 %- Steuerung der Ansicht "uber Zeitfenster
@@ -149,10 +150,31 @@ Der Vorgang der Editierung von Annotationen ist im \secref{edit_annotations} wei
 %- Datenzugriff "uber abstrakte Definition von \class{DataController}
 %- Subklassen verarbeiten Maus- und Tastatureingabe
 
-\subsubsection{[WIP]Koordiniertes Zoomen und Scrollen "uber \class{SignalPanel}}
+\subsubsection{Koordiniertes Zoomen und Scrollen "uber \class{SignalPanel}}
 
-- Observer-Prinzip
-- zwei eigene Managerklassen (Unabh"angigkeit) \class{ScrollLockManager}, \class{ZoomLockManager}
+Die Darstellung der Signale erfolgt in Diagrammen.
+Dabei wird die Abszisse als Zeitachse genutzt und die Werte der Zeitreihen werden auf der Ordinate abgebildet.
+Der Wertebereich der Ordinate passt sich automatisch den dargestellten Signalen an.
+Dabei wird die durch \jfc bereit gestellte Funktionalit"at das Minimum und das Maximum der Signalverl"aufe genutzt um den vertikalen vorhandenen Platz optimal zu nutzen.
+Der Wertebereich der Abszissenachse kann durch den Nutzer mithilfe der Maus ver"andert werden.
+Durch drehen des Mausrades wird der Wertebereich verschoben und der Nutzer scrollt entlang der Zeitachse die Signalansicht.
+Wird die Gro{\ss}schreibtaste w"ahrend der Mausradbewegung gedr"uckt, wird der Wertebereich vergr"o{\ss}ert bzw. verkleinert - der Anwender zoomt in einen Zeitbereich hinein oder hinaus.
+Der Wert um wieviel Zeiteinheiten gezoomt bzw. gescrollt wird ist proportional zu der Gr"o{\ss}e des dargestellten Zeitbereichs und betr"agt \unit{15}{\%} des dargestellten Zeitabschnitts.
+Der zentrale Wert des dargestellten Zeitbereichs bleibt w"ahrend des Zoomens unver"andert.
+Wird mit der mittleren Maustaste innerhalb einer Signalansicht geklickt, so wird die Ansicht auf den angeklickten Zeitpunkt zentriert.
+Die Zoomstufe und somit die Breite des Zeitbereichs bleibt dabei konstant.
+
+Da die einzelnen Diagramme und ihre Daten "ublicherweise in ihrem Zusammenhang betrachtet werden, ist es notwendig die Ver"anderungen der Ansicht in einem Diagramm an die anderen Diagramme zu "ubergeben.
+Es soll ein Effekt erreicht werden, dass alle Signale (egal in welchem Diagramm dargestellt) "uber ein und derselben Zeitachse dargestellt werden.
+Hierf"ur ruft die Klasse \class{Signal\-View\-Mouse\-Adapter} nicht die Methoden des ihnen zugeordneten \class{SignalView}-Objektes auf, sondern gibt die Informationen "uber den darzustellenden Zeitbereich an die Klasse \class{SignalPanel} weiter.
+Erst in den Methoden \code{ScrollToActionEvent()} und \code{ZoomActionEvent()} der Klasse \class{SignalPanel} werden anschlie{\ss}end die Methoden der \class{SignalView}-Objekte aufgerufen.
+Es wird in den Methoden von \class{SignalPanel} gepr"uft ob ein koordiniertes Zoomen bzw. Scrollen f"ur den urspr"unglichen \class{SignalView} aktiviert ist.
+Ist die koordinierte Ansichtssteuerung aktiv, werden alle Ansichten auf den gew"ahlten Zeitbereich gestellt.
+Nur wenn die Koordination deaktiviert ist, wird nur der Zeitbereich des \class{SignalView}s ver"andert bei dem die Nutzereingabe aufgetreten ist.
+Es k"onnen das koordinierte Zoomen und Scrollen unabh"angig voneinander f"ur alle Signalansichten aktiviert bzw. deaktiviert werden.
+
+%- Observer-Prinzip
+%- zwei eigene Managerklassen (Unabh"angigkeit) \class{ScrollLockManager}, \class{ZoomLockManager}
 
 \subsubsection{[WIP]Verarbeitung und Ver"anderung von Annotationen}
 \label{sec:edit_annotations}
