@@ -1,4 +1,4 @@
-\section{[WIP]Benutzerf"uhrung}
+\section{Benutzerf"uhrung}
 
 \subsection{Elemente der grafischen Benutzeroberfl"ache}
 
@@ -91,6 +91,7 @@ Diese Darstellungsartefakte nehmen mit Erh"ohung der Zoomstufe ab, da umso mehr 
 %- Einschr"ankung durch Begrenzung der Punkte auf die Pixelbreite des entsprechenden Diagramms
 
 \subsubsection{Dynamische Reaktion auf Ver"anderung der Daten}
+\label{sec:dynamic_reaction}
 
 Da durch die Implementierung in der Klasse \class{SignalView} die Darstellung der Daten von den Daten entkoppelt ist, resultiert eine "Anderung der Daten nicht direkt in einer "Anderung der Anzeige.
 Es ist aber w"unschenswert diese Ver"anderungen dem Nutzer zu visualisieren.
@@ -121,7 +122,7 @@ Diese Funktionen sind im folgendem Abschnitt beschrieben.
 
 %- organisationseinheit
 
-\subsection{[WIP]Verarbeitung der Benutzereingabe im Paket \class{ui}}
+\subsection{Verarbeitung der Benutzereingabe im Paket \class{ui}}
 \label{sec:userinput}
 
 \subsubsection{Allgemeines zur Verarbeitung der Benutzereingaben}
@@ -176,12 +177,43 @@ Es k"onnen das koordinierte Zoomen und Scrollen unabh"angig voneinander f"ur all
 %- Observer-Prinzip
 %- zwei eigene Managerklassen (Unabh"angigkeit) \class{ScrollLockManager}, \class{ZoomLockManager}
 
-\subsubsection{[WIP]Verarbeitung und Ver"anderung von Annotationen}
+\subsubsection{Verarbeitung und Ver"anderung von Annotationen}
 \label{sec:edit_annotations}
 
-- Einf"ugen von Annotationen "uber \class{AnnotationManager}
-- Dreiecksbeziehung von \class{Annotation\-Controller}, \class{AnnotationList} und \class{AnnotationManager} erl"autern
-- Suchalgorithmus zum finden der aktuellen Annotation
-- "Anderung wird durch die Implementierung vom Interface \class{Data\-Change\-Listener} automatisiert aktualisiert
+Annotationen k"onnen durch den Benutzer erstellt, editiert und gel"oscht werden.
+Sie werden nicht wie \emph{Values} und \emph{Signals} als Liniendiagramm dargestellt, da sie keinen Zahlenwert an sich besitzen.
+F"ur sie wird eine senkrechte Linie an dem entsprechenden Zeitpunkt gezeichnet.
+Zum Ver"andern der Annotationen wird auf die Klasse \class{AnnotationManager} des \code{data}-Paketes zur"uck gegriffen.
+Diese Klasse ben"otigt einen Eintrag eines Datensatzes damit bekannt ist, wo die Annotationen im Datensatz abgespeichert werden sollen.
+Der Nutzer kann "uber das Men"u den Datensatzeintrag ausw"ahlen und der entsprechende \class{DataController} wird an den \class{AnnotationManager} "ubergeben.
+
+Klickt der Benutzer in einem \class{SignalView} wird eine neue Annotation erzeugt und in dem ausgew"ahltem Datensatzeintrag abgespeichert.
+Dr"uckt der Nutzer bei dem Mausklick die Gro{\ss}schreibtaste kann er mithilfe eines Dialogfensters das Symbol und den Kommentar zu dieser Annotation editieren.
+Er kann auch aus vier implementierten Voreinstellungen f"ur Symbol und Kommentar per Druck auf eine Zifferntaste ausw"ahlen.
+Erfolgt der Mausklick ohne weitere zus"atzliche Tastendr"ucke wird die Annotation mit den zuletzt genutzten Symbol und Kommentar erzeugt.
+Durch diese Handhabe wird dem Nutzer die Eingabe mehrerer gleichartiger Annotationen erleichtert.
+Die Information zu dem Symbol und dem Kommentar werden durch den \class{AnnotationManager} zwischengespeichert.
+
+Die Bestimmung der Zeitpunkte an denen die Annotationen eingef"ugt werden sollen, erfolgt durch die Klasse \class{Signal\-View\-Mouse\-Adapter}.
+Dabei wird der Zeitpunkt aus der relativen X-Koordinate des Mausklicks zu der Abszisse errechnet.
+Der errechnete Zeitpunkt muss zus"atzlich noch auf den n"achstgelegenen Zeitpunkt der mit der virtuellen Abtastrate "ubereinstimmt gerundet werden.
+Erfolgt der Klick au{\ss}erhalb des durch die Koordinatenachsen aufgespannten Bereichs wird keine Annotation eingef"ugt.
+Zum L"oschen von Annotationen muss durch den Nutzer beim Klick die Steuerungstaste gedr"uckt werden.
+Erfolgt der Druck der Maustaste auf dem der Annotation angeheftetem Symbol, kann die selektierte Annotation durch den Anwender verschoben werden.
+Den Zustand, dass der Anwender eine Annotation durch den Nutzer gerade verschoben wird, ist durch eine farbliche Ver"anderung des Mauszeigers dargestellt.
+
+Da die senkrechten Linien zur Repr"asentation der Annotationen durch die \jfcNS-Bibliothek nicht als eigene grafische Objekte zur Verf"ugung gestellt werden, k"onnen auch die Zeitpunkte der repr"asentierten Annotationen nicht direkt erhalten werden.
+Im Programm erfolgt die Zeitbestimmung des der Position des Mausklicks innerhalb des Diagramms wie beim Einf"ugen von Annotationen und mithilfe dieses Zeitpunktes wird die entsprechende Annotation im selektierte Annotationskanal gesucht.
+Intern wird hier in einem kleinen Zeitbereich gesucht, da der Nutzer pixelgenau klicken m"usste, wenn nur der spezielle Zeitpunkt ausgew"ahlt werden w"urde.
+Der Zeitbereich ist in diesem Fall auch wieder relativ zur dargestellten Bereich gew"ahlt und betr"agt \unit{1}{\%} dessen.
+Mithilfe dieser Implementierung wird dem Nutzer erm"oglicht auch mit "`ungenauen"' Mausklicks genau die Annotationen zu selektieren die er ver"andern m"ochte.
+Das vereinfacht die Bedienung erheblich.
+Durch die im \secref{dynamic_reaction} beschriebene Implementierung des \class{DataChangeListener}-Interfaces wird beim Ver"andern einer Annotation alle Ansichten, die diese Annotation darstellen, automatisch aktualisiert.
+Der Nutzer erh"alt sofort eine optische R"uckmeldung "uber die von ihm vorgenommenen "Anderungen.
+
+%- Einf"ugen von Annotationen "uber \class{AnnotationManager}
+%- Dreiecksbeziehung von \class{Annotation\-Controller}, \class{AnnotationList} und \class{AnnotationManager} erl"autern
+%- Suchalgorithmus zum finden der aktuellen Annotation
+%- "Anderung wird durch die Implementierung vom Interface \class{Data\-Change\-Listener} automatisiert aktualisiert
 
 % EOF
