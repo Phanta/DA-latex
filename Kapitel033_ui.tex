@@ -36,7 +36,7 @@ Durch diese Entscheidung ist einerseits garantiert, dass die grafischen Elemente
 
 \subsection{[WIP]Visualisierung der Signalverl"aufe}
 
-\subsubsection{[WIP]Die genutzte \jfcNS-Bibliothek}
+\subsubsection{Die genutzte \jfcNS-Bibliothek}
 
 F"ur die Darstellung der Signalverl"aufe in Diagrammen wird die \javaNS-Bibliothek \jfc genutzt.
 \jfc wird, ebenso wie das \usNS-Format, unter der \ac{lgpl} zur freien Nutzung angeboten.
@@ -49,9 +49,50 @@ Zudem bietet die \jfcNS-Bibliothek, zus"atzlich zur grafischen Veranschaulichung
 %- Nutzung von \jfc (\ac{lgpl})
 %- langsam bei der darstellung vieler Datenpunkte
 
-\subsubsection{[WIP]Die Wrapper-Klasse \class{SignalView}}
+\subsubsection{Die Wrapper-Klasse \class{SignalView}}
 
 F"ur die Integration der Diagramme in die \ac{GUI} als Signalansichten existiert die Klasse \class{SignalView}.
+Objekte der Klasse haben die Aufgabe, die durch die \class{DataController} bereit gestellten Daten dem Benutzer grafisch zu veranschaulichen.
+\class{SignalView} ist eine Unterklasse der Klasse \class{ChartPanel} aus \jfc und bildet somit das Verbindungselement zwischen dem Programm und der genutzten Bibliothek.
+Ein \class{SignalView}-Objekt ist somit grafisch ein Diagramm auf der Benutzeroberfl"ache (vgl. mit \picref{gui_elements_and_classes}).
+Die Darstellung der Daten erfolgt durch zwei Varianten.
+Darstellung von kontinuierlich abgetasteten Signalen (\emph{Signals}) und Einzelwertezeitreihen (\emph{Values}) erfolgt als Liniendiagramm der Werte "uber der Zeit.
+Die grafische Pr"asentation von Annotationen ist durch senkrechte Striche in den Diagrammen realisiert.
+
+Um die Daten darzustellen muss der entsprechende \class{DataController} der Signalansicht hinzugef"ugt werden.
+Es wird sichergestellt, dass jeder \class{DataController} nur genau einmal ein und demselben \class{SignalView}-Objekt hinzugef"ugt werden kann.
+Jeder \class{SignalView} kann beliebig viele \class{DataController}-Objekte speichern und darstellen.
+\class{SignalView} implementiert das Interface \class{DataChangeListener} des \code{data}-Paketes und ist daher in der Lage dynamisch auf "Anderungen von Daten zu reagieren.
+Wird z.\,B. eine Annotation durch den Benutzer dem Datensatz hinzugef"ugt oder ver"andert, so wird in jeder Signalansicht diese "Anderung auch grafisch dargestellt (sofern der entsprechende Kanal dargestellt wird).
+
+Neben der grafischen Darstellung der Daten bietet die \class{SignalView}-Klasse weitere optische R"uckmeldung f"ur den Nutzer.
+So wird die aktuelle Mausposition innerhalb eines Diagramms, in Bezug auf die Zeitachse (Abszisse) durch eine gestrichelte senkrechte Linie hervorgehoben.
+Die Hervorhebung erfolgt nicht nur in dem Diagramm, "uber dem der Mauszeiger sich gerade befindet, sondern in allen dargestellten Diagrammen.
+Zudem wird die Signalansicht, "uber der sich der Mauszeiger befindet, visuell durch Ver"anderung der Hintergrundfarbe markiert.
+Damit ist f"ur den Nutzer ersichtlich, welches Diagramm seine Eingaben empf"angt.
+Die Verarbeitung der Maus- und Tastatureingabe des Nutzers durch zwei innere Klassen \class{Signal\-View\-Mouse\-Adapter} und \class{Signal\-View\-Key\-Adapter}.
+Details zur Behandlung der Benutzereingabe sind im \secref{userinput} weiter unten er"ortert.
+
+Das genutzte \jfcNS-Paket bietet die M"oglichkeit einem Diagramm eine Datenreihe mit mehreren Tausend Datenpunkten zuzuordnen.
+Die Wahl des darzustellenden Ausschnitts kann durch den Benutzer durchgef"uhrt werden und wird durch die Bibliothek komplett unterst"utzt.
+Die Zeit, die die Bibliothek ben"otigt um ein Diagramm mit all seinen Komponenten darzustellen, sinkt mit der Anzahl der Datenpunkte.
+Obwohl von \jfc ein Renderer (das Objekt dass die Datenpunkte in dem Diagramm darstellt) f"ur viele Datenpunkte angeboten wird, sinkt die Darstellungsgeschwindigkeit bei \unit{3000} oder mehr Datenpunkten so stark, dass die Aktualisierung der Anzeige nicht mehr fl"ussig erscheint.
+Das Programm ben"otigt zu viel Zeit um die Diagramme auf dem Bildschirm zu zeichnen, dass die Verarbeitung der Benutzereingabe und die Darstellung merklich verz"ogert erfolgen.
+Dieses Problem wird in der eingereichten Implementierung umgangen, indem den Diagramm-Objekten eine begrenzte Anzahl an Datenpunkten "ubergeben wird.
+Die Zahl der dargestellten Datenpunkte ist auf die Breite in Pixeln der Diagramme festgelegt.
+Damit bleibt die Darstellung fl"ussig aber es entstehen visuelle Artefakte die durch das Downsampling bedingt sind.
+Diese Darstellungsartefakte nehmen mit Erh"ohung der Zoomstufe ab, da umso mehr Datenpunkte dargestellt werden, je kleiner der Signalausschnitt wird (gr"o{\ss}ere Pixelaufl"osung pro Zeiteinheit).
+
+%- Klasse \class{SignalView}
+%- erh"alt Daten von \class{DataController} aus dem \code{data}-Paket
+%- unterscheidet nur zwischen Annotationen und Daten
+%- Markierung der Mausposition durch \emph{Crosshair} (gestrichelte Linie)
+%- Hervorhebung der Signalansicht, die gerade Mausfokus hat
+%- Einschr"ankung durch Begrenzung der Punkte auf die Pixelbreite des entsprechenden Diagramms
+
+\subsubsection{Dynamische Reaktion auf Ver"anderung der Daten}
+
+
 
 \subsection{[WIP]Gr"o{\ss}enbestimmung und Positionierung der Signalansichten durch \class{SignalPanel}}
 \label{sec:signalpanel_organisation}
@@ -59,6 +100,7 @@ F"ur die Integration der Diagramme in die \ac{GUI} als Signalansichten existiert
 - organisationseinheit
 
 \subsection{[WIP]Verarbeitung der Benutzereingabe im Paket \class{ui}}
+\label{sec:userinput}
 
 
 \subsubsection{[WIP]Koordiniertes Zoomen und Scrollen durch \class{SignalPanel}}
