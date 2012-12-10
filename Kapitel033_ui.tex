@@ -101,7 +101,7 @@ Sofern ein \class{DataController}-Objekt einer Signalansicht zugeordnet ist, wir
 "Andern sich die Daten eines \class{DataController}s, wird diese Ver"anderung dem \class{SignalView}-Objekt mitgeteilt und es wird entsprechend das Diagramm aktualisiert.
 Damit wird dem Nutzer eine visuelle R"uckmeldung bei "Anderungen der Daten geboten.
 
-\subsection{[WIP]Gr"o{\ss}enbestimmung und Positionierung der Signalansichten durch \class{SignalPanel}}
+\subsection{Gr"o{\ss}enbestimmung und Positionierung der Signalansichten durch \class{SignalPanel}}
 \label{sec:signalpanel_organisation}
 
 Die Klasse \class{SignalPanel} "ubernimmt im \code{ui}-Paket eine organisatorische Rolle.
@@ -113,7 +113,7 @@ Es werden drei Arbeitsmodi dem Benutzer zur Verf"ugung gestellt die "uber die To
 	\item eine gro{\ss}e Ansicht: Eine Signalansicht wird auf \unit{60}{\%} der zur Verf"ugung stehende Gr"o{\ss}e dargestellt und alle restlichen sind verkleinert. Dieser Modus ist mit einer 1 gekennzeichnet.
 	\item zwei vergr"o{\ss}erte Ansichten: Zwei Signalansichten erhalten jeweils \unit{35}{\%} der H"ohe zugesprochen und die restlichen sind verkleinert dargestellt. Diser Modus ist mit einer 2 gekennzeichnet.
 \end{itemize}
-Mit zwei zus"atzlichen Kn"opfen in der Toolbar k"onnen die zu vergr"o{\ss}ernden Signalansichten durch den Nutzer ausgew"ahlt werden.
+Mit zwei zus"atzlichen Schaltfl"achen in der Toolbar k"onnen die zu vergr"o{\ss}ernden Signalansichten durch den Nutzer ausgew"ahlt werden.
 Alle Signalansichten nutzten die komplette Breite und sind somit nur in ihrer H"ohe ver"anderlich.
 Eine durch den Nutzer ver"anderliche Breite der Signalansichten ist nicht implementiert, da eine solche Funktionalit"at nicht notwendig ist und die Bedienung des Programms komplexer werden w"urde.
 Neben der Positionierung und Anpassung der Gr"o{\ss}en "ubernimmt die \class{SignalPanel}-Klasse noch Koordinationsaufgaben bei dem gemeinsamen Scrollen und Zoomen der Signalansichten.
@@ -124,22 +124,38 @@ Diese Funktionen sind im folgendem Abschnitt beschrieben.
 \subsection{[WIP]Verarbeitung der Benutzereingabe im Paket \class{ui}}
 \label{sec:userinput}
 
+\subsubsection{Allgemeines zur Verarbeitung der Benutzereingaben}
 
-\subsubsection{[WIP]Koordiniertes Zoomen und Scrollen durch \class{SignalPanel}}
+Um auf Eingaben vom Benutzer reagieren zu k"onnen, besitzt die Klasse \class{SignalView} zwei innere Klassen: \class{Signal\-View\-Mouse\-Adapter} und \class{Signal\-View\-Key\-Adapter}.
+Jedes \class{SignalView}-Objekt besitz jeweils eine Objektinstanz dieser beiden Klassen.
+Die Methoden dieser Klassen werden durch aufgerufen, wenn ein Ereignis durch eine Maus- oder Tastatureingabe auftritt.
+Diese Ereignisse werden durch \java immer an die grafische Komponente gesendet, die den Fokus der Anwendung h"alt.
+In den meisten F"allen ist das die Komponente "uber der sich der Mauszeiger befindet.
+Sobald die Maus in den Bildschirmbereich einer Signalansicht eintritt, wird diese durch eine Ver"anderung der Hintergrundfarbe hervorgehoben.
+Gleichzeitig wird auch die Tastatureingabe an diese Signalansicht weitergeleitet.
+Mit der optischen Hervorhebung der grafischen Komponente wird dem Nutzer eine R"uckmeldung dar"uber gegeben, welcher Teil des Programms (bzw. der Oberfl"ache) durch seine Eingaben ver"andert wird.
+Beim Verlassen des Mauszeigers des grafischen Komponente wird die farbliche Hervorhebung wieder R"uckg"angig gemacht.
+
+Beim Dr"ucken der L-Taste wird dem Nutzer eine Legende der dargestellten Signale eingeblendet, damit er die unterschiedlich farblichen Linien den Signalen zuordnen kann.
+Dr"uckt der Benutzer die Taste E, so "offnet sich ein Dialog in dem er die Signale aus- und abw"ahlen kann die in der aktuellen Signalansicht dargestellt werden sollen.
+Mit der Taste Q kann die Signalansicht geschlossen werden.
+Zus"atzlich kann der Nutzer durch dr"ucken der Zifferntasten voreingestellte Annotationen ausw"ahlen, die er einem Annotationskanal hinzuf"ugen kann.
+Der Vorgang der Editierung von Annotationen ist im \secref{edit_annotations} weiter unten beschrieben.
+
+%- Einf"ugen und Entfernen von Datenkan"alen
+%- Steuerung der Ansicht "uber Zeitfenster
+%- Legende anzeigen
+%- \class{SignalView} stellt dar
+%- Datenzugriff "uber abstrakte Definition von \class{DataController}
+%- Subklassen verarbeiten Maus- und Tastatureingabe
+
+\subsubsection{[WIP]Koordiniertes Zoomen und Scrollen "uber \class{SignalPanel}}
 
 - Observer-Prinzip
 - zwei eigene Managerklassen (Unabh"angigkeit) \class{ScrollLockManager}, \class{ZoomLockManager}
 
-\subsubsection{[WIP]Verarbeitung der Benutzereingaben zur Steuerung der Ansicht}
-
-- Einf"ugen und Entfernen von Datenkan"alen
-- Steuerung der Ansicht "uber Zeitfenster
-- Legende anzeigen
-- \class{SignalView} stellt dar
-- Datenzugriff "uber abstrakte Definition von \class{DataController}
-- Subklassen verarbeiten Maus- und Tastatureingabe
-
 \subsubsection{[WIP]Verarbeitung und Ver"anderung von Annotationen}
+\label{sec:edit_annotations}
 
 - Einf"ugen von Annotationen "uber \class{AnnotationManager}
 - Dreiecksbeziehung von \class{Annotation\-Controller}, \class{AnnotationList} und \class{AnnotationManager} erl"autern
