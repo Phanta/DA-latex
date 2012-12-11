@@ -1,13 +1,27 @@
 \chapter{Validierung}
 \label{chap:validierung}
 
+\section{Vorbereitung}
 
+Der erste Schritt zur Validierung des umgesetzten Programms besteht darin, schon in \ml vorhandene Daten in das vom Programm genutzte Datenformat umzuwandeln.
+Hierf"ur wird ein \mlNS-Skript erstellt, dass die Daten in das \usNS-Format wandelt.
+Die Eingabeparameter des Skriptes sind der Name f"ur den Datensatz, das Verzeichnis in dem der Datensatz gespeichert werden soll und die Daten.
+Die Daten werden als strukturierte Variable an das Skript "ubergeben, dessen Struktur der des zu erstellenden Datensatzes "ahnelt.
+Bis auf der Datenart (\emph{Signal}, \emph{Value} oder \emph{Event}) werden durch das Skript alle notwendigen zus"atzlichen Parameter mit sinnvollen Werten vorbelegt.
+Nur wenn die Parameter von diesen Standardwerten abweichen, m"ussen diese dem Skript "ubergeben werden.
+Somit ist der Aufwand zum Exportieren von Daten in das \usNS-Format minimal.
 
 %-- NOTIZ: Speicherplatzbedarf bei speicherung in \verb|int16| und \verb|double|
--- Skripte zur Wandlung Matlab <--> Unisens
+%-- Skripte zur Wandlung Matlab <--> Unisens
 
 \section{Erf"ullung der Anforderungen}
 \label{sec:anforderungsvalidierung}
+
+Zur "Uberpr"ufung des Programms
+
+-- BONUS:
+- Schreibschutz f"ur Annotationen
+- Unterst"utzung von "`Echtzeit"'-Signalverarbeitung
 
 \section{Evaluation der Nutzeroberfl"ache}
 
