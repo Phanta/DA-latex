@@ -17,7 +17,54 @@ Somit ist der Aufwand zum Exportieren von Daten in das \usNS-Format minimal.
 \section{Erf"ullung der Anforderungen}
 \label{sec:anforderungsvalidierung}
 
-Zur "Uberpr"ufung des Programms
+Im \secref{testszenarien} spezifizierten Testszenarien werden genutzt um das erstellte Programm dahingehend zu pr"ufen, ob es die in \secref{anforderungen} genannten Anforderungen erf"ullen kann.
+Da es sich bei den Testszenarien 1 bis 5 um einfach "`Schritt-f"ur-Schritt"'-Anleitungen handelt, wird in diesem Abschnitt auf eine genaue Beschreibung der Durchf"uhrung verzichtet.
+Die aufgestellten Testszenarien werden nach den beschriebenen Anleitungen durchgef"uhrt.
+
+\begin{table}[htb]
+\caption{Ergebnis der durchgef"uhrten Testszenarien}
+\label{tab:test_ergebnisse}
+\centering
+\begin{tabular}{|r|c|c|c|c|c|c|c|c|c|c|c|c|c|c|c|c|c|}
+	\cline{2-14}
+	\multicolumn{1}{r|}{} & \multicolumn{13}{|c|}{Anforderung} \\ \cline{2-14}
+	\multicolumn{1}{r|}{} & A & B1 & B2 & C1 & C2 & D1 & D2 & E1 & E2 & E3 & F1 & F2 & F3 \\ \hline
+	erf"ullt & \ding{51} & \ding{51} & \ding{51} & \ding{51} & \ding{51} & \ding{51} & \ding{51} & \ding{51} & \ding{51} & \ding{51} &  & \ding{51} & \ding{51} \\ \hline
+	nicht erf"ullt & & & & & & & & & & & (\ding{55}) & &  \\ \hline %\XSolid
+\end{tabular}
+
+\vspace{2ex}
+
+\begin{tabular}{|r|c|c|c|c|c|c|c|c|c|c|c|c|c|}
+	\cline{2-14}
+	\multicolumn{1}{r|}{} & \multicolumn{13}{|c|}{Anforderung} \\ \cline{2-14}
+	\multicolumn{1}{r|}{} & G1 & G2 & G3 & G4 & H1 & H2 & H3 & H4 & I1 & I2 & J1 & J2 & J3 \\ \hline
+	erf"ullt & \ding{51} & \ding{51} & \ding{51} & \ding{51} & \ding{51} & \ding{51} & \ding{51} & \ding{51} & & & \ding{51} & \ding{51} & \ding{51} \\ \hline
+	nicht erf"ullt & & & & & & & & & \ding{55} & \ding{55} & & & \\ \hline
+\end{tabular}
+\end{table}
+
+Vielmehr sollen hier die Ergebnisse der Testdurchf"uhrung pr"asentiert werden.
+In \tabref{test_ergebnisse} sind diese "uberschtlich dargestellt.
+Es ist ersichtlich, dass drei der 26 (Teil-) Anforderungen nicht erf"ullt wurden.
+Im Folgendem sollen die Umst"ande er"ortert werden, warum diese Anforderungen nicht erf"ullt wurden.
+
+\begin{description}
+	\item[Anforderung F1] "`Das Programm soll dem Benutzer erm"oglichen, seine Signalansicht frei "`bewegen"' zu k"onnen.
+				 Es muss eine Vergr"o\ss erung und Verkleinerung bez"uglich der Abszissen- und der Ordinatenachse unterst"utzen. [...]"'
+\end{description}
+
+- nicht unbedingt notwendig da Autorangeing der Achse
+- "Uberladung der Nutzereingabe (steigende Komplexit"at)
+
+\begin{description}
+	\item[Anforderung K] "`Das Programm soll interne Einstellungen abspeichern und von einer Sitzung zur n"achsten "ubernehmen (1).
+					   Optionen bez"uglich der Darstellung von Signalen sollen in dem Datensatz mit abgespeichert werden k"onnen (2)."'
+\end{description}
+
+- hoher programmiertechnischer Aufwand
+- Abspeichern der visuellen Einstellungen innerhalb des Datensatzes nicht gew"unscht (was haben die im Datensatz verloren?)
+- extern Abspeichern auch nicht sinnvoll, da Daten in meisten F"allen nie wieder ben"otigt werden
 
 -- BONUS:
 - Schreibschutz f"ur Annotationen
