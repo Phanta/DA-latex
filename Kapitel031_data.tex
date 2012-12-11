@@ -68,6 +68,8 @@ Eine "Ubersicht der Klassenstruktur und der von au{\ss}en ersichtlichen Attribut
 Die vom Unisensformat unterst"utzten Signalarten sind auch in der Klassenstruktur in \tabref{unisens_signalklassen} erkennbar.
 \begin{table}[h]
 \centering
+\caption{Signalarten und ihre repr"asentierenden Klassen}
+\label{tab:unisens_signalklassen}
 \begin{tabular}{|c|c|}
 	\hline Signale & \verb|SignalEntry| \\
 	\hline Ereignisse & \verb|EventEntry| \\
@@ -75,8 +77,6 @@ Die vom Unisensformat unterst"utzten Signalarten sind auch in der Klassenstruktu
 	\hline Benutzerdefinierte Daten & \verb|CustomEntry| \\
 	\hline
 \end{tabular}
-\caption{Signalarten und ihre repr"asentierenden Klassen}
-\label{tab:unisens_signalklassen}
 \end{table}
 
 Aufgrund der Ableitung der Klassen \verb|EventEntry| und \verb|ValuesEntry| von \verb|TimedEntry| ist ersichtlich, dass die Zeitpunkte von Ereignisdaten und Einzelwertdaten "uber eine virtuelle Abtastrate bestimmt werden.
