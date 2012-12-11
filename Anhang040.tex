@@ -19,7 +19,27 @@
 
 \section{Installation}
 
+\begin{figure}[htb]
+\centering
+\includegraphics[width=0.8\textwidth]{bilder/java_version.png}
+\caption{Kommandokonsole zeigt die installierte \javaNS-Version an}
+\label{pic:java_version}
+\end{figure}
 
+Vor der Installation m"ussen sie sicherstellen, dass f"ur ihr Betriebssystem die aktuelle \javaNS-Version installiert ist.
+Das Programm ben"otigt die Version \unit{1.7.0\_01} oder h"oher.
+Um unter Windows die Versionsnummer ihrer \javaNS-Installation herauszufinden, f"uhren sie bitte folgende Schritte aus:
+\begin{enumerate}
+	{% Klammern damit "Anderungen lokal bleiben
+	\renewcommand{\theenumi}{\arabic{enumi}}
+	\renewcommand{\labelenumi}{{\theenumi}.}
+	\item Dr"ucken sie die Windowstaste und \code{R} gleichzeitig.
+	\item In dem neu ge"offneten Dialog geben sie den Befehl \code{cmd} ein und best"atigen ihn mit der Entertaste.
+	\item Es hat sich nun eine Kommandokonsole ge"offnet. Geben sie dort den Befehl \code{java -version} ein.
+	\item In der ersten Zeile steht ihre installierte \javaNS-Version. Das Fenster sollte dem in \picref{java_version} "ahneln.
+	}
+\end{enumerate}
+Die Installation ist durch einfaches Kopieren des Programmverzeichnisses in ein beliebiges Verzeichnis auf ihrem Computer vollzogen.
 
 \section{Starten des Programms}
 
@@ -37,11 +57,23 @@ Das Programmfenster sieht ungef"ahr so wie in \picref{program_start} dargestellt
 
 \section{Allgemeine Bedienung}
 
-Einen Datensatz l"adt man "uber das Menu \textsf{Datei - Datensatz laden ...}
-In dem sich "offnenden Dialog w"ahlt man den entsprechenden Ordner und dann die Datei \verb|unisens.xml|.
-Es werden dann alle in dem Datensatz vorhandenen Signale in einem eigenem Diagramm dargestellt.
-Bleibt das Fenster nach dem Laden grau aber es erscheint unter dem Mauszeiger ein gr"uner Streifen, dann sind zuviel Signale dargestellt.
-Die gr"une Markierung hebt das Signal hervor, f"ur welches die aktuelle Tastatureingabe gilt.
+\begin{figure}[htb]
+\centering
+\includegraphics[width=\textwidth]{bilder/datensatzmanager.png}
+\caption{Datensatzmanager zum Laden, Speichern und Schlie{\ss}en von Datens"atzen}
+\label{pic:datensatzmanager}
+\end{figure}
+
+"Uber den Menueintrag \textsf{Datei - Datens"atze...} "offnet man den Datensatzmanagerdialog (siehe \picref{datensatzmanager}).
+In diesem Dialog kann man Datens"atze mithilfe der Schaltfl"achen laden, speichern und schlie{\ss}en.
+Geladen wird ein Datensatz "uber die Schaltfl"ache \textsf{Datensatz laden...}
+In dem neue ge"offneten Dialog w"ahlt man den entsprechenden Ordner und dann die Datei \verb|unisens.xml| aus.
+Wenn der Datensatz geladen wurde kann der Datensatzmanager geschlossen werden.
+"Uber die Schaltfl"ache \textsf{Neu...} in der Toolbar kann eine neue Signalansicht ge"offnet werden.
+In dem Dialog kann man mehrere Datenkan"ale (durch halten der \verb|Strg| Taste) ausgew"ahlt werden, die in der Signalansicht angezeigt werden sollen.
+%Es werden dann alle in dem Datensatz vorhandenen Signale in einem eigenem Diagramm dargestellt.
+%Bleibt das Fenster nach dem Laden grau aber es erscheint unter dem Mauszeiger ein gr"uner Streifen, dann sind zuviel Signale dargestellt.
+Eine gr"une Markierung hebt die Signalansicht hervor, f"ur welches die aktuelle Maus- und Tastatureingabe gilt.
 Folgende Tastebefehle stehen zur Verf"ugung:
 
 \noindent
