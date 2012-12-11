@@ -47,10 +47,8 @@ Der Anwender m"ochte ...
 		  Signaleverl"aufe die parallel aufgenommen wurden, sollen auch zusammen gescrollt werden.
 	\item in einer Signalansicht mehrere Signale mit denselben Achsen darstellen lassen.
 		  Beispielsweise um ein Roh- und ein verarbeitetes Signal miteinander vergleichen zu k"onnen.
-	\item einen Amplitudenbereich eines Signals optisch hervorheben.
 	\item einzelne Zeitpunkte im Signalverlauf mit einer Markierung versehen und kommentieren.
 		  Diese Markierung kann sowohl f"ur ein bestimmtes Signal gelten, aber auch f"ur alle Signale des Datensatzes.
-	\item einen Zeitabschnitt markieren. Die Markierung der Abschnitte soll analog zur Markierung von Zeitpunkten erfolgen.
 	\item die Markierungen ver"andern (zeitlich verschieben, umbennen) oder l"oschen.
 	\item Markierungen gemeinsam mit dem Datensatz aber auch unabh"angig vom Datensatz abspeichern.
 \end{enumerate}
@@ -82,11 +80,9 @@ Das Programm ...
 				 Es muss eine Vergr"o\ss erung und Verkleinerung bez"uglich der Abszissen- und der Ordinatenachse unterst"utzen (1).
 				 Zus"atzlich ist die F"ahigkeit des Verschiebens der Ansicht gefordert (2).
 				 Dabei sollen mehrere Diagramme gleichzeitig Verschoben werden k"onnen (3).
-	\AF{amplitudenmarkierung} muss in der Lage sein einen Amplitudenbereich ein oder mehrerer Signalansichten optisch hervorzuheben.
 	\AF{annotationen} soll dem Nutzer ein Werkzeug zur Verf"ugung stellen, das ihm erlaubt Datenpunkte zu annotieren (1).
 					  Diese Annotationen sollen optisch in den Signalansichten ersichtlich sein (2) und mit einem Kommentar versehen werden k"onnen (3).
 				  	  Ferner ist gefordert, dass vorhandene Annotationen ver"anderbar sind (4).
-	\AF{breichsannotation} soll neben der Annotation einzelner Datenpunkte auch die Markierung von Signalbereichen unterst"utzt werden.
 	\AF{io} muss "Anderungen an den Signalen selbst (1) und den Annotationen (2) speichern k"onnen.
 			Annotationen m"ussen unabh"angig von Signalen gespeichert werden k"onnen (3).
 			Insbesondere d"urfen Annotationen sich nicht ver"andern, wenn sich das Ursprungssignal ver"andert oder nicht mehr vorhanden ist (4).
@@ -131,23 +127,26 @@ Abgeschlossen wird jedes Testszenario mit dem Speichern der geladenen Daten.
 					  Der Benutzer speichert die Einstellungen der Signalansichten.
 					  Er w"ahlt f"unf beliebige Annotationen aus versieht diese mit Kommentaren.
 					  Der Benutzer l"oscht jede zweite Annotation des fetalen QRS-Komplexes.
-					  Weiterhin soll er mindestens 10 Zeitbereiche markieren, wobei es auch zu "Uberschneidungen diese Bereiche kommen soll.
-					  Er l"adt die zuvor gespeicherten Einstellungen und "uberpr"uft ob diese richtig geladen wurden.
+					  %Weiterhin soll er mindestens 10 Zeitbereiche markieren, wobei es auch zu "Uberschneidungen diese Bereiche kommen soll.
+					  %Er l"adt die zuvor gespeicherten Einstellungen und "uberpr"uft ob diese richtig geladen wurden.
 \item[Testszenario 3] Der Benutzer l"adt den Bearbeiteten Datensatz aus dem zweiten Testszenario.
 					  Er entfernt die Kan"ale der approximierten \ac{EKG}-Verl"aufe aus dem Datensatz.
 					  Der Benutzer "uberpr"uft die gemachten Annotationen mithilfe des Rohsignals.
 \item[Testszenario 4] Der Benutzer l"adt einen Datensatz mit \ac{EKG}-und \ac{PPG}-Signalen.
 					  Er w"ahlt \ac{PPG} und \ac{EKG} Kan"ale und zeigt sie sich in einer Ansicht an.
 					  Der Benutzer verschafft sich eine "Ubersicht durch eine geringe Zoomstufe "uber die Signalverl"aufe.
-					  Der Benutzer markiert einen Amplitudenbereich im \ac{PPG}-Signal.
-					  Er wendet eine Filterfunktion auf das \ac{EKG}-Signal an und speichert das Ergebnis im Datensatz ab.
-					  Er kontrolliert die Informationen des ver"anderten Signals.
-					  Der Nutzer entfernt das Original-\ac{EKG}-Signal aus dem Datensatz.
+					  Er "uberpr"uft die Annotationen der QRS-Komplexe und l"asst sich mit dem Zeitreihenberechnungstool eine RR-Zeitreihe erstellen.
+					  Er Nutzt das Zeitreihentool um sich aus den annotierten P-Wellen des \ac{PPG}-Signals eine weitere Zeitreihe erstellen zu lassen.
+					  %Er wendet eine Filterfunktion auf das \ac{EKG}-Signal an und speichert das Ergebnis im Datensatz ab.
+					  Er kontrolliert die Informationen der erstellten Signale und vergleicht diese.
+					  Der Nutzer entfernt das Original-\ac{EKG}-Annotationssignal aus dem Datensatz.
 \item[Testszenario 5] Der Benutzer l"adt den Datensatz aus dem viertem Testszenario.
 					  Er kontrolliert dabei die Einstellungen der Ansichten darauf, ob sie aus dem Szenario 4 "ubernommen wurden.
-					  Er annotiert die QRS-Komplexe des gefiltertem \ac{EKG}-Signals f"ur mindestens f"unf Minuten des Signalverlaufs.
-					  Der Benutzer wendet eine weitere Filterfunktion auf das bereits gefilterte Signal an und speichert das Ergebnis erneut im Datensatz ab.
-					  Er kontrolliert die Annotationen mit dem erneut gefiltertem Signal.
+					  Er aktiviert die fortlaufende Zeitreihenberechnung f"ur die P-Wellen Annotation.
+					  Er ver"andert die Annotationen indem er sie verschiebt, l"oscht und neue Annotationen hinzuf"ugt.
+					  Gleichzeitig "uberpr"uft er, dass das Zeitreihensignal entsprechend ge"andert wird.
+					  %Er annotiert die QRS-Komplexe des gefiltertem \ac{EKG}-Signals f"ur mindestens f"unf Minuten des Signalverlaufs.
+					  %Der Benutzer wendet eine weitere Filterfunktion auf das bereits gefilterte Signal an und speichert das Ergebnis erneut im Datensatz ab.
 \end{description}
 
 \begin{table}[htb]
@@ -155,27 +154,27 @@ Abgeschlossen wird jedes Testszenario mit dem Speichern der geladenen Daten.
 \label{tab:anforderungs_abdeckung}
 \centering
 \begin{tabular}{|r|c|c|c|c|c|c|c|c|c|c|c|c|c|c|c|c|c|}
-	\cline{2-17}
-	\multicolumn{1}{r|}{} & \multicolumn{16}{|c|}{Anforderung} \\ \cline{2-17}
-	\multicolumn{1}{r|}{} & A & B1 & B2 & C1 & C2 & D1 & D2 & E1 & E2 & E3 & F1 & F2 & F3 & G & H1 & H2\\ \hline
-	TS 1 & \Checkmark & \Checkmark &  & \Checkmark & \Checkmark & \Checkmark & \Checkmark & \Checkmark & \Checkmark & \Checkmark & \Checkmark & \Checkmark & \Checkmark & & \Checkmark & \Checkmark \\ \hline
-	TS 2 & \Checkmark & \Checkmark & & \Checkmark & \Checkmark & & & \Checkmark & & & \Checkmark & \Checkmark & \Checkmark & & & \Checkmark \\ \hline
-	TS 3 & \Checkmark & \Checkmark & & \Checkmark & \Checkmark & & & \Checkmark & & & \Checkmark & & & & & \Checkmark \\ \hline
-	TS 4 & \Checkmark & \Checkmark & \Checkmark & \Checkmark & \Checkmark & & \Checkmark & \Checkmark & & \Checkmark & \Checkmark & \Checkmark & \Checkmark & \Checkmark & & \\ \hline
-	TS 5 & \Checkmark & \Checkmark & \Checkmark & \Checkmark & \Checkmark & & & \Checkmark & & & \Checkmark & \Checkmark & \Checkmark & \Checkmark & & \Checkmark \\ \hline
+	\cline{2-14}
+	\multicolumn{1}{r|}{} & \multicolumn{13}{|c|}{Anforderung} \\ \cline{2-14}
+	\multicolumn{1}{r|}{} & A & B1 & B2 & C1 & C2 & D1 & D2 & E1 & E2 & E3 & F1 & F2 & F3 \\ \hline
+	TS 1 & \Checkmark & \Checkmark &  & \Checkmark & \Checkmark & \Checkmark & \Checkmark & \Checkmark & \Checkmark & \Checkmark & \Checkmark & \Checkmark & \Checkmark \\ \hline
+	TS 2 & \Checkmark & \Checkmark & & \Checkmark & \Checkmark & & & \Checkmark & & & \Checkmark & \Checkmark & \Checkmark \\ \hline
+	TS 3 & \Checkmark & \Checkmark & & \Checkmark & \Checkmark & & & \Checkmark & & & \Checkmark & & \\ \hline
+	TS 4 & \Checkmark & \Checkmark & \Checkmark & \Checkmark & \Checkmark & & \Checkmark & \Checkmark & & \Checkmark & \Checkmark & \Checkmark & \Checkmark \\ \hline
+	TS 5 & \Checkmark & \Checkmark & \Checkmark & \Checkmark & \Checkmark & & & \Checkmark & & & \Checkmark & \Checkmark & \Checkmark \\ \hline
 \end{tabular}
 
 \vspace{2ex}
 
 \begin{tabular}{|r|c|c|c|c|c|c|c|c|c|c|c|c|c|}
-	\cline{2-13}
-	\multicolumn{1}{r|}{} & \multicolumn{12}{|c|}{Anforderung} \\ \cline{2-13}
-	\multicolumn{1}{r|}{} & H3 & H4 & I & J1 & J2 & J3 & J4 & K1 & K2 & L1 & L2 & L3 \\ \hline
-	TS 1 & & & & & \Checkmark & & & & & & & \\ \hline
-	TS 2 & \Checkmark & \Checkmark & \Checkmark & & \Checkmark & & & \Checkmark & \Checkmark & & & \\ \hline
-	TS 3 & & & & & & \Checkmark & \Checkmark & & \Checkmark & & & \\ \hline
-	TS 4 & & & & \Checkmark & & & & & & \Checkmark & \Checkmark & \Checkmark \\ \hline
-	TS 5 & & & & \Checkmark & \Checkmark & \Checkmark & \Checkmark & \Checkmark & \Checkmark & \Checkmark & \Checkmark & \Checkmark \\ \hline
+	\cline{2-14}
+	\multicolumn{1}{r|}{} & \multicolumn{13}{|c|}{Anforderung} \\ \cline{2-14}
+	\multicolumn{1}{r|}{} & G1 & G2 & G3 & G4 & H1 & H2 & H3 & H4 & I1 & I2 & J1 & J2 & J3 \\ \hline
+	TS 1 & \Checkmark & \Checkmark & & & & \Checkmark & & & & & & & \\ \hline
+	TS 2 & & \Checkmark & \Checkmark & \Checkmark & & \Checkmark & & & \Checkmark & \Checkmark & & & \\ \hline
+	TS 3 & & \Checkmark& & & & & \Checkmark & \Checkmark & & \Checkmark & & & \\ \hline
+	TS 4 & & & & & \Checkmark & & & & & & \Checkmark & \Checkmark & \Checkmark \\ \hline
+	TS 5 & & \Checkmark & & & \Checkmark & \Checkmark & \Checkmark & \Checkmark & \Checkmark & \Checkmark & \Checkmark & \Checkmark & \Checkmark \\ \hline
 \end{tabular}
 \end{table}
 
