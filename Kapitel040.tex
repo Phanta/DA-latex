@@ -1,7 +1,8 @@
 \chapter{Validierung}
 \label{chap:validierung}
 
-\section{Vorbereitung}
+\section{Vorbemerkung}
+\label{sec:validierung_vorbereitung}
 
 Der erste Schritt zur Validierung des umgesetzten Programms besteht darin, schon in \ml vorhandene Daten in das vom Programm genutzte Datenformat umzuwandeln.
 Hierf"ur wird ein \mlNS-Skript erstellt, dass die Daten in das \usNS-Format wandelt.
@@ -51,7 +52,7 @@ Im Folgendem sollen die Umst"ande er"ortert werden, warum diese Anforderungen ni
 
 \begin{description}
 	\item[Anforderung F1] "`Das Programm soll dem Benutzer erm"oglichen, seine Signalansicht frei "`bewegen"' zu k"onnen.
-				 Es muss eine Vergr"o\ss erung und Verkleinerung bez"uglich der Abszissen- und der Ordinatenachse unterst"utzen. [...]"'
+				 Es muss eine Vergr"o\ss erung und Verkleinerung bez"uglich der Abszissen- und der Ordinatenachse unterst"utzen (1). [...]"'
 \end{description}
 
 Anforderung F1 wurde nur teilweise nicht erf"ullt.
@@ -94,12 +95,18 @@ Durch die F"ahigkeit unmittelbar "Anderungen in abgeleiteten Signalen zu pr"asen
 %- Schreibschutz f"ur Annotationen
 %- Unterst"utzung von "`Echtzeit"'-Signalverarbeitung
 
-\section{[WIP]Anwendbarkeit des Programms in unterschiedlichen Problembereichen}
+\section{Anwendbarkeit des Programms bei unterschiedlichen Problemstellungen}
 
-- einheitliches Format als einzige Bedingung
-- sofern Daten in das Format passen, kann das programm genutzt werden
-- Konvertierung der Daten "uber die bereit gestellten \mlNS-Skripte
-- wird bereits an mehreren Stellen genutzt
+In der Aufgabenstellung zu dieser Arbeit ist gefordert, dass die Nutzerplattform die Bearbeitung unterschiedlicher biomedizinischer Messdaten unterst"utzen soll.
+Aus diesem Grund wird das Programm auch mit Daten aus zwei verschiedenen Problembereichen validiert.
+Weiterhin wird das Programm, neben den in \secref{genutzte_biosignale} beschriebenen F"allen, in weiteren Arbeiten genutzt.
+Dass die Messsignale im \usNS-Format gespeichert werden, ist die einzige Voraussetzung, die das Programm ben"otigt.
+Das in \secref{validierung_vorbereitung} genannte Skript ist somit die Schnittstelle f"ur die bereits vorhandene Signalverarbeitungsinfrastruktur (haupts"achlich in \mlNS) und dem in dieser Arbeit erstellten Programm.
+
+%- einheitliches Format als einzige Bedingung
+%- sofern Daten in das Format passen, kann das programm genutzt werden
+%- Konvertierung der Daten "uber die bereit gestellten \mlNS-Skripte
+%- wird bereits an mehreren Stellen genutzt
 
 %\section{Validierung anhand der Annotation von fetalen \ac{EKG}-Daten}
 
