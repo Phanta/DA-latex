@@ -16,31 +16,33 @@ Die Gliederung dieses Kapitels nach den Programmteilen dient jedeglich der "Uber
 
 \section{"Uberblick "uber das Gesamtprogramm}
 
-Das Programm ist in verschiedene Pakete geteilt (vgl. \picref{paket_ubersicht}).
+Das Programm ist in verschiedene Pakete geteilt: das Hauptpaket \code{gst} mit den Unterpaketen \code{data}, \code{signalprocessing}, \code{ui} und \code{test} (vgl. \picref{paket_ubersicht}).
 Die Teilung der einzelnen Komponenten erfolgt haupts"achlich nach ihrer Funktionalit"at.
 In dem Hauptpaket \code{gst} befinden sich nur zwei Klassen:
 Die Klasse \class{Main}, die die statische Methode f"ur den Programmstart und globale Initialisierungsroutinen beinhaltet, und die die Klasse \class{Settings}.
 Mit \class{Settings} werden Variablen bereit gehalten die f"ur das Programm konstant sind, aber auf Wunsch auch ver"andert werden k"onnen.
-Die Idee hinter dieser Implementierung ist die, dass "Anderungen die das allgemeine Verhalten und Aussehen des Programms beeinflussen m"oglichst zentral verwaltet werden und sich diese Optionen nicht "uber den gesamten Quellcode verteilt sind.
-Es soll damit eine einfacherer Wartbarkeit der Umsetzung erreicht werden.
+Die Idee hinter dieser Implementierung ist, dass "Anderungen die das allgemeine Verhalten und Aussehen des Programms beeinflussen m"oglichst zentral verwaltet werden und sich diese Optionen nicht "uber den gesamten Quellcode verteilt sind.
+Es soll damit eine einfache Wartbarkeit und Anpassbarkeit erreicht werden.
 
 Ein gro{\ss}es Teilpaket ist \code{data}.
-In diesem befinden sich Klassen die direkt mit dem Zugriff auf Daten, den Datensatz und die Ver"anderung von Daten besch"aftigen.
-Diese Paket ist im Detail im \secref{data} beschrieben.
-Das zweite Kernpaket des Programms ist \code{ui} und beinhaltet Klassen die direkt mit der \ac{GUI} der Benutzerinteraktion in Ber"uhrung kommen.
+In diesem befinden sich Klassen die den Zugriff auf Daten, den Datensatz und die Ver"anderung von Daten implementieren.
+Dieses Paket ist im Detail im \secref{data} beschrieben.
+Das zweite Kernpaket des Programms ist \code{ui}.
+Es beinhaltet Klassen die die \ac{GUI} zur Benutzerinteraktion implementieren.
 Das \code{ui}-Paket hat noch zwei Unterpakete:
 \code{dialog} enth"alt Klassen die das Aussehen und die Interaktion mit Dialogfenstern implementieren.
-Das Unterpaket \code{layout} umfasst Klassen die ben"otigt werden um die Anordnung der einzelnen grafischen Elemente der \ac{GUI} zu organisieren.
+Das Unterpaket \code{layout} umfasst Klassen die ben"otigt werden, um die Anordnung der einzelnen grafischen Elemente der \ac{GUI} zu organisieren.
 Das \code{ui}-Paket selbst und seine Klassen sind im \secref{gui} beschrieben.
-Ein drittes umfangreiches Paket ist das \code{signalprocessing}-Paket und enth"alt Quellcode der den Grundbaustein f"ur die Signalverarbeitung.
+Ein drittes umfangreiches Paket ist das \code{signalprocessing}-Paket
+Das \code{signalprocessing}-Paket enth"alt Quellcode der den Grundbaustein der Signalverarbeitung darstellt.
 Der Aufbau und die Funktionsweise des dritten Pakets ist im \secref{signalprocessing} dargelegt.
 
-Letztendlich existieren im \code{test}-Paket noch zwei Klassen, die haupts"achlich die Entwicklung des Programms selbst unterst"utzen.
+Im \code{test}-Paket existieren zwei Klassen, die haupts"achlich die Entwicklung des Programms selbst unterst"utzen.
 Die Klasse \class{Debug} bietet eine Methode zum ausgeben von Informationen auf der Konsole die f"ur den Entwickler bestimmt sind.
 "Uber ein Feld von booleschen Variablen k"onnen f"ur jede Klasse des Programms die Debugmeldungen ein- und ausgeschaltet werden.
 Somit ist es nicht notwendig den Quelltext der einzelnen Klassen zu ver"andern nur um die oben genannten Meldungen abzuschalten.
 Zus"atzlich zur Klasse \class{Debug} existiert im \code{test}-Paket noch die Klasse \class{DataTest}.
-In ihr sind Methoden implementiert, die die Funktionalit"at einzelner Klassen und die Interaktion der Objekte miteinander "uberpr"uft.
+In ihr sind Methoden implementiert, die die Funktionalit"at einzelner Klassen und die Interaktion der Objekte miteinander "uberpr"ufen.
 Die \class{DataTest} Klasse hat, ebenso wie \class{Debug}, den Zweck w"ahrend der Entwicklung Fehler in der Implementierung aufzudecken und dienen haups"achlich dem Informationsgewinn des Entwicklers.
 Aus diesem Grund wird das \code{test}-Paket in dieser Arbeit auch nicht n"aher erl"autert.
 

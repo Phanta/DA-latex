@@ -109,17 +109,17 @@ Damit wird dem Nutzer eine visuelle R"uckmeldung bei "Anderungen der Daten gebot
 Die Klasse \class{SignalPanel} "ubernimmt im \code{ui}-Paket eine organisatorische Rolle.
 Sie umfasst innerhalb der \ac{GUI} den in \picref{gui_elements_and_classes} dargestellten Bereich III, wird aber durch die einzelnen Signalansichten verdeckt.
 Eine Aufgabe von \class{SignalPanel} ist es, die einzelnen Signalansichten auf der zur Verf"ugung stehenden Fl"ache anzuordnen und deren Gr"o{\ss}en zu ver"andern.
-Es werden drei Arbeitsmodi dem Benutzer zur Verf"ugung gestellt die "uber die Toolbar erreicht werden k"onnen:
+Es werden dem Benutzer drei Arbeitsmodi zur Verf"ugung gestellt die "uber die Toolbar erreicht werden k"onnen:
 \begin{itemize}
-	\item gleiche Gr"o{\ss}en: Alle Signalansichten haben dieselbe H"ohe. Dieser Modus wird durch das = Symbol dargestellt.
-	\item eine gro{\ss}e Ansicht: Eine Signalansicht wird auf \unit{60}{\%} der zur Verf"ugung stehende Gr"o{\ss}e dargestellt und alle restlichen sind verkleinert. Dieser Modus ist mit einer 1 gekennzeichnet.
-	\item zwei vergr"o{\ss}erte Ansichten: Zwei Signalansichten erhalten jeweils \unit{35}{\%} der H"ohe zugesprochen und die restlichen sind verkleinert dargestellt. Diser Modus ist mit einer 2 gekennzeichnet.
+	\item gleiche Gr"o{\ss}en: Alle Signalansichten haben dieselbe H"ohe. Dieser Modus wird durch das "`="' Symbol dargestellt.
+	\item eine gro{\ss}e Ansicht: Eine Signalansicht wird auf \unit{60}{\%} der zur Verf"ugung stehende Gr"o{\ss}e dargestellt und alle restlichen sind verkleinert. Dieser Modus ist mit einer "`1"' gekennzeichnet.
+	\item zwei vergr"o{\ss}erte Ansichten: Zwei Signalansichten erhalten jeweils \unit{35}{\%} der H"ohe zugesprochen und die restlichen sind verkleinert dargestellt. Diser Modus ist mit einer "`2"' gekennzeichnet.
 \end{itemize}
 Mit zwei zus"atzlichen Schaltfl"achen in der Toolbar k"onnen die zu vergr"o{\ss}ernden Signalansichten durch den Nutzer ausgew"ahlt werden.
 Alle Signalansichten nutzten die komplette Breite und sind somit nur in ihrer H"ohe ver"anderlich.
 Eine durch den Nutzer ver"anderliche Breite der Signalansichten ist nicht implementiert, da eine solche Funktionalit"at nicht notwendig ist und die Bedienung des Programms komplexer werden w"urde.
 Neben der Positionierung und Anpassung der Gr"o{\ss}en "ubernimmt die \class{SignalPanel}-Klasse noch Koordinationsaufgaben bei dem gemeinsamen Scrollen und Zoomen der Signalansichten.
-Diese Funktionen sind im folgendem Abschnitt beschrieben.
+Diese Funktionen sind im \secref{signalpanel_koordination} beschrieben.
 
 %- organisationseinheit
 
@@ -128,15 +128,15 @@ Diese Funktionen sind im folgendem Abschnitt beschrieben.
 
 \subsubsection{Allgemeines zur Verarbeitung der Benutzereingaben}
 
-Um auf Eingaben vom Benutzer reagieren zu k"onnen, besitzt die Klasse \class{SignalView} zwei innere Klassen: \class{Signal\-View\-Mouse\-Adapter} und \class{Signal\-View\-Key\-Adapter}.
-Jedes \class{SignalView}-Objekt besitz jeweils eine Objektinstanz dieser beiden Klassen.
-Die Methoden dieser Klassen werden durch aufgerufen, wenn ein Ereignis durch eine Maus- oder Tastatureingabe auftritt.
+Um auf Eingaben des Benutzers reagieren zu k"onnen, besitzt die Klasse \class{SignalView} zwei innere Klassen: \class{Signal\-View\-Mouse\-Adapter} und \class{Signal\-View\-Key\-Adapter}.
+Jedes \class{SignalView}-Objekt besitzt jeweils eine Objektinstanz dieser beiden Klassen.
+Die Methoden dieser Klassen werden aufgerufen, wenn ein Ereignis durch eine Maus- oder Tastatureingabe auftritt.
 Diese Ereignisse werden durch \java immer an die grafische Komponente gesendet, die den Fokus der Anwendung h"alt.
 In den meisten F"allen ist das die Komponente "uber der sich der Mauszeiger befindet.
 Sobald die Maus in den Bildschirmbereich einer Signalansicht eintritt, wird diese durch eine Ver"anderung der Hintergrundfarbe hervorgehoben.
 Gleichzeitig wird auch die Tastatureingabe an diese Signalansicht weitergeleitet.
 Mit der optischen Hervorhebung der grafischen Komponente wird dem Nutzer eine R"uckmeldung dar"uber gegeben, welcher Teil des Programms (bzw. der Oberfl"ache) durch seine Eingaben ver"andert wird.
-Beim Verlassen des Mauszeigers des grafischen Komponente wird die farbliche Hervorhebung wieder R"uckg"angig gemacht.
+Beim Verlassen des Mauszeigers des grafischen Komponente wird die farbliche Hervorhebung wieder r"uckg"angig gemacht.
 
 Beim Dr"ucken der L-Taste wird dem Nutzer eine Legende der dargestellten Signale eingeblendet, damit er die unterschiedlich farblichen Linien den Signalen zuordnen kann.
 Dr"uckt der Benutzer die Taste E, so "offnet sich ein Dialog in dem er die Signale aus- und abw"ahlen kann die in der aktuellen Signalansicht dargestellt werden sollen.
@@ -153,11 +153,13 @@ Die Behandlung der Eingaben des Nutzers zur Steuerung der Ansicht der einzelnen 
 %- Subklassen verarbeiten Maus- und Tastatureingabe
 
 \subsubsection{Koordiniertes Zoomen und Scrollen "uber \class{SignalPanel}}
+\label{sec:signalpanel_koordination}
 
 Die Darstellung der Signale erfolgt in Diagrammen.
 Dabei wird die Abszisse als Zeitachse genutzt und die Werte der Zeitreihen werden auf der Ordinate abgebildet.
 Der Wertebereich der Ordinate passt sich automatisch den dargestellten Signalen an.
 Dabei wird die durch \jfc bereit gestellte Funktionalit"at das Minimum und das Maximum der Signalverl"aufe genutzt um den vertikalen vorhandenen Platz optimal zu nutzen.
+Diese automatisch skalierende Verhalten kann der Nutzer optional ausschalten und die Skala auf konstante Werte festlegen.
 Der Wertebereich der Abszissenachse kann durch den Nutzer mithilfe der Maus ver"andert werden.
 Durch drehen des Mausrades wird der Wertebereich verschoben und der Nutzer scrollt entlang der Zeitachse die Signalansicht.
 Wird die Gro{\ss}schreibtaste w"ahrend der Mausradbewegung gedr"uckt, wird der Wertebereich vergr"o{\ss}ert bzw. verkleinert - der Anwender zoomt in einen Zeitbereich hinein oder hinaus.
@@ -188,7 +190,7 @@ Zum Ver"andern der Annotationen wird auf die Klasse \class{AnnotationManager} de
 Diese Klasse ben"otigt einen Eintrag eines Datensatzes damit bekannt ist, wo die Annotationen im Datensatz abgespeichert werden sollen.
 Der Nutzer kann "uber das Men"u den Datensatzeintrag ausw"ahlen und der entsprechende \class{DataController} wird an den \class{AnnotationManager} "ubergeben.
 
-Klickt der Benutzer in einem \class{SignalView} wird eine neue Annotation erzeugt und in dem ausgew"ahltem Datensatzeintrag abgespeichert.
+Klickt der Benutzer in einen \class{SignalView} wird eine neue Annotation erzeugt und in dem ausgew"ahltem Datensatzeintrag abgespeichert.
 Dr"uckt der Nutzer bei dem Mausklick die Gro{\ss}schreibtaste kann er mithilfe eines Dialogfensters das Symbol und den Kommentar zu dieser Annotation editieren.
 Er kann auch aus vier implementierten Voreinstellungen f"ur Symbol und Kommentar per Druck auf eine Zifferntaste ausw"ahlen.
 Erfolgt der Mausklick ohne weitere zus"atzliche Tastendr"ucke wird die Annotation mit den zuletzt genutzten Symbol und Kommentar erzeugt.
@@ -204,7 +206,8 @@ Erfolgt der Druck der Maustaste auf dem der Annotation angeheftetem Symbol, kann
 Den Zustand, dass der Anwender eine Annotation durch den Nutzer gerade verschoben wird, ist durch eine farbliche Ver"anderung des Mauszeigers dargestellt.
 
 Da die senkrechten Linien zur Repr"asentation der Annotationen durch die \jfcNS-Bibliothek nicht als eigene grafische Objekte zur Verf"ugung gestellt werden, k"onnen auch die Zeitpunkte der repr"asentierten Annotationen nicht direkt erhalten werden.
-Im Programm erfolgt die Zeitbestimmung des der Position des Mausklicks innerhalb des Diagramms wie beim Einf"ugen von Annotationen und mithilfe dieses Zeitpunktes wird die entsprechende Annotation im selektierte Annotationskanal gesucht.
+Im Programm erfolgt die Zeitbestimmung des der Position des Mausklicks innerhalb des Diagramms wie beim Einf"ugen von Annotationen.
+Mithilfe dieses Zeitpunktes wird die entsprechende Annotation im selektierten Annotationskanal gesucht.
 Intern wird hier in einem kleinen Zeitbereich gesucht, da der Nutzer pixelgenau klicken m"usste, wenn nur der spezielle Zeitpunkt ausgew"ahlt werden w"urde.
 Der Zeitbereich ist in diesem Fall auch wieder relativ zur dargestellten Bereich gew"ahlt und betr"agt \unit{1}{\%} dessen.
 Mithilfe dieser Implementierung wird dem Nutzer erm"oglicht auch mit "`ungenauen"' Mausklicks genau die Annotationen zu selektieren die er ver"andern m"ochte.
