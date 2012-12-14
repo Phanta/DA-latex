@@ -1,12 +1,51 @@
-\chapter{Diskussion}
-
-% ggf. Zusammenlegen mit den Ergebnissen
-% 
+\chapter{Auswertung und Diskussion}
 
 \section{Bewertung der Evaluation}
 
+Die Evaluation zeigt, dass das in dieser Arbeit erstellte Programm zur Analyse und Aufbereitung biomedizinischer Messdaten genutzt werden kann.
+Durch das gew"ahlte Datensatzformat \us k"onnen Messdaten aus unterschiedlichen Aufgabenbereichen bearbeitet werden.
+Dank der universellen Natur von \us wird eine problemunabh"angige Datenverarbeitung erm"oglicht.
+Die nicht erf"ullten Anforderungen "`F1"' und "`K"' sind in der Praxis Anforderungen an den Nutzerkomfort.
+Die Kernfunktionalit"at der Software ist durch sie nicht beeintr"achtigt.
+
 \section{Ausblick}
 
-\section{Grenzen}
+Bei der Implementierung des Programms wurde auf ein einheitliches Dialogdesign geachtet.
+Dennoch weichen einige Dialoge vom homogenen Layout ab.
+In zuk"unftigen Versionen kann dieses Problem behoben werden, in dem f"ur die Dialoge eine gemeinsame Superklasse erstellt wird.
+Diese soll Aufgaben der Darstellung und Standardschaltfl"achen (wie "`OK"' und "`Abbrechen"') bereitstellen, damit ein wirkliches Standardlayout geschaffen wird.
+Zus"atzlich kann damit der Implementierungsaufwand, der f"ur grafische Komponenten besteht, reduziert werden.
 
-%% EOF %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{figure}[bth]
+\centering
+\includegraphics[angle=-90, width=\textwidth]{bilder/detail_LiveSignalProcessor_Menus_interaction.pdf}
+\caption{Interaktion zwischen \class{LiveSignalProcessor} und \class{Menus}}
+\label{pic:detail_signalprocessing}
+\end{figure}
+
+Ein weiterer Ansatzpunkt f"ur Verbesserungen an dem bestehendem Programm ist die Implementierung der \code{signalprocessing}-\code{Menus}-Interaktion.
+In der vorliegenden Version ist es notwendig, die einzelnen Konfigurationsdialoge der Signalverarbeitungsroutinen im Men"u zu verankern (vgl. \picref{detail_signalprocessing}).
+Der entsprechende Men"uunterpunkt und der Quelltext zum Aufrufen des Konfigurationsdialoges muss durch den Algorithmusimplementierer erfolgen.
+Die Signalverarbeitung selbst wird durch den Dialog gestartet.
+Die Beendigung dieser erfolgt durch den Benutzer "uber das Men"u.
+Eine Alternative dazu ist in \picref{better_detail_signalprocessing} dargestellt.
+\class{ImplementationClass} ist die den Konfigurationsdialog implementierende Klasse.
+Daf"ur muss ein \emph{Interface} \class{LiveSignalProcessorDialog} und entsprechender Code im \code{ui} umgesetzt werden.
+Die Idee besteht darin, dass in der Klasse \class{Menus} die Methode \code{registerLSPDialog()} automatisch einen Men"ueintrag f"ur einen \class{LiveSignalProcessor} erzeugt.
+Wird dieser Eintrag durch den Nutzer gew"ahlt, wird der Konfigurationsdialog mit der \emph{Interface}-Methode \code{show()} ge"offnet.
+Als R"uckgabe wird ein \class{LiveSignalProcessor} erwartet.
+Dieser kann anschlie{\ss}end durch \class{Menus} gestartet und gestoppt werden.
+Somit w"urde der gesamte Code zur Integration des Konfigurationsdialoges und der Signalverarbeitungsmethode in das Programm auf eine Zeile reduziert werden:
+\code{Menus.getInstance().registerLSPDialog(new ImplementationClass())}.
+Damit wird der Implementierungsaufwand f"ur neue Signalverarbeitungsmethoden auf den Konfigurationsdialog und den Algorithmus selbst reduziert.
+
+\begin{figure}[htb]
+\centering
+\includegraphics[angle=-90, width=\textwidth]{bilder/verbesserung_LiveSignalProcessor_Menus_interaction.pdf}
+\caption{Verbesserte Interaktion zwischen \class{LiveSignalProcessor} und \class{Menus}}
+\label{pic:better_detail_signalprocessing}
+\end{figure}
+
+%- andere \code{signalprocessing} Umsetzung
+%- freie H"ohen"anderung der Signalansichten durch den Nutzer
+%% EOF %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
