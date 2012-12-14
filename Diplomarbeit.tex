@@ -127,10 +127,17 @@
 
 
 %% Deckblatt * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * 
+\pagenumbering{gobble}
 \input{Deckblatt.tex}
+
+%% Phantomaufgabenstellung
+%\addcontentsline{toc}{chapter}{Aufgabenstellung}
 
 %% Selbständigkeitserklärung * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * 
 \input{Selbständigkeitserklärung.tex}
+
+%% Zusammenfassung  * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * 
+\input{Zusammenfassung.tex}
 
 %% Inhaltsverzeichnis * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * 
 \setcounter{tocdepth}{5}
@@ -169,8 +176,9 @@
 
 
 %\cleardoublepage % Das erste Kapitel soll auf einer ungeraden Seite beginnen.
+\clearpage
 \pagestyle{plain} %%Ab hier die Kopf-/Fusszeilen: headings / fancy / ...
-
+\pagenumbering{arabic}
 
 %% Le texte himself * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * 
 \input{Kapitel010.tex}
@@ -197,6 +205,9 @@
 %% Anhang * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * 
 %\appendix
 \begin{appendix}
+\clearpage
+\addcontentsline{toc}{chapter}{Anhang}
+\pagenumbering{alph}
 \input{Anhang010.tex}
 \input{Anhang020.tex}
 \input{Anhang030.tex}
