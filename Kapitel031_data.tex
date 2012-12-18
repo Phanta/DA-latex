@@ -36,7 +36,7 @@ Unisens unterscheidet zwischen vier Arten von Daten:
 		Zudem k"onnen Signale aus mehreren Kan"alen bestehen, die alle in ein und derselben Datei abgespeichert werden.
 		Alle Kan"ale desselben Signals haben auch dieselbe Abtastrate und -aufl"osung.
 	\item[Ereignisse \emph{(Event)}] \hfill \\
-		Ereignisse sind diskrete Zeitpunkte die mit einer textlichen Beschreibung versehen sind. (z.B. Triggersignale)
+		Ereignisse sind diskrete Zeitpunkte die mit einer textlichen Beschreibung versehen sind (z.B. Triggersignale).
 		Sie zeichnen sich durch einen Zeitstempel und einem textuellen K"urzel aus.
 		Optional kann zu jedem Ereignis ein Kommentar hinzugef"ugt werden.
 	\item[Einzelwerte \emph{(Value)}] \hfill \\
@@ -53,7 +53,7 @@ Eine detailliertere Beschreibung des Formates kann der offiziellen Dokumentation
 \subsection{Details der Unisens Referenzimplementierung}
 
 In diesem Abschnitt wird auf einige Details der Umsetzung des Unisens-Formates eingegangen.
-F"ur das Unisens-Paket gibt es eine Referenzimplementierung in Java, die unter der \emph{\ac{lgpl}} zur Verf"ugung gestellt wird.
+F"ur das Unisens-Paket gibt es eine Referenzimplementierung in \javaNS, die unter der \emph{\ac{lgpl}} zur Verf"ugung gestellt wird.
 Die bereitgestellte Bibliothek ist auf zwei Pakete aufgeteilt: \code{org.unisens.jar} und \code{org.unisens.\\ri.jar}.
 Bei der ersten Datei handelt es sich um die Definition des Unisensformates und seiner Bestandteile als Javaklassenstruktur.
 Diese Definition erfolgt haupts"achlich als \emph{Interface}klassen welche die Schnittstellen zwischen den einzelnen Bestandteilen festlegt.
@@ -97,7 +97,7 @@ Sollen hingegen konkret Objekte erstellt werden, muss auf die Referenzimplementi
 \subsection{Limitationen von Unisens und der Referenzimplementierung}
 
 Das Datenformat Unisens hat zwei Einschr"ankungen die in diesem Abschnitt erw"ahnt werden sollen.
-Zum einen wei{\ss}t die Referenzimplementierung einen Fehler bei der Behandlung von Gruppen auf.
+Zum einen weist die Referenzimplementierung einen Fehler bei der Behandlung von Gruppen auf.
 Es kann beim Laden eines Datensatzes, in dem Signale in Gruppen zusammengefasst sind, zu einer \code{Null\-Pointer\-Exception} kommen.
 Insbesondere tritt dieser Fehler auf, wenn innerhalb der Headerdatei der Gruppeneintrag nicht hinter den Dateneintr"agen steht.
 
@@ -117,15 +117,15 @@ Die Umsetzung in dem entwickeltem Programm der genannten Funktionen ist in den A
 \label{pic:data_package}
 \end{figure}
 
-Das Paket \verb|gst.data| ist die Schnittstelle des Programms zu dem gew"ahlten Datensatzformat Unisens.
+Das Paket \verb|gst.data| ist die Schnittstelle des Programms zu dem gew"ahlten Datensatzformat \usNS.
 Eine "Ubersicht des Paketes ist im \ac{uml}-Diagramm in \picref{data_package} dargestellt.
 Dieses Paket erf"ullt zwei wesentliche Aufgaben:
 \begin{itemize}
 	\item Vereinheitlichung der Behandlung der unterschiedlichen Datenarten
-	\item Abkapselung anderer Programmteile vom gew"ahltem Datensatzformat Unisens
+	\item Abkapselung anderer Programmteile vom gew"ahltem Datensatzformat \us
 \end{itemize}
 
-Die Vereinheitlichung ist notwendig, da Unisens die Daten in vier Arten gliedert: Signale (\code{SignalEntry}), Werte (\code{ValueEntry}), Ereignisse (\code{EventEntry}) und benutzerdefinierte Daten (\code{CustomEntry}).
+Die Vereinheitlichung ist notwendig, da \us die Daten in vier Arten gliedert: Signale (\code{SignalEntry}), Werte (\code{ValueEntry}), Ereignisse (\code{EventEntry}) und benutzerdefinierte Daten (\code{CustomEntry}).
 F"ur die Bearbeitung und Darstellung ist aber die Unterscheidung von Signalen und Werten innerhalb des Programms nicht notwendig.
 In beiden F"allen handelt es sich um numerische Werte die zu einem bestimmten Zeitpunkt aufgenommen wurden.
 Somit sollen diese auch vom Programm gleichartig behandelt werden.
@@ -136,24 +136,25 @@ Es werden notwendige Ausnahmebehandlungen (\emph{Exceptions}) durch die Klassen 
 Darunter f"allt unter anderem die Behandlung von Fehlern, wenn Daten aufgrund von fehlenden Zugriffsrechten nicht gelesen oder geschrieben werden k"onnen.
 Somit ist der Zugriff auf die konkreten Daten des Datensatzes sowohl vereinheitlicht als auch vereinfacht.
 
-Benutzerdefinierte Daten werden durch ihr nicht n"aher definiertes Format vom Programm in der vorgelegten Version ignoriert.
+Benutzerdefinierte Daten werden, aufgrund ihres nicht n"aher definierten Formates, vom Programm in der vorgeliegenden Version ignoriert.
 Somit k"onnen Daten dieses Typs in einem Datensatz vorhanden sein, schr"anken aber die Funktionalit"at des Programms nicht ein.
 Soll durch zuk"unftigen Programmversionen beispielsweise die Visualisierung von Bild- oder Videodaten erm"oglicht werden, k"onnen diese Daten als \code{CustomEntry} in den Datensatz integriert werden.
 Das Paket \code{data} kann bei Kenntnis des konkreten Formates dieser Daten erweitert werden.
 
 Weiterhin wird mit dem \verb|data|-Paket erreicht, dass die restlichen Komponenten des Programms nicht direkt auf das Datensatzformat zugreifen.
 Sie sind damit von dem gew"ahlten Format abgekapselt und ein Austausch des Formates erfordert nur die Anpassung des \verb|data|-Paketes.
+
 Der gesamte Datensatz ist durch die Wrapper-Klasse \verb|UnisensDataset| im Programm repr"asentiert und ist im \secref{datensatz_repraesentation} n"aher beschrieben.
 Zugriff auf den Datensatz erfolgt nur "uber die von der Klasse bereitgestellte Schnittstelle.
-Weiterhin wird der ver"anderte Zugriff auf Annotationen durch die Klasse \verb|AnnotationManager| realisiert und die Behandlung von Annotationen selbst "uber die Klasse \verb|AnnotationList| abgewickelt.
-Die zwei zu letzt genannten Klassen kapseln die von Unisens bereitgestellten Klassen (\verb|Event| und \verb|EventList|) von den anderen Programmteilen ab.
+Weiterhin wird ver"andernde Zugriff auf Annotationen durch die Klasse \verb|AnnotationManager| realisiert und die Behandlung von Annotationen selbst "uber die Klasse \verb|AnnotationList| abgewickelt.
+Die zwei zuletzt genannten Klassen kapseln die von \us bereitgestellten Klassen (\verb|Event| und \verb|EventList|) von den anderen Programmteilen ab.
 
 Neben den zwei oben genannten Aspekten wird auch der Zugriff auf die Daten selbst durch das \code{data}-Paket ver"andert.
 Unisens arbeitet durchgehend mit Samplenummern bei der Indizierung der einzelnen Datenpunkte.
 Die durch das Paket bereitgestellte Schnittstelle wandelt diese Art des Zugriffs auf eine zeitbasierte Art um.
 Das bedeutet, anstatt Daten "uber die Angabe von Samplenummern zu erhalten, bietet die Schnittstelle die M"oglichkeit Daten aus einem bestimmten Zeitraum zu erhalten.
 Die notwendige Umrechnung zwischen Samplenummern und Abtastraten auf entsprechende Zeitpunkte wird im \verb|data|-Paket ausgef"uhrt.
-Dadurch wird die Existenz verschiedener Abtastraten der unterschiedlichen Signale vor dem restlichen Programm verborgen.
+Dadurch wird die Existenz verschiedener Abtastraten der unterschiedlichen Signale vor den restlichen Programmkomponenten verborgen.
 
 \subsubsection{Repr"asentation des Datensatzes durch die Klassen \texttt{Unisens\-Dataset} und \texttt{DataController}}
 \label{sec:datensatz_repraesentation}
@@ -168,16 +169,16 @@ Jede Komponente des Programms die auf einen Dateneintrag zugreifen m"ochte, erh"
 Es wird sichergestellt, dass zu jedem Zeitpunkt jedem Dateneintrag genau ein Controllerobjekt zugeordnet ist und keine Duplizierung auftreten kann.
 Durch spezielle Funktionen \verb|AddNewSignal()|, \verb|AddNewValue()| und \verb|AddNewAnnotation()| k"onnen einem Datensatz zus"atzliche Dateneintr"age hinzugef"ugt werden.
 Die entsprechenden \verb|DataController| werden dann in die Liste \verb|ctrlList| aufgenommen und es kann durch diese anschlie\ss end auf die Daten zugegriffen werden.
-Der gesamte Datensatz wird bei einem Aufruf der \verb|save()|-Funktion des \class{UnisensDataset}-Objektes abgespeichert werden.
+Der gesamte Datensatz wird bei einem Aufruf der \verb|save()|-Funktion des \class{UnisensDataset}-Objektes abgespeichert.
 Diese Speicherfunktion ruft rekursiv f"ur alle \verb|DataController|-Objekte in \verb|crtlList| die entsprechende Funktion \code{save()} zum Speichern der einzelnen Dateneintr"age auf.
 
 \subsubsection{Das Singleton-Konzept und \texttt{DatasetList}}
 \label{sec:singleton}
 \label{sec:datasetlist}
 
-Die geladenen Datens"atze werden im Programm in einer Liste zusammengefasst werden.
+Die geladenen Datens"atze werden im Programm in einer Liste zusammengefasst.
 Diese Liste soll im gesamten Programm zug"anglich sein.
-Um das Erzeugen mehrerer \code{UnisensDataset}-Instanzen f"ur ein und denselben Datensatz zu vermeiden, muss aber sichergestellt werden, dass ein Datensatz nicht mehrfach geladen wird.
+Um das Erzeugen mehrerer \code{Unisens\-Data\-set}-Instanzen f"ur ein und denselben Datensatz zu vermeiden, muss aber sichergestellt werden, dass ein Datensatz nicht mehrfach geladen wird.
 %Es muss aber sichergestellt werden, dass ein und derselbe Datensatz nicht mehrfach geladen wird und somit mehrere Instanzen der Klasse \class{UnisensDataset} f"ur diesen angelegt werden.
 Diese Aufgabe wird durch die Klasse \class{DatasetList} "ubernommen, die als Singleton-Klasse implementiert ist (siehe \picref{datasetlist}).
 \begin{figure}[htb]
@@ -203,10 +204,10 @@ Durch diese Singletonimplementierung ist sichergestellt, dass
 
 Die Objekte der \class{UnisensDataset}s werden in einer nicht "offentlichen Liste \code{datasets} gespeichert.
 Au{\ss}erhalb der Klasse kann auf die Datensatzobjekte "uber einen Index und die \code{get()}-Funktion zugegriffen werden.
-Der entsprechende Index wird durch die \code{load()}-Funktion zur"uck gegeben.
-Die \code{loadDataset()}-Funktion "offnet einen Dialog zum "offnen einer Datei in dem der Benutzer die Headerdatei \verb|unisens.xml| eines Datensatzes ausw"ahlen kann.
+Der entsprechende Index wird durch die \code{load\-Dataset()}-Funktion zur"uck gegeben.
+Die \code{loadDataset()}-Funktion "offnet einen Dialog zum "Offnen einer Datei in dem der Benutzer die Headerdatei \verb|unisens.xml| eines Datensatzes ausw"ahlen kann.
 Dieser Dialog gibt den absoluten Pfad der gew"ahlten Datei zur"uck, welcher mit denen aller bereits geladenen Datens"atzen in der Liste \code{datasets} verglichen wird.
-Wurde der vom Nutzer gew"ahlte Datensatz bereits geladen, wird der Index dieses Datensatzes zur"uck gegeben.
+Wurde der vom Nutzer gew"ahlte Datensatz bereits geladen, wird der Index des entsprechenden Datensatzobjektes zur"uck gegeben.
 Ist der Datensatz jedoch unbekannt, wird er von der Funktion geladen und das \code{UnisensDataset}-Objekt in der Liste gespeichert.
 Der Index des neu erzeugten Objektes wird zur"uckgegeben.
 Durch diese Behandlung wird sicher gestellt, dass jeder Datensatz nur einmal geladen wird.
@@ -221,7 +222,7 @@ Wird ein Datensatz geschlossen, so wird auch das entsprechende \code{UnisensData
 \subsubsection{Pufferung, Sortieren und Suchen der Klasse \texttt{Annotation\-Con\-trol\-ler}}
 \label{sec:anno_ctrl}
 
-Die Referenzimplementierung des Unisensformates sieht f"ur das Lesen und Schreiben von Daten einen ungepufferten Ansatz vor.
+Die Referenzimplementierung des \usNS-Formates sieht f"ur das Lesen und Schreiben von Daten einen ungepufferten Ansatz vor.
 Das bedeutet sobald Daten vom Programm ver"andert werden, werden diese "Anderungen im Datensatz und somit auf dem Speichermedium ausgef"uhrt.
 Das hat zur Folge, dass Annotationen in der Reihenfolge in der sie erstellt wurden, in den Datendateien abgespeichert werden.
 Somit sind die Annotationen zeitlich unsortiert.
@@ -252,6 +253,8 @@ Das Problem konnte mit dem Parameter \code{-Xss2m} behoben werden, wodurch die m
 Der Parameter setzt sich aus dem Pr"afix \code{-Xss} und der gew"ahlten Gr"o{\ss}e zusammen (\code{512k} steht f"ur \unit{512}{kB}, \code{2m} f"ur \unit{2}{MB}, usw.).
 Das Problem wurde f"ur die genannte Datensatzgr"o{\ss}e behoben, kann aber bei h"oherer Annotationsanzahl wieder auftreten.
 Es kann die Gr"o{\ss}e des \emph{Thread-Stacks} weiter erh"oht werden.
+Diese Behandlung ist eher ein \emph{work-around} als eine L"osung des Problems.
+Ein alternativer Ansatz ist im folgendem Abschnitt beschrieben.
 
 %- w"ahrend der Test und Nutzung ist ein Stack-Overflow aufgetreten bei ca. \unit{3.000} - \unit{3.600} Annotationen
 %- = zuviele ineinander verschachtelte Funktionsaufrufe
@@ -264,7 +267,7 @@ Es kann die Gr"o{\ss}e des \emph{Thread-Stacks} weiter erh"oht werden.
 \subsubsection{Direkter Zugriff auf Einzelwerte (\emph{Values}) mit der Klasse \class{BufferedValueController}}
 \label{sec:bufferd_value_controller}
 
-Eine direkte "Anderung einzelner Datenpunkte ist vom Unisensformat nicht vorgesehen.
+Eine direkte "Anderung einzelner Datenpunkte ist vom \usNS-Datensatzformat nicht vorgesehen.
 Daher ist f"ur einen direkten Schreibzugriff auf die Daten eine eigene Implementierung notwendig.
 F"ur \emph{Values}, d.\,h. Datenpunkte denen ein Zeitpunkt und ein Wert zugeordnet sind, ist diese Eigenschaft in der Klasse \class{BufferedValueController} implementiert.
 In \picref{data_package} ist ersichtlich, dass \class{BufferedValueController} von der Klasse \class{ValueController} abgeleitet ist.
@@ -276,7 +279,7 @@ Der Datentyp der Werte kann frei gew"ahlt werden, da die Klasse \class{DataPoint
 In der aktuellen Implementierung von \class{BufferdValueController} ist der Datentyp der Werte als \code{Double} festgelegt.
 
 Die Datenpunkte sind im Puffer \code{buffer} nach ihren Samplenummern aufsteigend sortiert.
-Aufgrund der in \secref{anno_ctrl} beschriebenen Probleme des Quick-Sort-Algorithmus und der Java-\emph{Thread-Stack}-Gr"o{\ss}e ist die Sortierung auf andere Art und Weise implementiert.
+Aufgrund der in \secref{anno_ctrl} beschriebenen Probleme des Quick-Sort-Al\-go\-rith\-mus und der Java-\emph{Thread-Stack}-Gr"o{\ss}e ist die Sortierung auf andere Art und Weise implementiert.
 Die Daten werden beim anf"anglichen F"ullen des Puffers nicht erst aus der Datei gelesen und anschlie{\ss}end sortiert, sondern beide Schritte erfolgen gleichzeitig.
 Hierbei werden die Daten einzeln gelesen, anschlie{\ss}end die zugeh"orige Position aufgrund ihrer Samplenummer gesucht und letztendlich in den Puffer eingef"ugt.
 Die Positionssuche erfolgt, analog zur Implementierung in der Klasse \class{AnnotationController}, "uber einen Suchindex.

@@ -2,7 +2,8 @@
 \label{chap:entwurf}
 
 In diesem Kapitel m"ochte der Autor die Entwicklung des Gesamtprogramms er"ortern.
-Es wird ein "Uberblick "uber das umfassende Konzept des internen Aufbaus gegeben um anschlie\ss end auf die konkrete Umsetzung der einzelnen Bestandteile einzugehen.
+Es wird ein "Uberblick "uber das Gesamtkonzept des internen Aufbaus gegeben.
+Anschlie{\ss}end wird auf die konkrete Umsetzung der einzelnen Bestandteile eingegangen.
 Demzufolge sind die kommenden Abschnitte nach den Programmkomponenten gegliedert.
 In jedem einzelnen Abschnitt wird auf drei Punkte eingegangen:
 \begin{itemize}
@@ -10,9 +11,9 @@ In jedem einzelnen Abschnitt wird auf drei Punkte eingegangen:
 	\item Implementierungsdetails
 	\item Tests zur Verifikation der einzelnen Komponente
 \end{itemize}
-Es sei darauf hingewiesen, dass die eigentlichen Entwicklung und Implementierung nicht Komponentenweise, sondern nach entsprechenden Funktionalit"aten statt findet.
+Es sei darauf hingewiesen, dass die eigentlichen Entwicklung und Implementierung nicht Komponentenweise, sondern nach entsprechenden Funktionalit"aten erfolgt.
 Das Einbinden einer bestimmten Funktionalit"at betrifft oft mehrere Komponenten und ihr Zusammenspiel, wodurch der Ausbau der einzelnen Bestandteile parallel geschieht.
-Die Gliederung dieses Kapitels nach den Programmteilen dient jedeglich der "Ubersichtlichkeit.
+Die Gliederung dieses Kapitels nach den Programmteilen dient lediglich der "Ubersichtlichkeit.
 
 \section{"Uberblick "uber das Gesamtprogramm}
 
@@ -39,12 +40,12 @@ Der Aufbau und die Funktionsweise des dritten Pakets ist im \secref{signalproces
 
 Im \code{test}-Paket existieren zwei Klassen, die haupts"achlich die Entwicklung des Programms selbst unterst"utzen.
 Die Klasse \class{Debug} bietet eine Methode zum ausgeben von Informationen auf der Konsole die f"ur den Entwickler bestimmt sind.
-"Uber ein Feld von booleschen Variablen k"onnen f"ur jede Klasse des Programms die Debugmeldungen ein- und ausgeschaltet werden.
+"Uber ein Feld von booleschen Variablen k"onnen f"ur jede Klasse des Programms die Debugmeldungen ein- und ausgestellt werden.
 Somit ist es nicht notwendig den Quelltext der einzelnen Klassen zu ver"andern nur um die oben genannten Meldungen abzuschalten.
 Zus"atzlich zur Klasse \class{Debug} existiert im \code{test}-Paket noch die Klasse \class{DataTest}.
 In ihr sind Methoden implementiert, die die Funktionalit"at einzelner Klassen und die Interaktion der Objekte miteinander "uberpr"ufen.
 Die \class{DataTest} Klasse hat, ebenso wie \class{Debug}, den Zweck w"ahrend der Entwicklung Fehler in der Implementierung aufzudecken und dienen haups"achlich dem Informationsgewinn des Entwicklers.
-Aus diesem Grund wird das \code{test}-Paket in dieser Arbeit auch nicht n"aher erl"autert.
+%Aus diesem Grund wird das \code{test}-Paket in dieser Arbeit auch nicht n"aher erl"autert.
 
 \begin{figure}[htb]
 \centering
