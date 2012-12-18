@@ -1,6 +1,8 @@
 \chapter{Spezifikation der Programmfunktionalit"at}
 \label{chap:spezifikation}
 
+\section{Vorgehensweise}
+
 Die Spezifikation der Software ist in dieser Arbeit in zwei Etappen aufgeteilt:
 \begin{itemize}
 	\item Aufstellen von Anwendungsszenarien
@@ -18,7 +20,7 @@ Diese Bestandteile sind somit Funktionen die das Programm bereit stellen muss, u
 %In diesem und dem folgendem Abschnitt soll die zu erstellende Software genauer spezifiziert werden.
 %In diesem und dem folgendem Abschnitt soll die Softwarespezifikation im Entwicklungsprozess beschrieben und ausgearbeitet werden.
 
-Der erste Schritt stellt das Ausarbeiten von Szenarien dar, die eine Beschreibung eines Merkmals des Programmes aus Sicht des Anwenders ist.
+Der erste Schritt stellt das Ausarbeiten von Szenarien dar, die eine Beschreibung eines Merkmals des Programmes aus Sicht des Anwenders sind.
 %Dazu soll zun"achst eine Liste von Anwendungsf"allen ausgearbeitet werden.
 %Um eine Anforderungsliste an die zu erstellende Software ausarbeiten zu k"onnen, soll zun"achst eine Liste von Anwendungsf"allen ausgearbeitet werden.
 Aufgrund dieser informellen Beschreibungen h"aufiger Arbeitsabl"aufe und typischer Aufgabenstellungen wird eine "Ubersicht gewonnen, was die zu erstellende Software leisten soll und der Nutzer erwartet.
@@ -62,7 +64,7 @@ Dabei beschreiben die Anforderungen die konkret umzusetzenden Funktionen und Arb
 Zus"atzlich wird die im \chapref{validierung} beschriebene Validierung der Software die in diesem Abschnitt ausgearbeiteten Definitionen als Grundlage nehmen um das erstellte Programm zu "uberpr"ufen und zu bewerten.
 
 %Aus den oben genannten Anwendungsf"allen ergeben sich die folgenden Anforderungen an das Programm.
-Die folgende List von zu erf"ullenden Anforderungen ergibt sich aus den oben beschreibenen Anwendungsszenarien.
+Die folgende List von zu erf"ullenden Anforderungen ergibt sich aus den oben beschriebenen Anwendungsszenarien.
 Wenn mehrere Einzelanforderungen in einer Beschreibung enthalten sind, sind diese mit einer Ziffer in Klammern markiert.
 Das Programm ...
 \renewcommand{\theenumi}{\Alph{enumi}}
@@ -105,7 +107,7 @@ Daher wird die folgenden Anforderung nur auf Basis der Aufgabenstellung formulie
 \section{Testszenarien}
 \label{sec:testszenarien}
 
-In diesem Abschnitt sollen Szenarien heraus gearbeitet werden, mit denen die Software am Ende der Implementierung validiert werden kann.
+In diesem Abschnitt sollen Szenarien erstellt werden, mit denen die Software am Ende der Implementierung validiert werden kann.
 Dabei soll die oben geforderte Funktionalit"at anhand der Behandlung von Biosignalen "uberpr"uft werden.
 
 Folgend sind die Testszenarien beschrieben, die zur Validierung der Software durchgef"uhrt werden sollen.
@@ -121,8 +123,8 @@ Abgeschlossen wird jedes Testszenario mit dem Speichern der geladenen Daten.
 					  Der Benutzer zoomt auf interessante Bereiche der Aufnahme herein und vergr"o\ss ert die Ansicht der Einzelsignale.
 					  Er schlie{\ss}t die Ansicht des Rohsignals.
 					  Der Benutzer markiert in zwei unterschiedlichen, neu zu erstellenden Annotationskan"alen die QRS-Komplexe der Mutter, sowie des Fetus ("uber mindestens f"unf Minuten des Signalverlaufs).
-					  Zur "Uberpr"ufung der Annotationen l"asst er sich alle Signale und die gemachten Annotationen in einer Signalansicht darstellen.
-\item[Testszenario 2] Der Benutzer l"adt den im Testszenario abgespeicherten Datensatz wieder in das Programm.
+					  Zur "Uberpr"ufung der Annotationen l"asst er sich alle Signale und die erzeugten Annotationen in einer Signalansicht darstellen.
+\item[Testszenario 2] Der Benutzer l"adt den im Testszenario 1 abgespeicherten Datensatz wieder in das Programm.
 					  Er "uberpr"uft ob die Ansichten und die Einstellungen aus dem ersten Testszenario "ubernommen wurden.
 					  Der Benutzer speichert die Einstellungen der Signalansichten.
 					  Er w"ahlt f"unf beliebige Annotationen aus versieht diese mit Kommentaren.
@@ -132,13 +134,13 @@ Abgeschlossen wird jedes Testszenario mit dem Speichern der geladenen Daten.
 \item[Testszenario 3] Der Benutzer l"adt den Bearbeiteten Datensatz aus dem zweiten Testszenario.
 					  Er entfernt die Kan"ale der approximierten \ac{EKG}-Verl"aufe aus dem Datensatz.
 					  Der Benutzer "uberpr"uft die gemachten Annotationen mithilfe des Rohsignals.
-\item[Testszenario 4] Der Benutzer l"adt einen Datensatz mit \ac{EKG}-und \ac{PPG}-Signalen.
-					  Er w"ahlt \ac{PPG} und \ac{EKG} Kan"ale und zeigt sie sich in einer Ansicht an.
+\item[Testszenario 4] Der Benutzer l"adt einen Datensatz mit \ac{EKG}- und \ac{PPG}-Signalen.
+					  Er w"ahlt \ac{PPG} und \ac{EKG} Kan"ale aus und l"asst sich diese in einem Diagramm anzeigen.
 					  Der Benutzer verschafft sich eine "Ubersicht durch eine geringe Zoomstufe "uber die Signalverl"aufe.
 					  Er "uberpr"uft die Annotationen der QRS-Komplexe und l"asst sich mit dem Zeitreihenberechnungstool eine RR-Zeitreihe erstellen.
-					  Er Nutzt das Zeitreihentool um sich aus den annotierten P-Wellen des \ac{PPG}-Signals eine weitere Zeitreihe erstellen zu lassen.
+					  Er nutzt das Zeitreihentool um sich aus den annotierten P-Wellen des \ac{PPG}-Signals eine weitere Zeitreihe erstellen zu lassen.
 					  %Er wendet eine Filterfunktion auf das \ac{EKG}-Signal an und speichert das Ergebnis im Datensatz ab.
-					  Er kontrolliert die Informationen der erstellten Signale und vergleicht diese.
+					  Er kontrolliert die Informationen der erstellten Signale und vergleicht diese miteinander.
 					  Der Nutzer entfernt das Original-\ac{EKG}-Annotationssignal aus dem Datensatz.
 \item[Testszenario 5] Der Benutzer l"adt den Datensatz aus dem viertem Testszenario.
 					  Er kontrolliert dabei die Einstellungen der Ansichten darauf, ob sie aus dem Szenario 4 "ubernommen wurden.
@@ -184,7 +186,7 @@ Durch das Bestehen der Testszenarien wird gezeigt, dass das Programm die Erwartu
 
 Das Testen der Funktionalit"at mittels bestimmter Biosignale sind aber nur spezielle Einzelf"alle.
 Es kann durch sie nicht die absolute Fehlerfreiheit der Software gezeigt werden.
-Um entstehende Fehler schon w"ahrend der Entwicklung abfangen und beheben zu k"onnen, wird die Software bzw. die einzelnen Programmteile auch schon einzeln daraufhin getestet, dass sie sich so verhalten, wie es der Programmierer vorgesehen hat.
+Um entstehende Fehler schon w"ahrend der Entwicklung abfangen und beheben zu k"onnen, wird die Software bzw. die einzelnen Programmteile daraufhin getestet, dass sie sich so verhalten, wie es der Programmierer vorgesehen hat.
 Speziell wird auch das korekte Verhalten im Falle eines Fehlers "uberpr"uft.
 Diese fortlaufenden funktionellen Test werden in den entsprechenden Abschnitten zu den einzelnen Programmkomponenten im \chapref{entwurf} beschrieben.
 
