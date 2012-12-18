@@ -54,8 +54,7 @@ Eine detailliertere Beschreibung des Formates kann der offiziellen Dokumentation
 
 In diesem Abschnitt wird auf einige Details der Umsetzung des Unisens-Formates eingegangen.
 F"ur das Unisens-Paket gibt es eine Referenzimplementierung in Java, die unter der \emph{\ac{lgpl}} zur Verf"ugung gestellt wird.
-Die bereitgestellte Bibliothek ist auf zwei Pakete aufgeteilt: \verb|org.unisens.jar| und \verb|org.unisens.ri.jar|.
-
+Die bereitgestellte Bibliothek ist auf zwei Pakete aufgeteilt: \code{org.unisens.jar} und \code{org.unisens.\\ri.jar}.
 Bei der ersten Datei handelt es sich um die Definition des Unisensformates und seiner Bestandteile als Javaklassenstruktur.
 Diese Definition erfolgt haupts"achlich als \emph{Interface}klassen welche die Schnittstellen zwischen den einzelnen Bestandteilen festlegt.
 Eine "Ubersicht der Klassenstruktur und der von au{\ss}en ersichtlichen Attribute ist in \picref{unisens_interface} auf Seite \pageref{pic:unisens_interface} dargestellt.
@@ -156,7 +155,7 @@ Das bedeutet, anstatt Daten "uber die Angabe von Samplenummern zu erhalten, biet
 Die notwendige Umrechnung zwischen Samplenummern und Abtastraten auf entsprechende Zeitpunkte wird im \verb|data|-Paket ausgef"uhrt.
 Dadurch wird die Existenz verschiedener Abtastraten der unterschiedlichen Signale vor dem restlichen Programm verborgen.
 
-\subsubsection{Repr"asentation des Datensatzes durch die Klassen \texttt{UnisensDataset} und \texttt{DataController}}
+\subsubsection{Repr"asentation des Datensatzes durch die Klassen \texttt{Unisens\-Dataset} und \texttt{DataController}}
 \label{sec:datensatz_repraesentation}
 
 Die Klasse \verb|UnsiensDataset| stellt die Schnittstelle des Programms zu den Datens"atzen dar.
@@ -219,7 +218,7 @@ Wird ein Datensatz geschlossen, so wird auch das entsprechende \code{UnisensData
 %- Singleton Konzept erkl"aren \cite{Gamma1995} (Seiten 127 bis 134)
 %- stellt sicher, dass jeder DS nur einmal geladen wird
 
-\subsubsection{Pufferung, Sortieren und Suchen der Klasse \texttt{AnnotationController}}
+\subsubsection{Pufferung, Sortieren und Suchen der Klasse \texttt{Annotation\-Con\-trol\-ler}}
 \label{sec:anno_ctrl}
 
 Die Referenzimplementierung des Unisensformates sieht f"ur das Lesen und Schreiben von Daten einen ungepufferten Ansatz vor.
@@ -319,8 +318,8 @@ Das Interface \class{DataChangeListener} definiert nur eine Methode: \class{data
 Sie hat keinen R"uckgabewert und erh"alt als Parameter ein \class{DataChangeEvent}.
 Das Objekt der Klasse \class{DataChangeEvent} enth"alt alle Informationen "uber die aufgetretene Daten"anderung inklusive einer Referenz des entsprechenden \class{DataController}s.
 Somit ist es f"ur \class{DataChangeListener}-implementierende Klassen nicht notwendig die \class{DataController} zu speichern, von denen sie Mitteilungen "uber Ver"anderungen erhalten m"ochten.
-Die Registrierung eines Objektes bei einem \class{DataController} erfolgt mit der Methode \code{register(DataChangeListener)}.
-Die Speicherung der Objekte und die "Ubergabe der \class{DataChangeEvents} an alle \emph{Observer} ist komplett in der Klasse \class{DataController} implementiert.
+Die Registrierung eines Objektes bei einem \class{DataController} erfolgt mit der Methode \code{register( Data\-Change\-Listener)}.
+Die Speicherung der Objekte und die "Ubergabe der \class{Data\-Change\-Events} an alle \emph{Observer} ist komplett in der Klasse \class{DataController} implementiert.
 
 Die jeweilige \class{DataController}-Implementierung muss zwei Aufgaben "ubernehmen:
 \begin{enumerate}
@@ -328,11 +327,11 @@ Die jeweilige \class{DataController}-Implementierung muss zwei Aufgaben "uberneh
 	\renewcommand{\theenumi}{\arabic{enumi}}
 	\renewcommand{\labelenumi}{{\theenumi}.}
 	\item Bei einer "Anderung der Daten ein entsprechendes \class{DataChangeEvent} mit den notwendigen Informationen erzeugen.
-	\item Das erzeugte Objekt "uber die Methode \code{notifyListeners()} der Superklasse \class{DataController} an die \emph{Observer} weiterreichen.
+	\item Das erzeugte Objekt "uber die Methode \code{notifyListeners()} der Superklasse \class{Data\-Con\-trol\-ler} an die \emph{Observer} weiterreichen.
 	}
 \end{enumerate}
 Diese zwei Schritte werden beispielsweise durch die Klassen \class{AnnotationController} und \class{Buf\-fered\-Value\-Controller} bereits implementiert, da beide Klassen die "Anderung von Daten erm"oglichen.
-Intern werden bei einem Aufruf von \code{notifyListeners()} bei allen registrierten \emph{Observern} die Methode \code{dataChageReaction()} aufgerufen und das \class{DataChangeEvent} weitergegeben.
+Intern werden bei einem Aufruf von \code{notifyListeners()} bei allen registrierten \emph{Observern} die Methode \code{dataChageReaction()} aufgerufen und das \class{Data\-Change\-Event} weitergegeben.
 
 %- Erkl"arung der Prinzipes \cite{Gamma1995} (Seiten 293 bis 303)
 %- Observer wird von interessierten Klassen mit der Implementierung des Interface \class{DataChangeListener} realisiert

@@ -51,7 +51,7 @@ Diese zweite Verarbeitungsart ist im \secref{live_signal_processor} weiter unten
 Die Klasse \class{SignalProcessor} stellt einen Prototypen einer allgemeinen Signalverarbeitungsfunktion dar.
 Objekte dieser Klasse besitzen ein oder mehrere Eingangssignale und ebenso ein oder mehrere Ausgangssignale.
 \class{SignalProcessor} stellt eine einheitliche Schnittstelle f"ur das Hinzuf"ugen und Entfernen von Ein- und Ausgangssignalen zur Verf"ugung und speichert die notwendigen Objektreferenzen dieser Signale.
-Da sie aber nicht die konkrete Funktionalit"at der Signalverarbeitungsfunktion implementieren kann, ist \class{SignalProcessor} als abstrakte Klasse implementiert.
+Da sie aber nicht die konkrete Funktionalit"at der Signalverarbeitungsfunktion implementieren kann, ist \class{Sig\-nal\-Pro\-ces\-sor} als abstrakte Klasse implementiert.
 
 \class{SignalProcessor} "ubernimmt drei wesentliche Aufgaben implementierter Signalverarbeitungsfunktionen:
 \begin{enumerate}
@@ -71,14 +71,14 @@ Es werden bei der Ausf"uhrung einer Signalverarbeitungsfunktion die Programmvers
 Damit wird erreicht, dass die Entstehungsgeschichte von verarbeiteten Signalen automatisiert aufgezeichnet wird.
 
 In \picref{package_signalprocessing} sind drei abstrakten Methoden ersichtlich, die durch eine konkretisierende Unterklasse implementiert werden m"ussen.
-Die Methoden \code{getName()} und \code{getParameterString()} dienen der Dokumentation der Verarbeitungsschritte und geben einen \code{String} mit Funktionsnamen (und eventuell notwendiger Versionsnummer) bzw. die genutzten Parameter der Funktion zur"uck.
+Die Methoden \code{getName()} und \code{get\-Parameter\-String()} dienen der Dokumentation der Verarbeitungsschritte und geben einen \code{String} mit Funktionsnamen (und eventuell notwendiger Versionsnummer) bzw. die genutzten Parameter der Funktion zur"uck.
 Die dritte Methode \code{performFunctionality()} soll die konkrete Verarbeitung durchf"uhren und die Ausgangssignale entsprechende ver"andern.
 Durch diese Umsetzung kann sich ein zuk"unftiger Entwickler auf die Implementierung des Algorithmus konzentrieren.
 Alle organisatorischen Nebenabl"aufe sind durch \class{SignalProcessor} abgedeckt.
 
 %- einmalig: einfach im Menu der zugeh"origen Konfigurationsdialog registrieren und er "ubernimmt die Arbeit
 
-\subsection{Kontinuierliche Verarbeitung von Signalen durch \class{LiveSignalProcessor}}
+\subsection{Kontinuierliche Verarbeitung von Signalen durch \class{Live\-Signal\-Pro\-ces\-sor}}
 \label{sec:live_signal_processor}
 
 Aus \picref{package_signalprocessing} ist ersichtlich, dass die Klasse \class{LiveSignalProcessor} von \class{SignalProcessor} abgeleitet ist.
@@ -86,7 +86,7 @@ Somit wird auch die Funktionalit"at der einmaligen Signalverarbeitung mit "ubern
 Zus"atzlich dazu wird der Funktionsumfang dahingehend erweitert, dass eine kontinuierliche Signalverarbeitung ausgef"uhrt werden kann.
 Um dieses dynamische Verhalten zu erm"oglichen wird durch die Klasse \class{LiveSignalProcessor} das \emph{Interface} \class{DataChangeListener} implementiert.
 Der \class{LiveSignalProcessor} meldet sich bei allen Eingangssignalen als \emph{Observer} an und erh"alt dadurch Informationen "uber ver"anderte (Eingangs-) Daten.
-Die gewonnenen Informationen werden, sofern der \class{LiveSignalProcessor} gestartet ist, an die implementierende Unterklasse weitergegeben, die diese dann verarbeiten kann.
+Die gewonnenen Informationen werden, sofern der \class{Live\-Sig\-nal\-Pro\-ces\-sor} gestartet ist, an die implementierende Unterklasse weitergegeben, die diese dann verarbeiten kann.
 Informationen ver"anderter Daten werden verworfen, wenn die kontinuierliche Signalverarbeitung gestoppt ist.
 Der Zustand ob die Verarbeitung ein- oder ausgeschaltet ist, wird in der \code{boolean}-Variable \code{isRunning} gespeichert.
 Der Zustand kann "uber die Methoden \code{start()} und \code{stop()} ein- bzw. ausgeschaltet werden.
@@ -113,7 +113,7 @@ Diese Registrierung hat zur Folge:
 	\item Ein Men"ueintrag mit dem Namen des gestarteten \class{LiveSignalProcessor} wird erzeugt und in das Men"u eingef"ugt.
 	\item Die laufende Signalverarbeitungsfunktion und der entsprechende Men"ueintrag werden zusammen in einem \class{RunningSignalProcessorMenuItem}-Objekt gespeichert.
 \end{itemize}
-Wird der entsprechende Men"ueintrag durch den Nutzer aufgerufen, wird die \code{stop()}-Methode des \class{LiveSignalProcessor}s aufgerufen und der Men"ueintrag wieder entfernt.
+Wird der entsprechende Men"upunkt durch den Nutzer aufgerufen, wird die Methode \code{stop()} des \class{LiveSignalProcessor}s aufgerufen und der Men"ueintrag wieder entfernt.
 
 %\begin{figure}[tbh]
 %\centering
@@ -141,7 +141,7 @@ Vier Schritte sind durch einen zuk"unftigen Entwickler auszuf"uhren:
 	\item Integration des Konfigurationsdialogs in das Men"u des Programms.
 \end{itemize}
 Es ist empfohlen alle Klassen in einem eigenem Paket einzubinden um Namenskollisionen zu unterbinden.
-Das neue Paket kann und sollte als im bestehenden Paket \code{gst.signalprocessing} angelegt werden, damit die Gliederung der Pakete innerhalb des Programms nach Funktionalit"at erhalten bleibt.
+Das neue Paket kann und sollte als im bestehenden Paket \code{gst.sig\-nal\-pro\-ces\-sing} angelegt werden, damit die Gliederung der Pakete innerhalb des Programms nach Funktionalit"at erhalten bleibt.
 Der Konfigurationsdialog soll nach der Erstellung und Initialisierung des konkreten Signalverarbeitungsobjektes die Verarbeitungsroutine starten (durch den Methodenaufruf von \code{run()}).
 Wie schon im \secref{live_signal_processor} erw"ahnt, muss die kontinuierliche Verarbeitung durch die Methode \code{start()} ausgel"ost werden.
 Das Abbrechen der kontinuierlichen Signalverarbeitung durch den Nutzer ist in der vorgelegten Implementierung bereits integriert.

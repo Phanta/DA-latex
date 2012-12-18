@@ -17,9 +17,9 @@ Um solche Kooperationen zu unterst"utzen sollte es, aufgrund der unterschiedlich
 \label{sec:zielstellung}
 
 Das Ziel dieser Arbeit ist ein Programm zu konzipieren und umzusetzen, das unterschiedliche (Bio-) Signale grafisch darstellt und dem Nutzer die M"oglichkeit bietet, Zeitpunkte und -intervalle innerhalb des Signalverlaufs zu markieren und mit Kommentaren zu versehen.
-Hierbei soll insbesonderer die gleichzeitige Darstellung mehrerer Signale unterschiedlicher Natur und Auspr"agung unterst"utzt werden.
+Hierbei soll insbesondere die gleichzeitige Darstellung mehrerer Signale unterschiedlicher Natur und Auspr"agung unterst"utzt werden.
 Die Erstellung und Bearbeitung von Markierungen soll leicht verst"andlich aus der \ac{GUI} heraus geschehen.
-Zudem soll eine Grundlage geschaffen werden, paralell aufgenommene Signale in einem Datensatz zu vereinen.
+Zudem soll eine Grundlage geschaffen werden, parallel aufgenommene Signale in einem Datensatz zu vereinen.
 
 Zus"atzlich soll eine zuk"unftige Erweiterung der Funktionalit"at erm"oglicht und unterst"utzt werden.
 Daher ist eine klare Gliederung der Einzelkomponenten gefordert und die Dokumentation des Quelltextes sowie der einzelnen Programmteile fundamentaler Bestandteil der Aufgabenstellung.
@@ -35,20 +35,20 @@ In dieser Nutzerdokumentation soll dem Anwender die Funktionsweise und Bedienung
 \section{Konkretisieren der Aufgabenstellung}
 
 Die Entwicklung automatiserter Datenverarbeitungsmethoden am \ac{IBMT} erfolgt haupts"achlich innerhalb der von \ml (MathWorks, Inc., Natick, MA, USA) bereit gestellten Umgebung statt.
-Das zu erstellende Programm soll aber unabh"angig aus lizensrechtlichen Gr"unden von \ml unabh"angig sein.
-Durch die M"oglichkeit in \ml Java-Code auszuf"uhren, bietet es sich an das Programm mit der Programmiersprache Java zu implementiern.
+Das zu erstellende Programm soll aus lizensrechtlichen Gr"unden von \ml unabh"angig sein.
+Durch die M"oglichkeit in \ml \javaNS-Code auszuf"uhren, bietet es sich an, das Programm mit der Programmiersprache \java zu implementiern.
 Dadurch werden zwei Ziele erreicht:
 \begin{itemize}
 	\item Ausf"uhrbarkeit des Programms auf Computersystem durch Nutzung frei erh"altlicher Software
 	\item Integration der \ac{IBMT}-internen Nutzung des Programms in die bereits vorhandenen Entwicklungmethoden und -Werkzeuge
 \end{itemize}
-Die Implementierung in Java hat zus"atzlich noch den Vorteil, dass die Umsetzung der \ac{GUI} durch vorhandenen Bibliotheksfunktionen unterst"utzt und vereinfacht wird.
+Die Implementierung in \java hat zus"atzlich noch den Vorteil, dass die Umsetzung der \ac{GUI} durch vorhandenen Bibliotheksfunktionen unterst"utzt und vereinfacht wird.
 %Da jedoch die Datenspeicherung von \ml in einem propriet"aren Dateiformat erfolgt und dieses sich mit den \ml -Versionen in der Vergangenheit oft ver"andert hat, muss f"ur die Speicherung und den Transport von Daten ein geeignetes Format gew"ahlt werden.
 Die Datenspeicherung durch \ml erfolgt in einem propriet"arem Dateiformat und unterlag in der Vergangenheit h"aufigen Ver"anderungen.
 Daher soll f"ur die Speicherung und den Transport von Daten ein geeignetes, von \ml unabh"angiges Datensatzformat gew"ahlt werden.
 Zus"atzlich m"ussen auch Skripte f"ur eventuell anfallenden Import- und Exportfunktionen der Daten bereit gestellt werden.
 Bei der Erstellung der Konvertierungsskripte soll auf leicht verst"andliche und einfach Schnittstelle der Fokus gelegt werden.
-Eine ausf"uhrliche Dokumentation der Schnittstelle und der Skripte selbst ist nat"urlich auch ein Kernpunkt.
+Eine ausf"uhrliche Dokumentation der Schnittstelle und der Skripte selbst ist ein Kernpunkt.
 %-- Programmiersprache Java
 %-- notwendige Konvertierungsskripte (Matlab <-> Java) f"ur Daten
 
@@ -74,12 +74,12 @@ Um dem Nutzer die Arbeit mit dem Programm zu erm"oglichen, soll eine Benutzerdok
 In dieser Dokumentation soll dem Nutzer die M"oglichkeiten, die ihm das Programm bietet, erl"autert werden.
 Die einzelnen Werkzeuge und die Funktionsweise des Programmes sollen vermittelt werden.
 Eine weitere Dokumentation soll f"ur die zweite Zielgruppe (zuk"unftige Entwickler des Programmes) erstellt werden.
-Im Zusammenhang mit der vorliegenden Arbeit soll innerhalb des zweiten Dokumentes das Wissen vermittelt werden.
-Genauer werden die einzelnen Bestandteile des Programmes und internen Beziehungen untereinander diskutiert.
+Im Zusammenhang mit der vorliegenden Arbeit soll innerhalb des zweiten Dokumentes das Wissen vermittelt werden, wie die einzelnen Programmkomponenten zusammenarbeiten.
+Genauer werden die einzelnen Bestandteile des Programmes und die internen Beziehungen untereinander diskutiert.
 Die Entwicklerdokumentation besteht aus drei Elementen:
 \begin{itemize}
 	\item Einem \verb|pdf|-Dokument, dass den allgemeinen Aufbau und das interne Zusammenspiel der Komponent erkl"art.
-	\item Die mit dem Dokumentationswerkzeug Javadoc automatisiert erstellte Dokumentation aller Klassen, deren Membervariablen und Methoden, die die jeweilgen Schnittstellen im Detail beschreibt.
+	\item Die mit dem Dokumentationswerkzeug \emph{Javadoc} automatisiert erstellte Dokumentation aller Klassen, deren Membervariablen und Methoden, die die jeweilgen Schnittstellen im Detail beschreibt.
 	\item Die Kommentierung des Quelltextes an notwendigen Stellen, die die Funktionsweise und Implementierung der Algorithmen besser verst"andlich machen.
 \end{itemize}
 Besonders die beispielhaft implementierte Signalverarbeitungsfunktion und die dazugeh"orige Dokumentation soll eine Weiterentwicklung des Programmes erm"oglichen.
