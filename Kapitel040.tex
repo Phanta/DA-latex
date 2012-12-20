@@ -19,7 +19,7 @@ Somit ist der Aufwand zum Exportieren von Daten in das \usNS-Format minimal.
 \label{sec:anforderungsvalidierung}
 
 Im \secref{testszenarien} spezifizierten Testszenarien werden genutzt um das erstellte Programm dahingehend zu pr"ufen, ob es die in \secref{anforderungen} genannten Anforderungen erf"ullen kann.
-Da es sich bei den Testszenarien 1 bis 5 um einfach "`Schritt-f"ur-Schritt"'-Anleitungen handelt, wird in diesem Abschnitt auf eine genaue Beschreibung der Durchf"uhrung verzichtet.
+Da es sich bei den Testszenarien um einfache "`Schritt-f"ur-Schritt"'-Anleitungen handelt, wird in diesem Abschnitt auf eine genaue Beschreibung der Durchf"uhrung verzichtet.
 Die aufgestellten Testszenarien werden nach den beschriebenen Anleitungen durchgef"uhrt.
 
 \begin{table}[htb]
@@ -70,7 +70,7 @@ Daher ist diese Option, die zus"atzlich die Bedienung komplexer werden lie{\ss}e
 					   Optionen bez"uglich der Darstellung von Signalen sollen in dem Datensatz mit abgespeichert werden k"onnen (2)."'
 \end{description}
 
-Die Anforderung K wurde nicht umgesetzt, weil der Komfortgewinn f"ur den Nutzer den erh"ohten Implementierungsaufwand nicht rechtfertigen.
+Die Anforderung K wurde nicht umgesetzt, weil der Komfortgewinn f"ur den Nutzer den erh"ohten Implementierungsaufwand nicht rechtfertigt.
 Zudem erscheint in einer nachtr"aglichen Betrachtung die Abspeicherung von Anzeigeparametern \emph{innerhalb} des Datensatzes nicht sinnvoll.
 Der Mehrwert einer solchen Option ist f"ur den Nutzer vorhanden, aber diese programmspezifischen Einstellungen sollten nicht Teil des Datensatzes sein.
 Eine Speicherung der Daten au{\ss}erhalb des Datensatzes ist m"oglich, f"uhrt aber zu weiteren Problemen.
@@ -83,13 +83,13 @@ Zudem muss eine Identifizierung von Datens"atzen realisiert werden, die umbenann
 
 W"ahrend des Testens der Applikation wurde festgestellt das es m"oglich sein soll "Anderungen bestimmter Annotationskan"ale durch den Nutzer zu verhindern.
 Dies ist z.~B. der Fall, wenn in einem Datensatz ein Kanal mit Referenzannotierungen vorhanden ist.
-Dazu kann die Datendatei innerhalb des Verzeichnisses als schreibgesch"utzt markiert.
-Vom Programm wird dieser Zustand erkannt und der Nutzer werden diese Informationen auch innerhalb der \ac{GUI} dargestellt.
-Zus"atzlich dazu werden die betroffenen Eintr"age dem Nutzer auch nicht mehr bei der Auswahl des zu editierenden Annotationskanals angezeigt.
-Eine Fehlbedienung durch den nutzer wird somit verhindert.
-Eine weitere Programmfunktionalit"at die nicht gefordert ist, ist die Signalverarbeitung in "`Echtzeit"'.
+Dazu kann die Datendatei innerhalb des Verzeichnisses schreibgesch"utzt werden.
+Vom Programm wird dieser Zustand erkannt und dem Nutzer wird diese Information innerhalb der \ac{GUI} dargestellt.
+Zus"atzlich werden die betroffenen Eintr"age dem Nutzer nicht bei der Auswahl des zu editierenden Annotationskanals angezeigt.
+Eine Fehlbedienung durch den Nutzer wird somit verhindert.
+Eine weitere Programmfunktionalit"at die nicht gefordert ist, ist die unterst"utzte Signalverarbeitung in "`Echtzeit"'.
 (Echtzeit im Sinne von schnell genug f"ur den Nutzer, fernab harter Echtzeit.)
-Durch die F"ahigkeit unmittelbar "Anderungen in abgeleiteten Signalen zu pr"asentieren, wird der Nutzen des Programms f"ur den Nutzer deutlich erh"oht.
+Durch die F"ahigkeit unmittelbar "Anderungen in abgeleiteten Signalen zu pr"asentieren, wird der Nutzen des Programms f"ur den Anwender deutlich erh"oht.
 
 %-- BONUS:
 %- Schreibschutz f"ur Annotationen
