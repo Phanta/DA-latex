@@ -131,12 +131,12 @@ Wird der entsprechende Men"upunkt durch den Nutzer aufgerufen, wird die Methode 
 
 \subsection{Implementierung weiterer Signalverarbeitungsmethoden}
 
-Das Paket \code{signalprocessing} ist daf"ur ausgelegt, um um zus"atzliche Signalverarbeitungsfunktionen einfach erweitert werden zu k"onnen.
-Die Implementierungen der zwei Hauptklassen \class{SignalProcessor} und \class{LiveSignalProcessor} als abstrakte Klassen erm"oglicht ein schnelles einbinden neuer Funktionalit"aten.
+Das Paket \code{signalprocessing} ist daf"ur ausgelegt, um um zus"atzliche Signalverarbeitungsfunktionen einfach erweitert zu werden.
+Die Implementierungen der zwei Hauptklassen \class{SignalProcessor} und \class{LiveSignalProcessor} als abstrakte Klassen erm"oglicht ein schnelles Einbinden neuer Funktionalit"aten.
 Vier Schritte sind durch einen zuk"unftigen Entwickler auszuf"uhren:
 \begin{itemize}
 	\item Auswahl einer Superklasse abh"angig davon ob eine einfache oder kontinuierliche Signalverarbeitung stattfinden soll.
-	\item Implementierung einer Unterklasse die die gew"unschte Funktionalit"at bereit stellt.
+	\item Implementierung einer Unterklasse, die die gew"unschte Funktionalit"at bereit stellt.
 	\item Programmierung einer Dialogbox, die dem Benutzer des Programmes Einstellungen der Parameter erlaubt.
 	\item Integration des Konfigurationsdialogs in das Men"u des Programms.
 \end{itemize}
